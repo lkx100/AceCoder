@@ -4,4 +4,4 @@ Change made by Lucky
 
 a = 3
 
-b = 3
+b = 0
