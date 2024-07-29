@@ -1,3 +1,7 @@
 This is done by Sweshik Reddy, in the new branch.
 
 Change made by Lucky
+
+a = 0
+
+b = 0
