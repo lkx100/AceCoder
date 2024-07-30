@@ -1,4 +1,4 @@
-# 🎓 Welcome to <span style="color: #4CAF50;">[AceCoder]</span> - Leverage Your Coding Skills 🎓
+# 🎓 Welcome to AceCoder - Leverage Your Coding Skills 🎓
 
 Welcome to our dedicated platform, designed to elevate your CodeChef contest experience through AI-powered insights and comprehensive resources. Our mission is to empower students and faculty with detailed performance analysis and valuable tools for continuous improvement.
 
