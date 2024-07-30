@@ -67,4 +67,7 @@ class Codechef_database(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return f"{self.student.roll_no} - {self.student.name}"
+        if self.student:
+            return f"{self.student.roll_no} - {self.student.name}"
+        else:
+            return f"Student Deleted"
