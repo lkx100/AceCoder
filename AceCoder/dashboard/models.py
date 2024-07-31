@@ -43,7 +43,7 @@ class Student(models.Model): # Model for Student database
     
 
 class Codechef_database(models.Model):
-    student = models.ForeignKey("Student", on_delete=models.SET_NULL, null=True)
+    student = models.ForeignKey("Student", on_delete=models.CASCADE, null=True)
     last_contest = models.CharField(max_length=10 ,null=True, blank=True)
     latest_rating = models.IntegerField(null=True, blank=True)
     latest_rank = models.IntegerField(null=True, blank=True)
