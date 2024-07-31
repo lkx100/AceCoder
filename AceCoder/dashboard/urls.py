@@ -20,5 +20,6 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name="home"),
-    path('dashboard', views.dashboard, name="dashboard")
+    path('dashboard', views.dashboard, name="dashboard"),
+    path('fetch_details/<str:codechef_id>', views.fetch_details, name="fetch_details")
 ]
