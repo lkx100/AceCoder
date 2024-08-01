@@ -11,24 +11,43 @@ def home(request):
 
 def dashboard(request):
     details = Codechef_database.objects.all().order_by('-latest_rating', 'latest_rank')
+
     return render(request, "dashboard.html", {"details": details})
 
 def fetch_details(request, codechef_id):
     student = CodechefTools(codechef_id)
     if student.account_exists():
-        contests = student.feth_details()
+        all_contests = student.feth_details()
+        contests = all_contests[:]
         num_of_contests = student.fetch_num_of_contests()
         num_of_problems = student.fetch_num_of_problems()
         num_of_plagarisms = student.fetch_num_of_plagarisms()
         stars = student.stars()
     else:
+        all_contests = None
         contests = None
         num_of_contests = None
         num_of_problems = None
         num_of_plagarisms = None
         stars = None
 
+    if request.method == "POST":
+        plag = request.POST.get('plagarised', 'All')
+        if contests and plag!='All':
+            contests = [contest for contest in contests if (plag == 'Yes' and contest['penalised_in'] is not None) or (plag == 'No' and contest['penalised_in'] is None)]
+    else:
+        plag = 'All'
 
 
-    details = {"codechef_id": codechef_id, "contests": contests, "num_of_contests": num_of_contests, "num_of_plagarisms": num_of_plagarisms, "num_of_problems": num_of_problems, "stars": stars}
+
+    details = {
+        "codechef_id": codechef_id, 
+        "contests": contests, 
+        "num_of_contests": num_of_contests, 
+        "num_of_plagarisms": num_of_plagarisms, 
+        "num_of_problems": num_of_problems, 
+        "stars": stars,
+        "all_contests": all_contests,
+        "plag": plag,
+        }
     return render(request, "fetch_details.html", {'details': details})

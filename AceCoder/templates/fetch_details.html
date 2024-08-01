@@ -19,7 +19,7 @@
     <tbody>
         <tr>
             <td>{{details.codechef_id}}</td>
-            {% if details.contests %}
+            {% if details.all_contests %}
             <td>Valid account</td>
             <td>{{details.num_of_contests}}</td>
             <td>{{details.num_of_problems}}</td>
@@ -33,8 +33,34 @@
 </table>
 
 
+<form action="{% url "fetch_details" details.codechef_id%}" method="POST">
+    {% csrf_token %}
+    <label for="plagarised">Plagarised</label>
+    <select name="plagarised" id="plagarised">
+        <option value="All" {% if details.plag == 'All' %}selected{% endif %}>All</option>
+        <option value="Yes" {% if details.plag == 'Yes' %}selected{% endif %}>Yes</option>
+        <option value="No" {% if details.plag == 'No' %}selected{% endif %}>No</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+{% comment %} <form action="{% url "fetch_details" details.codechef_id%}" method="POST">
+    {% csrf_token %}
+    <label for="sorting">Sort by</label>
+    <select name="sorting" id="sorting">
+        <option value="None" {% if details.plag == 'All' %}selected{% endif %}>None</option>
+        <option value="Rating_Desc" {% if details.plag == 'All' %}selected{% endif %}>Rating (High to Low)</option>
+        <option value="Rating_Asce" {% if details.plag == 'Yes' %}selected{% endif %}>Rating (Low to High)</option>
+        <option value="Rank_Asce" {% if details.plag == 'No' %}selected{% endif %}>Rank (Low to High)</option>
+    </select>
+    <button type="submit">Sort</button>
+</form> {% endcomment %}
+
+
+
 
 {% if details.contests %}
+
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
