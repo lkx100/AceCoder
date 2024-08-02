@@ -41,22 +41,16 @@
         <option value="Yes" {% if details.plag == 'Yes' %}selected{% endif %}>Yes</option>
         <option value="No" {% if details.plag == 'No' %}selected{% endif %}>No</option>
     </select>
+    <label for="sorting">SortBy</label>
+    <select name="sorting" id="sorting">
+        <option value="None" {% if details.sortby == 'None' %}selected{% endif %}>None</option>
+        <option value="RatingInc" {% if details.sortby == 'RatingInc' %}selected{% endif %}>Rating (Low to High)</option>
+        <option value="RatingDec" {% if details.sortby == 'RatingDec' %}selected{% endif %}>Rating (High to Low)</option>
+        <option value="RankInc" {% if details.sortby == 'RankInc' %}selected{% endif %}>Rank (Low to High)</option>
+        <option value="RankDec" {% if details.sortby == 'RankDec' %}selected{% endif %}>Rank (High to Low)</option>
+    </select>
     <button type="submit">Filter</button>
 </form>
-
-{% comment %} <form action="{% url "fetch_details" details.codechef_id%}" method="POST">
-    {% csrf_token %}
-    <label for="sorting">Sort by</label>
-    <select name="sorting" id="sorting">
-        <option value="None" {% if details.plag == 'All' %}selected{% endif %}>None</option>
-        <option value="Rating_Desc" {% if details.plag == 'All' %}selected{% endif %}>Rating (High to Low)</option>
-        <option value="Rating_Asce" {% if details.plag == 'Yes' %}selected{% endif %}>Rating (Low to High)</option>
-        <option value="Rank_Asce" {% if details.plag == 'No' %}selected{% endif %}>Rank (Low to High)</option>
-    </select>
-    <button type="submit">Sort</button>
-</form> {% endcomment %}
-
-
 
 
 {% if details.contests %}

@@ -33,10 +33,21 @@ def fetch_details(request, codechef_id):
 
     if request.method == "POST":
         plag = request.POST.get('plagarised', 'All')
+        sortby = request.POST.get('sorting', 'None')
         if contests and plag!='All':
             contests = [contest for contest in contests if (plag == 'Yes' and contest['penalised_in'] is not None) or (plag == 'No' and contest['penalised_in'] is None)]
+        if contests and sortby!='None':
+            if sortby == 'RatingInc':
+                contests.sort(key=lambda x: int(x['rating']))
+            elif sortby == 'RatingDec':
+                contests.sort(key=lambda x: int(x['rating']), reverse='True')
+            elif sortby == 'RankInc':
+                contests.sort(key=lambda x: int(x['rank']))
+            elif sortby == 'RankDec':
+                contests.sort(key=lambda x: int(x['rank']), reverse='True')
     else:
         plag = 'All'
+        sortby = 'None'
 
 
 
@@ -49,5 +60,6 @@ def fetch_details(request, codechef_id):
         "stars": stars,
         "all_contests": all_contests,
         "plag": plag,
+        "sortby": sortby,
         }
     return render(request, "fetch_details.html", {'details': details})
