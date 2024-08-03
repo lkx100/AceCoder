@@ -1,7 +1,7 @@
 .right-sidebar-container {
     position: fixed;
     right: 0;
-    top: 0px;
+    top: 60px;
     bottom: 10;
     width: 300px;
     height: 100%;
@@ -14,4 +14,16 @@
 .right-sidebar {
     overflow-y: auto;
     height: 50%;
+}
+
+/* .right-sidebar-container, .left-sidebar-container {
+    top: 60px; /* Adjust this value to match the navbar's height 
+} 
+*/
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1020; /* Ensure it's above the sidebars */
 }
