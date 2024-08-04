@@ -33,25 +33,33 @@
 </table>
 
 
-<form action="{% url "fetch_details" details.codechef_id%}" method="POST">
+<form action="{% url "fetch_details" details.codechef_id %}" method="POST">
     {% csrf_token %}
-    <label for="plagarised">Plagarised</label>
-    <select name="plagarised" id="plagarised">
-        <option value="All" {% if details.plag == 'All' %}selected{% endif %}>All</option>
-        <option value="Yes" {% if details.plag == 'Yes' %}selected{% endif %}>Yes</option>
-        <option value="No" {% if details.plag == 'No' %}selected{% endif %}>No</option>
-    </select>
-    <label for="sorting">SortBy</label>
-    <select name="sorting" id="sorting">
-        <option value="None" {% if details.sortby == 'None' %}selected{% endif %}>None</option>
-        <option value="RatingInc" {% if details.sortby == 'RatingInc' %}selected{% endif %}>Rating (Low to High)</option>
-        <option value="RatingDec" {% if details.sortby == 'RatingDec' %}selected{% endif %}>Rating (High to Low)</option>
-        <option value="RankInc" {% if details.sortby == 'RankInc' %}selected{% endif %}>Rank (Low to High)</option>
-        <option value="RankDec" {% if details.sortby == 'RankDec' %}selected{% endif %}>Rank (High to Low)</option>
-    </select>
-    <button type="submit">Filter</button>
+    <div class="row align-items-center">
+        <div class="col-auto">
+            <label for="plagarised" style="font-weight: bold">Plagarised</label>
+            <select name="plagarised" id="plagarised" class="form-select">
+                <option value="All" {% if details.plag == 'All' %}selected{% endif %}>All</option>
+                <option value="Yes" {% if details.plag == 'Yes' %}selected{% endif %}>Yes</option>
+                <option value="No" {% if details.plag == 'No' %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <label for="sorting" style="font-weight: bold">SortBy</label>
+            <select name="sorting" id="sorting" class="form-select">
+                <option value="None" {% if details.sortby == 'None' %}selected{% endif %}>None</option>
+                <option value="RatingInc" {% if details.sortby == 'RatingInc' %}selected{% endif %}>Rating (Low to High)</option>
+                <option value="RatingDec" {% if details.sortby == 'RatingDec' %}selected{% endif %}>Rating (High to Low)</option>
+                <option value="RankInc" {% if details.sortby == 'RankInc' %}selected{% endif %}>Rank (Low to High)</option>
+                <option value="RankDec" {% if details.sortby == 'RankDec' %}selected{% endif %}>Rank (High to Low)</option>
+            </select>
+        </div>
+        <div class="col-auto ms-auto">
+            <button type="submit" class="btn btn-warning">Filter</button>
+            <button id="download" name="download" value="download" class="btn btn-success ms-2">Download</button>
+        </div>
+    </div>
 </form>
-
 
 {% if details.contests %}
 
