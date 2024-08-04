@@ -38,10 +38,10 @@ def fetch_details(request, codechef_id):
         plag = request.POST.get('plagarised', 'All')
         sortby = request.POST.get('sorting', 'None')
 
-        if contests and plag != 'All':
+        if contests and plag!='All':
             contests = [contest for contest in contests if (plag == 'Yes' and contest['penalised_in'] is not None) or (plag == 'No' and contest['penalised_in'] is None)]
 
-        if contests and sortby != 'None':
+        if contests and sortby!='None':
             if sortby == 'RatingInc':
                 contests.sort(key=lambda x: int(x['rating']))
             elif sortby == 'RatingDec':
