@@ -40,11 +40,11 @@ def fetch_details(request, codechef_id):
             if sortby == 'RatingInc':
                 contests.sort(key=lambda x: int(x['rating']))
             elif sortby == 'RatingDec':
-                contests.sort(key=lambda x: int(x['rating']), reverse='True')
+                contests.sort(key=lambda x: int(x['rating']), reverse=True)
             elif sortby == 'RankInc':
                 contests.sort(key=lambda x: int(x['rank']))
             elif sortby == 'RankDec':
-                contests.sort(key=lambda x: int(x['rank']), reverse='True')
+                contests.sort(key=lambda x: int(x['rank']), reverse=True)
     else:
         plag = 'All'
         sortby = 'None'
