@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
 HOME
@@ -21,16 +22,31 @@ HOME
         text-shadow: 1px 1px black
     }
     .info_card {
+        margin-right: 380px;
         width: 750px;
+    }
+    .info_container {
+        display: flex;
+        align-items: center;
+        {% comment %} justify-content: space-between; {% endcomment %}
+    }
+    .info_container img {
+        margin-left: 50px;
+        margin-bottom: 20px;
+        width: 200px; 
+        height: 200px
     }
 </style>
 
 
 <h1 style="text-align: center; color: lightgrey; margin-bottom: 130px">Home Page</h1>
 
-<div class="info_card">
-    <h1 style="color: white">Welcome to AceCoder!</h1>
-    <h4>Welcome to our dedicated platform, designed to elevate your CodeChef contest experience through AI-powered insights and comprehensive resources. Our mission is to empower students and faculty with detailed performance analysis and valuable tools for continuous improvement.</h4>
+<div class="info_container">
+    <img src="{% static 'Images/AceCoder_Rounded.png' %}" alt="Main_Logo">
+    <div class="info_card">
+        <h1 style="color: white">Welcome to AceCoder!</h1>
+        <h4>Welcome to our dedicated platform, designed to elevate your CodeChef contest experience through AI-powered insights and comprehensive resources. Our mission is to empower students and faculty with detailed performance analysis and valuable tools for continuous improvement.</h4>
+    </div>
 </div>
 
 <hr style="color: darkgrey">
