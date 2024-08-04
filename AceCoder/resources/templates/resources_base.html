@@ -2,6 +2,7 @@
 
 <!doctype html>
 <html lang="en" data-bs-theme="dark">
+
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <head>
         <meta charset="utf-8">
@@ -16,36 +17,36 @@
     </head>
     <body>
 
-        <!-- Left -->
+        <div class="left-sidebar-container">   <!-- Left sidebar content -->
+            <h3> Topics </h3> <br>
+            <ul>
+                <li><h5> Problems </h5></li>
+                <li><h5> Roadmaps </h5></li>
+                <li><h5> Upsolve </h5></li>
+                <li><h5> DSA </h5></li>
+                <li><h5> Competitive Programming </h5></li>
+            </ul>
+        </div>
+        <div class="right-sidebar-container">    <!-- Right sidebar content -->
+            <h3> Page Contents </h3>
+            <ul>
+                <li>basics</li>
+                <li>If - Else</li>
+                <li>Loops</li>
+                <li>Arrays</li>
+                <li>Linked list</li>
+                <li>Stacks</li>
+                <li>Queues</li>
+            </ul>
+        </div>
+        <div class="main-content">
 
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body scrolling</button>
+            {% block content %}
+            Default Base Content
+            {% endblock %}
 
-        <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <p>Try scrolling the rest of the page to see this option in action.</p>
-            </div>
         </div>
 
-        <!-- Right -->
-
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
-
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                ...
-            </div>
-        </div>
-
-        {% block content %}
-        {% endblock %}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>
