@@ -84,6 +84,29 @@ class CodechefTools:
 
         return(df)
     
+    def fetch_contest_problems(self) -> dict:
+        contests_section = self.soup.find_all('div', class_='content')
+        contest_problems = {}
+        
+        for section in contests_section:
+            # print("Section:", section)  # Debugging line to print the section
+            h5_tag = section.find('h5')
+            if h5_tag:
+                contest_name = h5_tag.text.strip()
+                paragraphs = section.find_all('p')
+                if len(paragraphs) > 0:
+                    problems = paragraphs[0].find_all('span', style=lambda value: value and 'font-size: 12px' in value)
+                    problem_list = [problem.text.strip() for problem in problems]
+                    contest_problems[contest_name] = problem_list
+                else:
+                    print(f"No problems found for contest {contest_name}")
+            else:
+                # print("No 'h5' tag found in this section")
+                continue
+            # print("-"*32)
+
+        return contest_problems
+    
 if __name__ == "__main__":
     obj = CodechefTools("sweshikreddy")
     obj.account_exists()
