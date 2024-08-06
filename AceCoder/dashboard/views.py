@@ -25,6 +25,17 @@ def fetch_details(request, codechef_id):
         num_of_problems = student.fetch_num_of_problems()
         num_of_plagarisms = student.fetch_num_of_plagarisms()
         stars = student.stars()
+        contest_problems = student.fetch_contest_problems()
+
+        # Add problems solved to each contest
+        for contest in contests:
+            try:
+                contest['problems_solved'] = ", ".join(contest_problems.get(contest['name'], 0))
+                contest['count_problems_solved'] = len(contest_problems.get(contest['name'], 0))
+            except:
+                contest['problems_solved'] = None
+                contest['count_problems_solved'] = None
+
     else:
         all_contests = None
         contests = None
@@ -32,6 +43,7 @@ def fetch_details(request, codechef_id):
         num_of_problems = None
         num_of_plagarisms = None
         stars = None
+        contest_problems = None
 
     if request.method == "POST":
         download = request.POST.get('download', "False")
@@ -91,7 +103,9 @@ def download_details(details):
             'Contest': contest['name'],
             'Rating': contest['rating'],
             'Rank': contest['rank'],
-            'Plagarised': 'Yes' if contest['penalised_in'] else 'No'
+            'Plagarised': 'Yes' if contest['penalised_in'] else 'No',
+            "Problems Solved": contest['count_problems_solved'],
+            "Problems Solved List": contest['problems_solved'],
         }
         contest_rows.append(row)
     contests_df = pd.DataFrame(contest_rows)

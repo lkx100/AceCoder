@@ -70,6 +70,8 @@
             <th>Rating</th>
             <th>Rank</th>
             <th>Plagarised</th>
+            <th>Problems Solved</th>
+            <th>Problems Solved List</th>
         </tr>
     </thead>
     <tbody>
@@ -83,6 +85,8 @@
             {% else %}
             <td>NO</td>
             {% endif %}
+            <td>{{contest.count_problems_solved}}</td>
+            <td>{{contest.problems_solved}}</td>
         </tr>
         {% endfor %}
     </tbody>
