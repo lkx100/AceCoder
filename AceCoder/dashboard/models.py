@@ -30,7 +30,7 @@ class Student(models.Model): # Model for Student database
     )
 
     # Input fields
-    name = models.CharField(max_length=200) 
+    name = models.CharField(max_length=200)
     roll_no = models.CharField(max_length=10)
     codechef_id = models.CharField(max_length=100, null=True)
     department = models.CharField(choices=department_options, max_length=5)
@@ -40,7 +40,7 @@ class Student(models.Model): # Model for Student database
     # Display name
     def __str__(self) -> str:
         return f"{self.roll_no} - {self.name}"
-    
+
 
 class Codechef_database(models.Model):
     student = models.ForeignKey("Student", on_delete=models.CASCADE, null=True)
@@ -57,8 +57,8 @@ class Codechef_database(models.Model):
             codechef_obj = CodechefTools(self.student.codechef_id)
             if codechef_obj.account_exists():
                 details = codechef_obj.feth_details()[-1]
-                self.last_contest = details['code'] 
-                self.latest_rating = details['rating'] 
+                self.last_contest = details['code']
+                self.latest_rating = details['rating']
                 self.latest_rank = details['rank']
                 self.no_of_contests = codechef_obj.fetch_num_of_contests()
                 self.no_of_problems = codechef_obj.fetch_num_of_problems()
