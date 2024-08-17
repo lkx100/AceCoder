@@ -1,29 +1,39 @@
 {% extends "resources_base.html" %}
 
+{% load static %}
+
 {% block title %}
     Resources Page
 {% endblock %}
 
 {% block content %}
 
-    <h1 style="text-align: center;"> Resources Page </h1>
+    <h1 style="text-align: center;"> Resources Page </h1> <br>
 
-    This content block is just for testing purpose, you can overlook it. This was just to make sure
-    that all of the contents are written as aspected. This content block is just for testing purpose, you can overlook it. This was just to make sure that all of the contents are written as aspected.
+    <h3>Most Liked Posts here....</h3> <br> <br>
 
-    <h2>Hi lucky</h2>
-
-    <p>
-
-        Donald John Trump (born June 14, 1946) is an American politician, media personality, and businessman who served as the 45th president of the United States from 2017 to 2021.
-
-Trump received a Bachelor of Science in economics from the University of Pennsylvania in 1968. His father named him president of his real estate business in 1971. Trump renamed it the Trump Organization and reoriented the company toward building and renovating skyscrapers, hotels, casinos, and golf courses. After a series of business failures in the late 1990s, he launched successful side ventures, mostly licensing the Trump name. From 2004 to 2015, he co-produced and hosted the reality television series The Apprentice. He and his businesses have been plaintiffs or defendants in more than 4,000 legal actions, including six business bankruptcies.
-
-Trump won the 2016 presidential election as the Republican Party nominee against Democratic Party candidate Hillary Clinton while losing the popular vote.[a] A special counsel investigation established that Russia had interfered in the election to favor Trump. During the campaign, his political positions were described as populist, protectionist, isolationist, and nationalist. His election and policies sparked numerous protests. He was the only U.S. president without prior military or government experience. Trump promoted conspiracy theories and made many false and misleading statements during his campaigns and presidency, to a degree unprecedented in American politics. Many of his comments and actions have been characterized as racially charged, racist, and misogynistic.
-
-As president, Trump ordered a travel ban on citizens from several Muslim-majority countries, diverted military funding toward building a wall on the U.S.-Mexico border, and implemented a family separation policy. He rolled back more than 100 environmental policies and regulations. He signed the Tax Cuts and Jobs Act of 2017, which cut taxes and eliminated the individual health insurance mandate penalty of the Affordable Care Act. He appointed Neil Gorsuch, Brett Kavanaugh, and Amy Coney Barrett to the U.S. Supreme Court. He reacted slowly to the COVID-19 pandemic, ignored or contradicted many recommendations from health officials, used political pressure to interfere with testing efforts, and spread misinformation about unproven treatments. Trump initiated a trade war with China and withdrew the U.S. from the proposed Trans-Pacific Partnership trade 
-
-    </p>
-
+    <div class = "container row gap-3">
+        {% if blogs %}
+            {% for blog in blogs|slice:":4" %}
+                <div class="card" style="width: 20rem;">
+                    <img src="{{ blog.banner.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ blog.tittle }}</h4>
+                        <p class="card-text">
+                            {% if blog.description|length >= 50 %}
+                                {{ blog.description|slice:":50" }} ...
+                            {% else %}
+                                {{ blog.description }}
+                            {% endif %}
+                        </p>
+                        <a href="#" class="btn btn-primary">View Blog</a>
+                    </div>
+                </div>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            {% endfor %}
+        {% else %}
+            <h2> Nothing to show, Please create your blogs </h2>
+        {% endif %}
+    </div>
 
 {% endblock %}
