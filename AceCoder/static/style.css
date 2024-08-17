@@ -45,3 +45,9 @@ html body nav.navbar {
     width: 100%;
     z-index: 1030; /* Bootstrap's navbar z-index + 1 for good measure */
 }
+
+.card-img-top {
+    height: 100px;
+    width: 100%;
+    object-fit: cover; /* Cover the area without distorting the image */
+}
