@@ -1,11 +1,19 @@
 {% extends "resources_base.html" %}
 
-{% block tittle %}
-A blog Page
+{% block title %}
+blog Page
 {% endblock %}
 
 {% block content %}
 
-    <h2> {{ blog.tittle }} </h2>
+    <h1 style = "text-align: center;"> {{ blog.tittle }} </h1> <br>
+
+    <p style="text-align: left;"> Author: {{ blog.author }} </p>
+    <p style="text-align: left;"> Created On: {{ blog.created_on }} </p> <br> <br>
+
+    <div style="align-content: center;">
+        <img src="{{ blog.banner.url }}" alt="">
+        <p> {{ blog.post }} </p>
+    </div>
 
 {% endblock %}
