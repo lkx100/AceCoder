@@ -48,6 +48,9 @@ html body nav.navbar {
 
 .card-img-top {
     height: 200px;
-    width: 100%;
+    width: 150%;
     object-fit: cover; /* Cover the area without distorting the image */
+    /* image with rounded corners with some padding*/
+    border-radius: 10px;
+    padding: 2px;
 }
