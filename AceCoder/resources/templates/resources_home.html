@@ -10,7 +10,7 @@
 
     <h1 style="text-align: center;font-weight: bold; color: lightgrey"> Resources Page </h1> <br>
 
-    {% comment %} <h3>Most Liked Posts here....</h3> <br> <br> {% endcomment %}
+    <h3>Most Liked Posts here....</h3> <br> <br>
 
     <div class = "container row gap-3">
         {% if blogs %}
@@ -27,7 +27,7 @@
                                 {{ blog.description }}
                             {% endif %}
                         </p>
-                        <a href="#" class="btn btn-primary">View Blog</a>
+                        <a href="{{ blog.id }}" class="btn btn-primary">View Blog</a>
                     </div>
                 </div>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;

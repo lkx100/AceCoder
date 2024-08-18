@@ -50,6 +50,9 @@ html body nav.navbar {
     height: 100px;
     width: 100%;
     object-fit: cover; /* Cover the area without distorting the image */
+    /* image with rounded corners with some padding*/
+    border-radius: 10px;
+    padding: 2px;
 }
 
 ul.no-marker {
