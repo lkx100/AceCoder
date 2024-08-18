@@ -8,14 +8,15 @@
 
 {% block content %}
 
-    <h1 style="text-align: center;"> Resources Page </h1> <br>
+    <h1 style="text-align: center;font-weight: bold; color: lightgrey"> Resources Page </h1> <br>
 
-    <h3>Most Liked Posts here....</h3> <br> <br>
+    {% comment %} <h3>Most Liked Posts here....</h3> <br> <br> {% endcomment %}
 
     <div class = "container row gap-3">
         {% if blogs %}
             {% for blog in blogs|slice:":4" %}
-                <div class="card" style="width: 20rem;">
+                <div class="card text-light bg-secondary" style="width: 20rem;">
+                    <br>
                     <img src="{{ blog.banner.url }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h4 class="card-title">{{ blog.tittle }}</h4>
