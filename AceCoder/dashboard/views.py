@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from .models import *
 from .Codechef import CodechefTools
 import pandas as pd
-from django.core.paginator import Paginator
 
 # Create your views here.
 def home(request):
@@ -17,16 +16,11 @@ def dashboard(request):
 
     return render(request, "dashboard.html", {"details": details})
 
-
 def fetch_details(request, codechef_id):
     student = CodechefTools(codechef_id)
     if student.account_exists():
         all_contests = student.feth_details()
-        paginator = Paginator(all_contests, 14)  # Show 15 contests per page
-
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-
+        contests = all_contests[:]
         num_of_contests = student.fetch_num_of_contests()
         num_of_problems = student.fetch_num_of_problems()
         num_of_plagarisms = student.fetch_num_of_plagarisms()
@@ -34,27 +28,71 @@ def fetch_details(request, codechef_id):
         contest_problems = student.fetch_contest_problems()
 
         # Add problems solved to each contest
-        for contest in page_obj:
+        for contest in contests:
             try:
                 contest['problems_solved'] = ", ".join(contest_problems.get(contest['name'], 0))
                 contest['count_problems_solved'] = len(contest_problems.get(contest['name'], 0))
             except:
                 contest['problems_solved'] = None
+                contest['count_problems_solved'] = None
 
-        context = {
-            'details': {
-                'codechef_id': codechef_id,
-                'num_of_contests': num_of_contests,
-                'num_of_problems': num_of_problems,
-                'num_of_plagarisms': num_of_plagarisms,
-                'stars': stars,
-                'contests': page_obj,
-                'plag': request.POST.get('plagarised', 'All'),
-                'sortby': request.POST.get('sorting', 'None')
-            }
+    else:
+        all_contests = None
+        contests = None
+        num_of_contests = None
+        num_of_problems = None
+        num_of_plagarisms = None
+        stars = None
+        contest_problems = None
+
+    if request.method == "POST":
+        download = request.POST.get('download', "False")
+        plag = request.POST.get('plagarised', 'All')
+        sortby = request.POST.get('sorting', 'None')
+
+        if contests and plag!='All':
+            contests = [contest for contest in contests if (plag == 'Yes' and contest['penalised_in'] is not None) or (plag == 'No' and contest['penalised_in'] is None)]
+
+        if contests and sortby!='None':
+            if sortby == 'RatingInc':
+                contests.sort(key=lambda x: int(x['rating']))
+            elif sortby == 'RatingDec':
+                contests.sort(key=lambda x: int(x['rating']), reverse=True)
+            elif sortby == 'RankInc':
+                contests.sort(key=lambda x: int(x['rank']))
+            elif sortby == 'RankDec':
+                contests.sort(key=lambda x: int(x['rank']), reverse=True)
+
+        details = {
+            "codechef_id": codechef_id,
+            "contests": contests,
+            "num_of_contests": num_of_contests,
+            "num_of_plagarisms": num_of_plagarisms,
+            "num_of_problems": num_of_problems,
+            "stars": stars,
+            "all_contests": all_contests,
+            "plag": plag,
+            "sortby": sortby,
         }
 
-        return render(request, "fetch_details.html", context)
+        if download != 'False':
+            return download_details(details)
+    else:
+        plag = 'All'
+        sortby = 'None'
+        details = {
+            "codechef_id": codechef_id,
+            "contests": contests,
+            "num_of_contests": num_of_contests,
+            "num_of_plagarisms": num_of_plagarisms,
+            "num_of_problems": num_of_problems,
+            "stars": stars,
+            "all_contests": all_contests,
+            "plag": plag,
+            "sortby": sortby,
+        }
+
+    return render(request, "fetch_details.html", {'details': details})
 
 def download_details(details):
     # Create the contests DataFrame

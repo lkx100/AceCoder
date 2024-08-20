@@ -1,33 +1,39 @@
 {% extends "base.html" %}
+
+
 {% block content %}
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Codechef ID</th>
-            <th>Valid account</th>
-            {% if details.contests %}
-            <th>Contests Participated</th>
-            <th>Problems Solved</th>
-            <th>Plagarisms</th>
-            <th>Stars</th>
-            {% endif %}
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{details.codechef_id}}</td>
-            {% if details.contests %}
-            <td>Valid account</td>
-            <td>{{details.num_of_contests}}</td>
-            <td>{{details.num_of_problems}}</td>
-            <td>{{details.num_of_plagarisms}}</td>
-            <td>{{details.stars}}</td>
-            {% else %}
-            <td>Invalid Account - Codechef Id doesn't exists</td>
-            {% endif %}
-        </tr>
-    </tbody>
-</table>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Codechef ID</th>
+                <th>Valid account</th>
+                {% if details.contests %}
+                <th>Contests Participated</th>
+                <th>Problems Solved</th>
+                <th>Plagarisms</th>
+                <th>Stars</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{details.codechef_id}}</td>
+                {% if details.all_contests %}
+                <td>Valid account</td>
+                <td>{{details.num_of_contests}}</td>
+                <td>{{details.num_of_problems}}</td>
+                <td>{{details.num_of_plagarisms}}</td>
+                <td>{{details.stars}}</td>
+                {% else %}
+                <td>Invalid Account - Codechef Id doesn't exists</td>
+                {% endif %}
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>
 <form action="{% url "fetch_details" details.codechef_id %}" method="POST">
     {% csrf_token %}
     <div class="row align-items-center">
@@ -55,51 +61,41 @@
         </div>
     </div>
 </form>
+
+<br>
+
 {% if details.contests %}
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Contest Code</th>
-            <th>Rating</th>
-            <th>Rank</th>
-            <th>Plagarised</th>
-            <th>Problems Solved</th>
-            <th>Problems Solved List</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for contest in details.contests %}
-        <tr>
-            <td>{{contest.name}}</td>
-            <td>{{contest.rating}}</td>
-            <td>{{contest.rank}}</td>
-            {% if contest.penalised_in %}
-            <td>YES</td>
-            {% else %}
-            <td>NO</td>
-            {% endif %}
-            <td>{{contest.count_problems_solved}}</td>
-            <td>{{contest.problems_solved}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<div class="pagination">
-    <span class="step-links">
-        {% if details.contests.has_previous %}
-            <a href="?page=1"><button>&laquo;</button></a>
-            <a href="?page={{ details.contests.previous_page_number }}"><button>&larr;</button></a>
-        {% endif %}
 
-        <span class="current" style="font-weight: bold;">
-            {{ details.contests.number }} / {{ details.contests.paginator.num_pages }}
-        </span>
-
-        {% if details.contests.has_next %}
-            <a href="?page={{ details.contests.next_page_number }}"><button>&rarr;</button></a>
-            <a href="?page={{ details.contests.paginator.num_pages }}"><button>&raquo;</button></a>
-        {% endif %}
-    </span>
+<div class="table-responsive" style="height: 600px; overflow-y: auto;">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Contest Code</th>
+                <th>Rating</th>
+                <th>Rank</th>
+                <th>Plagarised</th>
+                <th>Problems Solved</th>
+                <th>Problems Solved List</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for contest in details.contests %}
+            <tr>
+                <td>{{contest.name}}</td>
+                <td>{{contest.rating}}</td>
+                <td>{{contest.rank}}</td>
+                {% if contest.penalised_in %}
+                <td>YES</td>
+                {% else %}
+                <td>NO</td>
+                {% endif %}
+                <td>{{contest.count_problems_solved}}</td>
+                <td>{{contest.problems_solved}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endif %}
+
 {% endblock %}
