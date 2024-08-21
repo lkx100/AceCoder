@@ -14,7 +14,39 @@ def home(request):
 def dashboard(request):
     details = Codechef_database.objects.all().order_by('-latest_rating', 'latest_rank')
 
-    return render(request, "dashboard.html", {"details": details})
+
+    if request.method == "POST":
+        download = request.POST.get('download', "False")
+        plag = request.POST.get('plagarised', 'All')
+        depart = request.POST.get('department', 'All')
+        sortby = request.POST.get('sorting', 'None')
+
+        if details and depart!='All':
+            details = details.filter(student__department=depart)
+
+        if details and plag!='All':
+            details = [student for student in details if (plag == 'Yes' and student.plagarisms!=0) or (plag == 'No' and student.plagarisms==0)]
+
+        if details and sortby!='None':
+            if sortby == 'RatingInc':
+                details = details.order_by('latest_rating')
+            elif sortby == 'RatingDec':
+                details = details.order_by('-latest_rating')
+            elif sortby == 'RankInc':
+                details = details.order_by('latest_rank')
+            elif sortby == 'RankDec':
+                details = details.order_by('-latest_rank')
+
+        if download != 'False':
+            return download_details_all(details)
+    else:
+        plag = 'All'
+        sortby = 'None'
+        depart = 'All'
+        
+
+
+    return render(request, "dashboard.html", {"details": details, "plag": plag, "sortby": sortby, "depart": depart}) 
 
 def fetch_details(request, codechef_id):
     student = CodechefTools(codechef_id)
@@ -128,5 +160,35 @@ def download_details(details):
     general_details_df.to_csv(response, index=False)
     response.write("\n\n")  # Add some space between the two tables
     contests_df.to_csv(response, index=False)
+
+    return response
+
+def download_details_all(details):
+    print("Function called!")
+    rows = []
+
+    for student in details:
+        row = {
+            'Roll No': student.student.roll_no,
+            'Name': student.student.name,
+            'Year': student.student.year,
+            'Department': student.student.department,
+            'Last Contest': student.last_contest,
+            'Latest Rating': student.latest_rating,
+            'Latest Rank': student.latest_rank,
+            'Plagiarisms': student.plagarisms,
+            'Contest Problems Solved': student.contest_problems,
+        }
+
+        rows.append(row)
+
+    details_df = pd.DataFrame(rows)
+    print(details_df)
+
+    # Create a response object
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="Codechef_contest_details.csv"'
+
+    details_df.to_csv(response, index=False)
 
     return response

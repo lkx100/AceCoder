@@ -50,6 +50,7 @@ class Codechef_database(models.Model):
     no_of_contests = models.IntegerField(null=True, blank=True)
     no_of_problems = models.IntegerField(null=True, blank=True)
     plagarisms = models.IntegerField(null=True, blank=True)
+    contest_problems = models.CharField(max_length=1000, null=True, blank=True)
     stars = models.IntegerField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
@@ -58,11 +59,14 @@ class Codechef_database(models.Model):
             if codechef_obj.account_exists():
                 details = codechef_obj.feth_details()[-1]
                 self.last_contest = details['code']
+                self.last_contest_full = details['name']
                 self.latest_rating = details['rating']
                 self.latest_rank = details['rank']
                 self.no_of_contests = codechef_obj.fetch_num_of_contests()
                 self.no_of_problems = codechef_obj.fetch_num_of_problems()
                 self.plagarisms = codechef_obj.fetch_num_of_plagarisms()
+                contest_problems_list = codechef_obj.fetch_contest_problems().get(self.last_contest_full, [])
+                self.contest_problems = ", ".join(contest_problems_list)
                 self.stars = codechef_obj.stars()
         super().save(*args, **kwargs)
 
