@@ -42,11 +42,14 @@
         <div class="left-sidebar-container">   <!-- Left sidebar content -->
             <h3 style='font-weight: bold; padding-left: 50px'> Topics </h3> <br>
             <ul class='right-bar'>
-                <li><button class="btn btn-secondary" style="width: 200px;">Problems</button></li>
-                <li><button class="btn btn-light" style="width: 200px;">Roadmaps</button></li>
-                <li><button class="btn btn-secondary" style="width: 200px;">Upsolve</button></li>
-                <li><button class="btn btn-light" style="width: 200px;">DSA</button></li>
-                <li><button class="btn btn-secondary" style="width: 200px;">Completitive Programming</button></li>
+                <a href="{% url "resources_home"%}"><li><button class="btn btn-light" style="width: 200px;">All</button></li></a>
+                <a href="{% url "tag_posts" 'Problems'%}"><li><button class="btn btn-secondary" style="width: 200px;">Problems</button></li></a>
+                <a href="{% url "tag_posts" 'Roadmaps'%}"><li><button class="btn btn-light" style="width: 200px;">Roadmaps</button></li></a>
+                <a href="{% url "tag_posts" 'Upsolve'%}"><li><button class="btn btn-secondary" style="width: 200px;">Upsolve</button></li></a>
+                <a href="{% url "tag_posts" 'DSA'%}"><li><button class="btn btn-light" style="width: 200px;">DSA</button></li></a>
+                <a href="{% url "tag_posts" 'CP'%}"><li><button class="btn btn-secondary" style="width: 200px;">Completitive Programming</button></li></a>
+                <a href="{% url "tag_posts" 'Coding'%}"><li><button class="btn btn-light" style="width: 200px;">Coding</button></li></a>
+                <a href="{% url "tag_posts" 'Others'%}"><li><button class="btn btn-secondary" style="width: 200px;">Others</button></li></a>
             </ul>
         </div>
         <div class="right-sidebar-container">    <!-- Right sidebar content -->
