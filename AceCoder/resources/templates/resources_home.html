@@ -27,7 +27,7 @@
                                 {{ blog.description }}
                             {% endif %}
                         </p>
-                        <a href="{{ blog.id }}" class="btn btn-primary">View Blog</a>
+                        <a href="{% url "blog_page" blog.id %}" class="btn btn-primary">View Blog</a>
                     </div>
                 </div>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
