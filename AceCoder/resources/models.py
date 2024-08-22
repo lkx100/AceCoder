@@ -19,3 +19,12 @@ class Post(models.Model):
 
     def __str__(self):
         return f"\"{self.tittle[:20]}.... \" by {self.author}" if len(self.tittle) > 20 else f"\"{self.tittle}\" by {self.author}"
+    
+
+class SubPost(models.Model):
+    tittle = models.CharField(max_length = 200)
+    link = models.URLField(default = '')
+    parent_post = models.ManyToManyField(Post)
+
+    def __str__(self):
+        return self.tittle

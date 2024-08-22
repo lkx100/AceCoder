@@ -1,19 +1,45 @@
 {% extends "resources_base.html" %}
 
+{% load static %}
+
 {% block title %}
-blog Page
+Blog Page
 {% endblock %}
 
 {% block content %}
 
     <h1 style = "text-align: center;"> {{ blog.tittle }} </h1> <br>
 
-    <p style="text-align: left;"> Author: {{ blog.author }} </p>
-    <p style="text-align: left;"> Created On: {{ blog.created_on }} </p> <br> <br>
+    <p style="text-align: right;"> Author: {{ blog.author }} </p>
+    <p style="text-align: right;"> Created On: {{ blog.created_on }} </p> <br>
 
-    <div style="align-content: center;">
-        <img src="{{ blog.banner.url }}" alt="">
-        <p> {{ blog.post }} </p>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            
+            <img src="{{ blog.banner.url }}" alt=""> <br> <br> <br>
+            <h5 style="text-align: center;"> Description - {{ blog.description }} </h5>
+            <h5 style="text-align: center;"> Details - {{ blog.post }} </h5>
+
+            {% if subposts %}
+                {% for subpost in subposts %}
+                <div class="row">
+                    <div class="col-10">
+                        <h3> {{subpost.tittle}} </h3>
+                    </div>
+                    <div class="col-2">
+                        <a href="{{subpost.link}}" target="_blank">
+                            <button class="btn btn-success">Source</button>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <br> <br>
+                <h5 style="text-align: center;"> Links will be updated soon .... </h5>
+            {% endif %}
+
+        </div>
     </div>
 
 {% endblock %}

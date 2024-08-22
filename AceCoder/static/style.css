@@ -3,7 +3,7 @@
     left: 0;
     top: 69px; /* Adjust this value to match the navbar's height */
     bottom: 0;
-    width: 350px;
+    width: 250px;
     border-right: 1px solid rgb(88, 88, 88); /* Adjusted the color and width for visibility */
     padding: 2%;
     /*background-color: 'bg-body-tertiary'; */ /* Optional: Adding a background color for contrast */
@@ -53,6 +53,14 @@ html body nav.navbar {
     /* image with rounded corners with some padding*/
     border-radius: 10px;
     padding: 2px;
+}
+
+.image-class {
+    height: 200px; /* Fixed height */
+    width: 100%; /* Full width of the container */
+    object-fit: contain; /* Scale down/up to fit, maintaining aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+    padding: 2px; /* Padding around the image */
 }
 
 ul.no-marker {

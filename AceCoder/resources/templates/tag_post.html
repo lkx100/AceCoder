@@ -1,5 +1,7 @@
 {% extends "resources_base.html" %}
 
+{% load static %}
+
 {% block title %}
     Tag Page
 {% endblock %}
@@ -27,7 +29,8 @@
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         {% endfor %}
     {% else %}
-        <h2> Nothing to show, Please create your blogs </h2>
+        <h2> No Blogs created here .... </h2>
+        <h2> Try Creating One ! </h2>
     {% endif %}
 </div>
 
