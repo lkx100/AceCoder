@@ -3,7 +3,7 @@
     left: 0;
     top: 69px; /* Adjust this value to match the navbar's height */
     bottom: 0;
-    width: 250px;
+    width: 350px;
     border-right: 1px solid rgb(88, 88, 88); /* Adjusted the color and width for visibility */
     padding: 2%;
     /*background-color: 'bg-body-tertiary'; */ /* Optional: Adding a background color for contrast */
