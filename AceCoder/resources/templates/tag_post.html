@@ -20,32 +20,47 @@
         </div>
     {% endblock %}
 
+    {% block right_sidebar %}
+        <div class="right-sidebar-container">
+            <h3 style='font-weight: bold; padding-left: 5px; margin-bottom: 30px'> Page Contents </h3>
+            <ul class='left-bar'>
+                {% comment %} <li>basics</li>
+                <li>If - Else</li>
+                <li>Loops</li>
+                <li>Arrays</li>
+                <li>Linked list</li>
+                <li>Stacks</li>
+                <li>Queues</li> {% endcomment %}
+            </ul>
+        </div>
+    {% endblock %}
 
-<h1 style="text-align: center">{{tag}}</h1>
-<div class = "container row gap-3">
-    {% if blogs %}
-        {% for blog in blogs|slice:":4" %}
-            <div class="card text-light bg-secondary" style="width: 20rem;">
-                <br>
-                <img src="{{ blog.banner.url }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h4 class="card-title">{{ blog.tittle }}</h4>
-                    <p class="card-text">
-                        {% if blog.description|length >= 50 %}
-                            {{ blog.description|slice:":50" }} ...
-                        {% else %}
-                            {{ blog.description }}
-                        {% endif %}
-                    </p>
-                    <a href="{% url "blog_page" blog.id %}" class="btn btn-primary">View Blog</a>
+
+    <h1 style="text-align: center">{{tag}}</h1>
+    <div class = "container row gap-3">
+        {% if blogs %}
+            {% for blog in blogs|slice:":4" %}
+                <div class="card text-light bg-secondary" style="width: 20rem;">
+                    <br>
+                    <img src="{{ blog.banner.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ blog.tittle }}</h4>
+                        <p class="card-text">
+                            {% if blog.description|length >= 50 %}
+                                {{ blog.description|slice:":50" }} ...
+                            {% else %}
+                                {{ blog.description }}
+                            {% endif %}
+                        </p>
+                        <a href="{% url "blog_page" blog.id %}" class="btn btn-primary">View Blog</a>
+                    </div>
                 </div>
-            </div>
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        {% endfor %}
-    {% else %}
-        <h2> No Blogs created here .... </h2>
-        <h2> Try Creating One ! </h2>
-    {% endif %}
-</div>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            {% endfor %}
+        {% else %}
+            <h2> No Blogs created here .... </h2>
+            <h2> Try Creating One ! </h2>
+        {% endif %}
+    </div>
 
 {% endblock %}

@@ -10,6 +10,7 @@
             {% block title %}
             {% endblock %}
         </title>
+        
         {% include "navbar.html" %}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'style.css' %}">
@@ -19,44 +20,34 @@
                 list-style-type: none;
                 padding-left: 0; /* Optional: Remove default padding */
             }
-
             ul.right-bar li {
                 padding-bottom: 10px;
             }
-
             ul.right-bar button{
                 list-style-type: none;
                 padding-left: 0; /* Optional: Remove default padding */
                 font-weight: bold;
             }
-            
             ul.left-bar{
                 padding-left: 15px;
             }
-
         </style>
 
     </head>
     <body>
-        {% block left_sidebar %}
-            
+
+        {% block left_sidebar %}    
         {% endblock %}
-        <div class="right-sidebar-container">    <!-- Right sidebar content -->
-            <h3 style='font-weight: bold; padding-left: 5px; margin-bottom: 30px'> Page Contents </h3>
-            <ul class='left-bar'>
-                {% comment %} <li>basics</li>
-                <li>If - Else</li>
-                <li>Loops</li>
-                <li>Arrays</li>
-                <li>Linked list</li>
-                <li>Stacks</li>
-                <li>Queues</li> {% endcomment %}
-            </ul>
-        </div>
+
+        {% block right_sidebar %}
+        {% endblock %}
+
         <div class="main-content">
             {% block content %}
-            Default Base Content
             {% endblock %}
         </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
     </body>
 </html>
