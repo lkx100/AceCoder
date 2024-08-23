@@ -38,20 +38,9 @@
 
     </head>
     <body>
-
-        <div class="left-sidebar-container">   <!-- Left sidebar content -->
-            <h3 style='font-weight: bold; padding-left: 50px'> Topics </h3> <br>
-            <ul class='right-bar'>
-                <a href="{% url "resources_home"%}"><li><button class="btn btn-light" style="width: 180px;">All</button></li></a>
-                <a href="{% url "tag_posts" 'Problems'%}"><li><button class="btn btn-secondary" style="width: 180px;">Problems</button></li></a>
-                <a href="{% url "tag_posts" 'Roadmaps'%}"><li><button class="btn btn-light" style="width: 180px;">Roadmaps</button></li></a>
-                <a href="{% url "tag_posts" 'Upsolve'%}"><li><button class="btn btn-secondary" style="width: 180px;">Upsolve</button></li></a>
-                <a href="{% url "tag_posts" 'DSA'%}"><li><button class="btn btn-light" style="width: 180px;">DSA</button></li></a>
-                <a href="{% url "tag_posts" 'CP'%}"><li><button class="btn btn-secondary" style="width: 180px;">Completitive Programming</button></li></a>
-                <a href="{% url "tag_posts" 'Coding'%}"><li><button class="btn btn-light" style="width: 180px;">Coding</button></li></a>
-                <a href="{% url "tag_posts" 'Others'%}"><li><button class="btn btn-secondary" style="width: 180px;">Others</button></li></a>
-            </ul>
-        </div>
+        {% block left_sidebar %}
+            
+        {% endblock %}
         <div class="right-sidebar-container">    <!-- Right sidebar content -->
             <h3 style='font-weight: bold; padding-left: 5px; margin-bottom: 30px'> Page Contents </h3>
             <ul class='left-bar'>

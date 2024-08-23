@@ -8,6 +8,20 @@
 
 {% block content %}
 
+    {% block left_sidebar %}
+        <div class="left-sidebar-container">   <!-- Left sidebar content -->
+            <h3 style='font-weight: bold; padding-left: 50px'> Topics </h3> <br>
+            <ul class='right-bar'>
+                <a href="{% url "resources_home" %}"><li><button class="btn btn-light" style="width: 180px;">All</button></li></a>
+                {% for tag in all_tags %}
+                <a href="{% url "tag_posts" tag.post_tag %}"><li><button {% if forloop.counter|divisibleby:2 %} class="btn btn-light" {% else %} class="btn btn-secondary" {% endif %} style="width: 180px;">{{ tag.post_tag }}</button></li></a>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endblock %}
+
+
+<h1 style="text-align: center">{{tag}}</h1>
 <div class = "container row gap-3">
     {% if blogs %}
         {% for blog in blogs|slice:":4" %}

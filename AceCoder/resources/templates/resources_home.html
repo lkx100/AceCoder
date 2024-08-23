@@ -8,6 +8,18 @@
 
 {% block content %}
 
+    {% block left_sidebar %}
+        <div class="left-sidebar-container">   <!-- Left sidebar content -->
+            <h3 style='font-weight: bold; padding-left: 50px'> Topics </h3> <br>
+            <ul class='right-bar'>
+                <a href="{% url "resources_home" %}"><li><button class="btn btn-light" style="width: 180px;">All</button></li></a>
+                {% for tag in all_tags %}
+                <a href="{% url "tag_posts" tag.post_tag %}"><li><button {% if forloop.counter|divisibleby:2 %} class="btn btn-light" {% else %} class="btn btn-secondary" {% endif %} style="width: 180px;">{{ tag.post_tag }}</button></li></a>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endblock %}
+
     <h1 style="text-align: center;font-weight: bold; color: lightgrey"> Resources Page </h1> <br> <br>
 
     <div class = "container row gap-3">
@@ -26,6 +38,15 @@
                             {% endif %}
                         </p>
                         <a href="{% url "blog_page" blog.id %}" class="btn btn-primary">Click For Details</a>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            {% for tag in blog.tags.all %}
+                                    <div class="col-auto">
+                                        <h6>{{tag.post_tag}} &nbsp |</h6>
+                                    </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
