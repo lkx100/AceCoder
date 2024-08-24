@@ -76,8 +76,7 @@ HOME
             </tr>
         </thead>
         <tbody>
-            {% for student in details %}
-            
+            {% for student in details|slice:":10" %}
             <tr style="text-align: center">
                 <td>{{ forloop.counter }}</td>
                 <td>{{student.student.roll_no}}</td>
@@ -91,7 +90,6 @@ HOME
                 <td>{{student.no_of_contests}}</td>
                 <td>{{student.plagarisms}}</td>
             </tr>
-            
             {% endfor %}
         </tbody>
     </table>

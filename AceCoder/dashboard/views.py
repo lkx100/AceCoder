@@ -12,7 +12,7 @@ def home(request):
 
 
 def dashboard(request):
-    details = Codechef_database.objects.all().order_by('-latest_rating', 'latest_rank')
+    details = Codechef_database.objects.all().order_by('student__roll_no')
 
 
     if request.method == "POST":

@@ -80,8 +80,8 @@ Blog Page
             <hr style="margin-top: 50px; border-width: 3px; border-color: white;">
             {% if subposts %}
                 {% for subpost in subposts %}
-                    <div class="row">
-                        <div class="col-9">
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
                             <h3> {{subpost.tittle}} </h3>
                         </div>
                         {% if subpost.link|slice:"12:19" == "youtube" %}
@@ -114,19 +114,19 @@ Blog Page
                                 </a>  
                         {% endif %}
                         </div>
-                    </div>
-                    <div class="row">
-                        <p>
-                            The BeginnersGuide page on the Python Wiki serves as a comprehensive resource for those new to Python programming. It offers a step-by-step guide to getting started with Python, including installation instructions, learning resources, and information on finding specific applications or libraries.
-
-                            Key points from the page:
-
-                            Installation: The page provides guidance on installing Python, which is generally straightforward on most operating systems.
-                            Learning: It recommends exploring various resources such as IDEs, text editors, introductory books, and code samples to aid in the learning process.
-                            Finding Applications and Libraries: The page suggests using the Python Package Index (PyPI) and searching on python.org to locate relevant tools.
-                            Additional Resources: It provides links to tutorials, documentation, and online communities for further support and learning.
-                            Overall, the BeginnersGuide page is a valuable resource for anyone looking to start their Python programming journey. It offers practical information and guidance to help beginners get started and navigate the world of Python development.
-                        </p>
+                        <div class="row">
+                            <p>
+                                The BeginnersGuide page on the Python Wiki serves as a comprehensive resource for those new to Python programming. It offers a step-by-step guide to getting started with Python, including installation instructions, learning resources, and information on finding specific applications or libraries.
+    
+                                Key points from the page:
+    
+                                Installation: The page provides guidance on installing Python, which is generally straightforward on most operating systems.
+                                Learning: It recommends exploring various resources such as IDEs, text editors, introductory books, and code samples to aid in the learning process.
+                                Finding Applications and Libraries: The page suggests using the Python Package Index (PyPI) and searching on python.org to locate relevant tools.
+                                Additional Resources: It provides links to tutorials, documentation, and online communities for further support and learning.
+                                Overall, the BeginnersGuide page is a valuable resource for anyone looking to start their Python programming journey. It offers practical information and guidance to help beginners get started and navigate the world of Python development.
+                            </p>
+                        </div>
                     </div>
                 {% endfor %}
             {% else %}
