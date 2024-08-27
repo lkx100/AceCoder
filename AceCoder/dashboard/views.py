@@ -1,18 +1,47 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout
 from django.http import HttpResponse
 from .models import *
 from .Codechef import CodechefTools
 import pandas as pd
+from django.contrib import messages
+from django.conf import settings
 
 # Create your views here.
 def home(request):
 
+    if request.user.is_authenticated:
+        email = request.user.email
+        email_domain = email.split('@')[1] if '@' in email else ''
+        allowed_domains = settings.ALLOWED_EMAILS
+        
+        if email_domain not in allowed_domains and not request.user.is_superuser:
+            messages.warning(request, "Given email is not example@klh.edu.in! You have been logged out.")
+            request.user.delete()
+            logout(request)
+
+            return redirect('account_login')
+        
+    is_admin = request.user.groups.filter(name='admin').exists()
     details = Codechef_database.objects.all().order_by('-latest_rating', 'latest_rank')
-    return render(request, "home.html", {'details': details})
+    return render(request, "home.html", {'details': details, 'is_admin': is_admin})
 
 
 def dashboard(request):
     details = Codechef_database.objects.all().order_by('student__roll_no')
+    is_admin = request.user.groups.filter(name='admin').exists()
+    roll_no = request.user.email[0:10]
+
+    # print("Roll No:", roll_no)
+
+    if not is_admin:
+        try:
+            student = Student.objects.get(roll_no=roll_no)
+            codechef_id = student.codechef_id
+            return redirect(f"fetch_details/{codechef_id}")
+        except Student.DoesNotExist:
+            messages.error(request, "Student with the given roll number does not exist.")
+            return redirect("home")
 
 
     if request.method == "POST":
