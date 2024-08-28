@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 {% block title %}
-HOME
+AceCoder
 {% endblock %}
 {% block content %}
 <style>
@@ -35,7 +35,7 @@ HOME
     }
 </style>
 <h1 style="text-align: center; color: lightgrey; margin-bottom: 130px">Home Page</h1>
-<div class="container mt-5">
+<div class="container">
     {% for message in messages %}
         {% if forloop.last %}
             <div class="alert alert-{{ message.tags }}">
@@ -54,7 +54,7 @@ HOME
         </div>
         <div class="col-md-8 col-xl-10">
             {% if user.is_authenticated %}
-            <h1 {% if is_admin %} style="color: lightgreen" {% else %} style="color: white" {% endif %}>Hello, {{user.get_full_name}}</h1>
+            <h1 style="color: white">Hello, {{user.get_full_name}}</h1>
             {% endif %}
             <h2 style="color: white">Welcome to AceCoder!</h2>
             <h4>Welcome to our dedicated platform, designed to elevate your CodeChef contest experience through AI-powered insights and comprehensive resources. Our mission is to empower students and faculty with detailed performance analysis and valuable tools for continuous improvement.</h4>

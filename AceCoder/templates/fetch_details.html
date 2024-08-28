@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+{% block title %}
+{{details.codechef_id}} - Codechef details
+{% endblock %}
 
 {% block content %}
 
@@ -86,7 +89,7 @@
                 <td>{{contest.rank}}</td>
                 {% if contest.penalised_in %}
                 <td>YES</td>
-                {% else %}
+                {% else %} 
                 <td>NO</td>
                 {% endif %}
                 <td>{{contest.count_problems_solved}}</td>

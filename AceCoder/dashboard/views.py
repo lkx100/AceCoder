@@ -6,6 +6,7 @@ from .Codechef import CodechefTools
 import pandas as pd
 from django.contrib import messages
 from django.conf import settings
+from .decorators import *
 
 # Create your views here.
 def home(request):
@@ -27,22 +28,10 @@ def home(request):
     return render(request, "home.html", {'details': details, 'is_admin': is_admin})
 
 
+
+@isadmindashboard
 def dashboard(request):
     details = Codechef_database.objects.all().order_by('student__roll_no')
-    is_admin = request.user.groups.filter(name='admin').exists()
-    roll_no = request.user.email[0:10]
-
-    # print("Roll No:", roll_no)
-
-    if not is_admin:
-        try:
-            student = Student.objects.get(roll_no=roll_no)
-            codechef_id = student.codechef_id
-            return redirect(f"fetch_details/{codechef_id}")
-        except Student.DoesNotExist:
-            messages.error(request, "Student with the given roll number does not exist.")
-            return redirect("home")
-
 
     if request.method == "POST":
         download = request.POST.get('download', "False")
@@ -50,13 +39,13 @@ def dashboard(request):
         depart = request.POST.get('department', 'All')
         sortby = request.POST.get('sorting', 'None')
 
-        if details and depart!='All':
+        if details and depart != 'All':
             details = details.filter(student__department=depart)
 
-        if details and plag!='All':
-            details = [student for student in details if (plag == 'Yes' and student.plagarisms!=0) or (plag == 'No' and student.plagarisms==0)]
+        if details and plag != 'All':
+            details = [student for student in details if (plag == 'Yes' and student.plagarisms != 0) or (plag == 'No' and student.plagarisms == 0)]
 
-        if details and sortby!='None':
+        if details and sortby != 'None':
             if sortby == 'RatingInc':
                 details = details.order_by('latest_rating')
             elif sortby == 'RatingDec':
@@ -72,10 +61,10 @@ def dashboard(request):
         plag = 'All'
         sortby = 'None'
         depart = 'All'
-        
 
+    # print("details:" , details)
 
-    return render(request, "dashboard.html", {"details": details, "plag": plag, "sortby": sortby, "depart": depart}) 
+    return render(request, "dashboard.html", {"details": details, "plag": plag, "sortby": sortby, "depart": depart})
 
 def fetch_details(request, codechef_id):
     student = CodechefTools(codechef_id)
