@@ -7,14 +7,38 @@ Contest Page
 
 {% block content %}
 
+<style>
+    .iframe-container {
+        position: relative;
+        width: 1000px;
+        height: 550px;
+        border: 10px solid #ccc;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    
+    .iframe-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+</style>
+
 <h1 style="font-weight: bold; text-align: center; color: lightgrey">Upsolve Session</h1>
 
 <hr>
 
-<div class="d-flex justify-content-center align-items-center" style="height: 700px; justify-content: center">
-    {% comment %} <iframe width="900" height="550" src="https://www.youtube.com/embed/{{solution_link|slice:"32:"}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> {% endcomment %}
+{% comment %} <div class="d-flex justify-content-center align-items-center" style="height: 700px; justify-content: center">
     <iframe width="1000" height="550" src="https://www.youtube.com/embed/{{solution_link|slice:"32:"}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div> {% endcomment %}
+
+<div class="d-flex justify-content-center align-items-center" style="height: 700px; justify-content: center">
+    <div class="iframe-container">
+        <iframe width="1000" height="550" src="https://www.youtube.com/embed/{{solution_link|slice:"32:"}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 </div>
+
 <h2 style="font-weight: bold"> Contest Code - {{contest_name}} </h2>
 
     <br><br>
