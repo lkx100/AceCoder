@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'social_django',
+    'upsolve',
 ]
 
 SOCIALACCOUNT_PROVIDERS = {

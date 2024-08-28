@@ -10,14 +10,11 @@ def blog_page(request, blog_id):
     blog = get_object_or_404(Post, pk = blog_id)
     all_tags = PostTag.objects.all()
     subposts = SubPost.objects.filter(parent_post = blog)
-    video_ids = [subpost.link[32:] if subpost.link[12:19] == "youtube" else "" for subpost in SubPost.objects.all()]
-    together = zip(subposts, video_ids)
     context = {
         'blog': blog,  
         'all_tags': all_tags,
         'subposts': subposts
     }
-    print(together)
     return render(request, 'blog_page.html', context)
 
 def tag_posts(request, tag):
