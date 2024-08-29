@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Contest, ContestProblem
 
 def upsolve_home(request):
-    contests = Contest.objects.all()
+    contests = Contest.objects.all().order_by('-date')
     return render(request, 'upsolve_home.html', {'contests': contests})
 
 def contest_page(request, contest_name):
