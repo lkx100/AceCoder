@@ -82,14 +82,15 @@
                             {{ blog.description }}
                         {% endif %}
                         <br>
-                        <a href="{% url "blog_page" blog.id %}" class="btn btn-primary">Click For Details</a>
                     </div>
+                    <a href="{% url "blog_page" blog.id %}"><button class="btn btn-info" style="width: 200px"> Details </button></a>
                     <div class="card-footer">
+                        <hr style="width: 250px">
                         <div class="row">
                             {% for tag in blog.tags.all %}
-                                <div class="col-auto">
-                                    <h6>{{tag.post_tag}} &nbsp |</h6>
-                                </div>
+                            <div class="col-auto">
+                                <h6>{{tag.post_tag}} &nbsp |</h6>
+                            </div>
                             {% endfor %}
                         </div>
                     </div>

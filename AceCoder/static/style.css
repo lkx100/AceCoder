@@ -85,10 +85,16 @@ ul.no-marker {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
     margin: 10px; /* Add initial margin */
   }
+
+  .glassBox hr {
+    border: 1px solid rgba(255, 255, 255); /* Light border color */
+    margin: 20px 0; /* Add some margin for spacing */
+  }
+  
 
   .glassBox__imgBox {
     img {
@@ -103,8 +109,8 @@ ul.no-marker {
     margin-top: 15px;
     color: #FFF;
     font-size: 20px;
-    font-weight: 400;
-    font-family: "Lato";
+    font-weight: bold;
+    /* font-family: "Lato"; */
   }
   .glassBox__content {
     position: absolute;
@@ -123,9 +129,18 @@ ul.no-marker {
     transform: translateY(-20px);
   }
   .glassBox:hover .glassBox__imgBox img {
-    transform: scale(1.4);
+    transform: scale(1.2);
     width: 100%; /* Only increase the size without rotating */
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.6); /* Cyan shadow */
   }
   .glassBox:hover .glassBox__title {
     margin-top: 40px;
+  }
+  .glassTable {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
   }
