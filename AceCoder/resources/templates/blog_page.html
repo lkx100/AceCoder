@@ -7,10 +7,10 @@ Blog Page
 {% endblock %}
 
 {% block content %}
-
     {% block left_sidebar %}
         <div class="left-sidebar-container">
-            <h3 style='font-weight: bold; padding-left: 50px'> Topics </h3> <br>
+            <h3 style='font-weight: bold; padding-left: 50px'> Topics </h3>
+            <hr>
             <ul class='right-bar'>
                 <a href="{% url "resources_home" %}"><li><button class="btn btn-light" style="width: 180px;">All</button></li></a>
                 {% for tag in all_tags %}
@@ -23,9 +23,10 @@ Blog Page
     {% block right_sidebar %}
         <div class="right-sidebar-container">
             <h3 style='font-weight: bold; padding-left: 5px; margin-bottom: 30px'> Page Contents </h3>
-            <ul class='left-bar'>
+            <hr>
+            <ul class='left-bar' style="list-style-type: decimal">
                 {% for subpost in subposts %}
-                    <li> {{subpost}} </li> <br>
+                <li><a href="#subpost-{{ subpost.id }}">{{ subpost.tittle }}</a></li> <br>
                 {% endfor %}
             </ul>
         </div>
@@ -76,7 +77,7 @@ Blog Page
             <hr style="margin-top: 50px; border-width: 3px; border-color: white;">
             {% if subposts %}
                 {% for subpost in subposts %}
-                    <div class="row justify-content-between">
+                    <div id="subpost-{{ subpost.id }}" class="row justify-content-between">
                         <div class="col-auto">
                             <h3> {{subpost.tittle}} </h3>
                         </div>
@@ -132,5 +133,19 @@ Blog Page
 
         </div>
     </div>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .left-bar li a {
+            color: lightgrey;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .left-bar li a:hover {
+            color: cyan;
+        }
+    </style>
 
 {% endblock %}
