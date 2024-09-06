@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{details.codechef_id}} - Codechef details
+{% endblock %}
+
+{% block content %}
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Codechef ID</th>
+                <th>Valid account</th>
+                {% if details.contests %}
+                <th>Contests Participated</th>
+                <th>Problems Solved</th>
+                <th>Plagarisms</th>
+                <th>Stars</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{details.codechef_id}}</td>
+                {% if details.all_contests %}
+                <td>Valid account</td>
+                <td>{{details.num_of_contests}}</td>
+                <td>{{details.num_of_problems}}</td>
+                <td>{{details.num_of_plagarisms}}</td>
+                <td>{{details.stars}}</td>
+                {% else %}
+                <td>Invalid Account - Codechef Id doesn't exists</td>
+                {% endif %}
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<form action="{% url "fetch_details" details.codechef_id %}" method="POST">
+    {% csrf_token %}
+    <div class="row align-items-center">
+        <div class="col-auto">
+            <label for="plagarised" style="font-weight: bold">Plagarised</label>
+            <select name="plagarised" id="plagarised" class="form-select">
+                <option value="All" {% if details.plag == 'All' %}selected{% endif %}>All</option>
+                <option value="Yes" {% if details.plag == 'Yes' %}selected{% endif %}>Yes</option>
+                <option value="No" {% if details.plag == 'No' %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <label for="sorting" style="font-weight: bold">SortBy</label>
+            <select name="sorting" id="sorting" class="form-select">
+                <option value="None" {% if details.sortby == 'None' %}selected{% endif %}>None</option>
+                <option value="RatingInc" {% if details.sortby == 'RatingInc' %}selected{% endif %}>Rating (Low to High)</option>
+                <option value="RatingDec" {% if details.sortby == 'RatingDec' %}selected{% endif %}>Rating (High to Low)</option>
+                <option value="RankInc" {% if details.sortby == 'RankInc' %}selected{% endif %}>Rank (Low to High)</option>
+                <option value="RankDec" {% if details.sortby == 'RankDec' %}selected{% endif %}>Rank (High to Low)</option>
+            </select>
+        </div>
+        <div class="col-auto ms-auto">
+            <button type="submit" class="btn btn-warning">Filter</button>
+            <button id="download" name="download" value="download" class="btn btn-success ms-2">Download</button>
+        </div>
+    </div>
+</form>
+
+<br>
+
+{% if details.contests %}
+
+<div class="table-responsive" style="height: 600px; overflow-y: auto;">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Contest Code</th>
+                <th>Rating</th>
+                <th>Rank</th>
+                <th>Plagarised</th>
+                <th>Problems Solved</th>
+                <th>Problems Solved List</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for contest in details.contests %}
+            <tr>
+                <td>{{contest.name}}</td>
+                <td>{{contest.rating}}</td>
+                <td>{{contest.rank}}</td>
+                {% if contest.penalised_in %}
+                <td>YES</td>
+                {% else %} 
+                <td>NO</td>
+                {% endif %}
+                <td>{{contest.count_problems_solved}}</td>
+                <td>{{contest.problems_solved}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% endblock %}

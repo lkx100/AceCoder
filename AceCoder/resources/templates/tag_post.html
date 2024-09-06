@@ -1,0 +1,77 @@
+{% extends "resources_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Tag Page
+{% endblock %}
+
+{% block content %}
+
+    {% block left_sidebar %}
+        <div class="left-sidebar-container">   <!-- Left sidebar content -->
+            <h3 style='font-weight: bold; padding-left: 50px'> Topics </h3> <br>
+            <ul class='right-bar'>
+                <a href="{% url "resources_home" %}"><li><button class="btn btn-light" style="width: 180px;">All</button></li></a>
+                {% for tag in all_tags %}
+                <a href="{% url "tag_posts" tag.post_tag %}"><li><button {% if forloop.counter|divisibleby:2 %} class="btn btn-light" {% else %} class="btn btn-secondary" {% endif %} style="width: 180px;">{{ tag.post_tag }}</button></li></a>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endblock %}
+
+    {% block right_sidebar %}
+        <div class="right-sidebar-container">
+            <h3 style='font-weight: bold; padding-left: 5px; margin-bottom: 30px'> Page Contents </h3>
+            <ul class='left-bar'>
+                {% comment %} <li>basics</li>
+                <li>If - Else</li>
+                <li>Loops</li>
+                <li>Arrays</li>
+                <li>Linked list</li>
+                <li>Stacks</li>
+                <li>Queues</li> {% endcomment %}
+            </ul>
+        </div>
+    {% endblock %}
+
+
+    <h1 style="text-align: center; font-weight: bold">{{tag}}</h1>
+    <div class="container row gap-3">
+        {% if blogs %}
+            {% for blog in blogs|slice:":4" %}
+                <div class="glassBox">
+                    <div class="glassBox__imgBox">
+                        <img src="{{ blog.banner.url }}" alt="...">
+                    </div>
+                    <div class="glassBox__title">
+                        {{ blog.tittle }}
+                    </div>
+                    <div class="glassBox__content">
+                        {% if blog.description|length >= 50 %}
+                            {{ blog.description|slice:":50" }} ...
+                        {% else %}
+                            {{ blog.description }}
+                        {% endif %}
+                        <br>
+                    </div>
+                    <a href="{% url "blog_page" blog.id %}"><button class="btn btn-info" style="width: 200px"> Details </button></a>
+                    <div class="card-footer">
+                        <hr style="width: 250px">
+                        <div class="row">
+                            {% for tag in blog.tags.all %}
+                            <div class="col-auto">
+                                <h6>{{tag.post_tag}} &nbsp |</h6>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+                <h1 style="font-weight: bold; color: grey; text-align: center;">No Posts created for this tag!</h1>
+                <h1 style="font-weight: bold; color: grey; text-align: center">Try Creating One!</h1>
+        {% endif %}
+    </div>
+
+{% endblock %}

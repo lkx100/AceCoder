@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Sign Out" %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 style="font-weight: bold">{% trans "Sign Out" %}</h2>
+    <hr>
+    <p>You are currently logged in as {{user.get_full_name}}</p>
+    <p>Are you sure you want to Logout?</p>
+    <br>
+    <form method="post" action="{% url 'account_logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">{% trans "Sign Out" %}</button>
+    </form>
+</div>
+{% endblock %}

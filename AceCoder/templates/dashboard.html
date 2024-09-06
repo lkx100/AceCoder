@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+Dashboard
+
+{% endblock %}
+
+
+{% block content %}
+
+<h1 style="text-align: center">Dashboard</h1>
+
+<br><br>
+
+<form action="{% url "dashboard"%}" method="POST">
+    {% csrf_token %}
+    <div class="row align-items-center">
+        <div class="col-auto">
+            <label for="plagarised" style="font-weight: bold">Plagarised</label>
+            <select name="plagarised" id="plagarised" class="form-select">
+                <option value="All" {% if plag == 'All' %}selected{% endif %}>All</option>
+                <option value="Yes" {% if plag == 'Yes' %}selected{% endif %}>Yes</option>
+                <option value="No" {% if plag == 'No' %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <label for="department" style="font-weight: bold">Department</label>
+            <select name="department" id="department" class="form-select">
+                <option value="All" {% if depart == 'All' %}selected{% endif %}>All</option>
+                <option value="Ai&Ds" {% if depart == 'Ai&Ds' %}selected{% endif %}>Ai&Ds</option>
+                <option value="CSE" {% if depart == 'CSE' %}selected{% endif %}>CSE</option>
+                <option value="ECE" {% if depart == 'ECE' %}selected{% endif %}>ECE</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <label for="sorting" style="font-weight: bold">SortBy</label>
+            <select name="sorting" id="sorting" class="form-select">
+                <option value="None" {% if sortby == 'None' %}selected{% endif %}>None</option>
+                <option value="RatingInc" {% if sortby == 'RatingInc' %}selected{% endif %}>Rating (Low to High)</option>
+                <option value="RatingDec" {% if sortby == 'RatingDec' %}selected{% endif %}>Rating (High to Low)</option>
+                <option value="RankInc" {% if sortby == 'RankInc' %}selected{% endif %}>Rank (Low to High)</option>
+                <option value="RankDec" {% if sortby == 'RankDec' %}selected{% endif %}>Rank (High to Low)</option>
+            </select>
+        </div>
+        <div class="col-auto ms-auto">
+            <button type="submit" class="btn btn-warning">Filter</button>
+            <button id="download" name="download" value="download" class="btn btn-success ms-2">Download</button>
+        </div>
+    </div>
+</form>
+
+<br>
+
+<div class="table-responsive" style="max-height: 680px; overflow-y: auto;">
+    <table class="table table-striped table-bordered">
+        <thead class="background-white">
+            <tr style="text-align: center">
+                <th>College Rank</th>
+                <th>Roll No</th>
+                <th>Student Name</th>
+                <th>Year</th>
+                <th>Department</th>
+                <th>Codechef Id</th>
+                <th>Last Contest</th>
+                <th>Rating</th>
+                <th>Rank</th>
+                <th>Stars</th>
+                <th>Problems Solved</th>
+                <th>Contests Participated</th>
+                <th>Plagarisms</th>
+                <th>All Contests Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in details %}
+            
+            <tr style="text-align: center">
+                <td>{{ forloop.counter }}</td> 
+                <td>{{student.student.roll_no}}</td> 
+                <td>{{student.student.name}}</td>
+                <td>{{student.student.year}}</td>
+                <td>{{student.student.department}}</td>
+                <td>{{student.student.codechef_id}}</td>
+                <td>{{student.last_contest}}</td>
+                <td>{{student.latest_rating}}</td>
+                <td>{{student.latest_rank}}</td>
+                <td>{{student.stars}}</td>
+                <td>{{student.no_of_problems}}</td>
+                <td>{{student.no_of_contests}}</td>
+                <td>{{student.plagarisms}}</td>
+                <td><a href={% url "fetch_details" student.student.codechef_id%}><button type="button" class="btn btn-success">Check Out</button></a></td>
+            </tr>
+            
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
