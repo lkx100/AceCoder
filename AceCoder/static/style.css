@@ -29,13 +29,44 @@
 
 .main-content {
     margin-top: 69px; /* Adjust this value to match the navbar's height */
-    margin-left: 275px; /* Adjusted to ensure separation from the left sidebar */
-    margin-right: 275px;
+    /* margin-left: 275px;
+    margin-right: 275px; */
     padding: 20px;
     /*background-color: #272727;*/  /* Optional: Adding a background color for contrast */
     z-index: 0; /* Ensures the main content is below the sidebars */
     overflow: auto; /* Adds scroll to the main content if it overflows */
 
+}
+
+.blog_page_main_content {
+  margin-right: 275px;
+}
+
+.resource_home_main_content{
+  margin-left: 275px;
+}
+
+/* Media query for screens smaller than large (less than 992px) */
+@media (max-width: 991px) {
+  .main-content {
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%
+  }
+
+  .left-sidebar-container,
+    .right-sidebar-container {
+        display: none;
+        margin: 0;
+        padding: 0;
+        width: 0;
+    }
+  .resource_home_main_content{
+    margin-left: 0;
+  }
+  .blog_page_main_content {
+    margin-right: 0;
+  }
 }
 
 html body nav.navbar {
@@ -144,3 +175,18 @@ ul.no-marker {
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.18);
   }
+
+/* Responsive image styles for blog_page */
+.blog-page-image {
+  width: 100%;
+  height: auto;
+  max-width: 700px; /* Maximum width for larger screens */
+  margin-bottom: 50px;
+  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+  .blog-page-image {
+      max-width: 100%; /* Full width for smaller screens */
+  }
+}
