@@ -94,7 +94,7 @@ AceCoder
                     <img src="{% static 'Images/AceCoder_Rounded.png' %}" alt="Main_Logo" style="width: 300px; height: 300px; box-shadow: 0 4px 20px rgba(0, 255, 255, 0.6); border-radius: 200px">
                 </center>
             </div>
-            <div class="col-md-6 col-xl-8">
+            <div class="col-md-6 col-xl-8 mt-4 mt-md-0"> <!-- Added margin-top for smaller screens -->
                 {% if user.is_authenticated %}
                 <h1 style="color: white">Hello, {{user.get_full_name}}</h1>
                 {% endif %}
@@ -121,8 +121,8 @@ AceCoder
                     </li>
                     <li><strong>Answer Key Videos</strong>
                         <ul>
-                            <li>Provides detailed answer key videos after each contest.</li>
-                            <li>Helps users grasp complex problems and learn efficient coding practices.</li>
+                            <li>Provides video explanations for contest problems.</li>
+                            <li>Helps users understand problem-solving techniques and approaches.</li>
                         </ul>
                     </li>
                 </ul>
