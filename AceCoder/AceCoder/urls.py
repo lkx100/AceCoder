@@ -21,6 +21,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include("dashboard.urls")),
     path('resources/', include("resources.urls")),
     path('upsolve/', include("upsolve.urls")),
