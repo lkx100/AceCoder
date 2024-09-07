@@ -89,14 +89,9 @@ AceCoder
             
     <div class="container glass_bg">
         <div class="row align-items-center g-10">
-            <div class="col-md-6 col-xl-4">
-                <center>
-                    <img src="{% static 'Images/AceCoder_Rounded.png' %}" alt="Main_Logo" style="width: 300px; height: 300px; box-shadow: 0 4px 20px rgba(0, 255, 255, 0.6); border-radius: 200px; opacity: 100%;">
-                </center>
-            </div>
-            <div class="col-md-6 col-xl-8 mt-4 mt-md-0"> <!-- Added margin-top for smaller screens -->
+            <div class="col-md-6 col-xl-8 mt-4 mt-md-0 order-2 order-lg-1"> <!-- Added margin-top for smaller screens -->
                 {% if user.is_authenticated %}
-                <h1 style="color: white">Hello, {{user.get_full_name}}</h1>
+                <h1 style="color: white;">Hello, {{user.get_full_name}}</h1>
                 {% endif %}
                 <h2 style="color: white">Welcome to AceCoder!</h2>
                 <h4>Welcome to our dedicated platform, designed to elevate your CodeChef contest experience through AI-powered insights and comprehensive resources. Our mission is to empower students and faculty with detailed performance analysis and valuable tools for continuous improvement.</h4>
@@ -126,6 +121,11 @@ AceCoder
                         </ul>
                     </li>
                 </ul>
+            </div>
+            <div class="col-md-6 col-xl-4 order-1 order-lg-2">
+                <center>
+                    <img src="{% static 'Images/3_rounded.png' %}" alt="Main_Logo" style="width: 300px; height: 300px; box-shadow: 0 4px 20px rgba(0, 255, 255, 0.6); border-radius: 200px; opacity: 100%;">
+                </center>
             </div>
         </div>
     </div>
