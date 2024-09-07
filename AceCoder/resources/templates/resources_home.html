@@ -21,7 +21,7 @@
 {% block content %}
     <div class="resource_home_main_content">       
         <h1 style="text-align: center;font-weight: bold; color: lightgrey"> Resources Page </h1> <br> <br>
-        <div class="container row gap-3">
+        <div class="container d-flex flex-wrap justify-content-center gap-3">
             {% if blogs %}
             {% for blog in blogs|slice:":4" %}
             <div class="glassBox">
