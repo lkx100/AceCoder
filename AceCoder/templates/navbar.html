@@ -10,7 +10,6 @@
         color: white;
         margin-top: 0;
         text-shadow: 1px 1px cyan;
-        {% comment %} font-weight: bold; {% endcomment %}
         font-family: 'Blanka', sans-serif; /* Apply Blanka font */
         letter-spacing: 2px;
     }
@@ -19,6 +18,9 @@
         color: lightgrey;
         text-shadow: 1px 1px black;
         font-weight: bold;
+    }
+    .nav-link.active {
+        color: cyan !important; /* Change color to cyan for active link */
     }
 </style>
 <nav class="navbar navbar-expand-lg">
@@ -30,16 +32,16 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'dashboard' %}">Dashboard</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'resources_home' %}">Resources</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'resources_home' %}active{% endif %}" href="{% url 'resources_home' %}">Resources</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'upsolve_home' %}">Upsolve</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'upsolve_home' %}active{% endif %}" href="{% url 'upsolve_home' %}">Upsolve</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
