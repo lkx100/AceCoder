@@ -1,2 +1,6 @@
 .myenv
 myenv
+.DS_Store
+
+# AceCoder/model_testing/__pycache__/
+AceCoder/
