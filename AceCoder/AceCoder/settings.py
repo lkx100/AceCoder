@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'social_django',
     'upsolve',
+    'django_rename_app',
+    'blogs'
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
