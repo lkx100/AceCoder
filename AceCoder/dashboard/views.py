@@ -7,6 +7,10 @@ import pandas as pd
 from django.contrib import messages
 from django.conf import settings
 from .decorators import *
+from django.core.paginator import Paginator
+
+
+
 
 # Create your views here.
 def home(request):
@@ -33,36 +37,35 @@ def home(request):
 def dashboard(request):
     details = Codechef_database.objects.all().order_by('student__roll_no')
 
-    if request.method == "POST":
-        download = request.POST.get('download', "False")
-        plag = request.POST.get('plagarised', 'All')
-        depart = request.POST.get('department', 'All')
-        sortby = request.POST.get('sorting', 'None')
+    # Fetch filter values from GET parameters
+    plag = request.GET.get('plagarised', 'All')
+    depart = request.GET.get('department', 'All')
+    sortby = request.GET.get('sorting', 'None')
+    download = request.GET.get('download', 'False')
 
-        if details and depart != 'All':
-            details = details.filter(student__department=depart)
+    if depart != 'All':
+        details = details.filter(student__department=depart)
 
-        if details and plag != 'All':
-            details = [student for student in details if (plag == 'Yes' and student.plagarisms != 0) or (plag == 'No' and student.plagarisms == 0)]
+    if plag != 'All':
+        details = details.filter(plagarisms__gt=0) if plag == 'Yes' else details.filter(plagarisms=0)
 
-        if details and sortby != 'None':
-            if sortby == 'RatingInc':
-                details = details.order_by('latest_rating')
-            elif sortby == 'RatingDec':
-                details = details.order_by('-latest_rating')
-            elif sortby == 'RankInc':
-                details = details.order_by('latest_rank')
-            elif sortby == 'RankDec':
-                details = details.order_by('-latest_rank')
+    if sortby != 'None':
+        if sortby == 'RatingInc':
+            details = details.order_by('latest_rating')
+        elif sortby == 'RatingDec':
+            details = details.order_by('-latest_rating')
+        elif sortby == 'RankInc':
+            details = details.order_by('latest_rank')
+        elif sortby == 'RankDec':
+            details = details.order_by('-latest_rank')
 
-        if download != 'False':
-            return download_details_all(details)
-    else:
-        plag = 'All'
-        sortby = 'None'
-        depart = 'All'
+    if download != 'False':
+        return download_details_all(details)
 
-    # print("details:" , details)
+    # Setup pagination
+    paginator = Paginator(details, 10)
+    page = request.GET.get('page')
+    details = paginator.get_page(page)
 
     return render(request, "dashboard.html", {"details": details, "plag": plag, "sortby": sortby, "depart": depart})
 
