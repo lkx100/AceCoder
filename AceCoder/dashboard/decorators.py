@@ -10,7 +10,8 @@ def isadmindashboard(view_func):
             return redirect("home")
 
         is_admin = request.user.groups.filter(name='admin').exists()
-        if not is_admin:
+        is_faculty = request.user.groups.filter(name='Faculty').exists()
+        if not is_admin and not is_faculty:
             roll_no = request.user.email[0:10]
             try:
                 student = Student.objects.get(roll_no=roll_no)

@@ -28,8 +28,9 @@ def home(request):
             return redirect('account_login')
         
     is_admin = request.user.groups.filter(name='admin').exists()
+    is_faculty = request.user.groups.filter(name='Faculty').exists()
     details = Codechef_database.objects.all().order_by('-latest_rating', 'latest_rank')
-    return render(request, "home.html", {'details': details, 'is_admin': is_admin})
+    return render(request, "home.html", {'details': details, 'is_admin': is_admin, 'is_faculty': is_faculty})
 
 
 

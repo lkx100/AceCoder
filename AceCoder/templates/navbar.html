@@ -47,7 +47,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 {% if user.is_authenticated %}
                 <li class="nav-item d-flex align-items-center" style="font-weight: bold; margin-right: 20px">
-                    Role: {% if is_admin %} <div style="color: red; padding-left: 10px"> Admin</div> {% else %} Student {% endif %}
+                    Role: {% if is_admin %} <div style="color: red; padding-left: 10px"> Admin</div>{% elif is_faculty %}<div style="color: lightgreen; padding-left: 10px"> Faculty</div>{% else %} Student {% endif %}
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'account_logout' %}"><button class='btn btn-danger' style="color: white">Logout</button></a>
