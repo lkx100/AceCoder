@@ -8,7 +8,7 @@
 <body>
     <h1>Blogs</h1>
     {% for blog in blogs %}
-        <h2><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></h2>
+        <h2><a href="{% url 'blog_details' blog.pk %}">{{ blog.title }}</a></h2>
         <p>Type: {{ blog.blog_type }}</p>
         <p>Author: {{ blog.author }}</p>
         <p>Created: {{ blog.created_at }}</p>
