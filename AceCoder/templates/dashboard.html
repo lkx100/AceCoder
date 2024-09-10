@@ -95,6 +95,7 @@ Dashboard
                 <th>Problems Solved</th>
                 <th>Contests Participated</th>
                 <th>Plagarisms</th>
+                <th>Performace Graphs</th>
                 <th>All Contests Details</th>
             </tr>
         </thead>
@@ -115,6 +116,7 @@ Dashboard
                 <td>{{student.no_of_problems}}</td>
                 <td>{{student.no_of_contests}}</td>
                 <td>{{student.plagarisms}}</td>
+                <td><a href={% url "graphofstudent" student.student.codechef_id%}><button type="button" class="btn btn-primary">Graphs</button></a></td>
                 <td><a href={% url "fetch_details" student.student.codechef_id%}><button type="button" class="btn btn-success">Check Out</button></a></td>
             </tr>
             
