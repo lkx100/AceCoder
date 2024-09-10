@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .graph-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns layout */
+        gap: 20px; /* Space between grid items */
+        padding: 20px; /* Padding around the grid */
+    }
+
+    .graph-placeholder {
+        background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        backdrop-filter: blur(10px); /* Glassmorphism effect */
+        -webkit-backdrop-filter: blur(10px); /* Glassmorphism effect for Safari */
+        border: 1px solid rgba(255, 255, 255, 0.18); /* Border for glass effect */
+        height: 350px; /* Fixed height for placeholders */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFF; /* Text color */
+        font-size: 18px; /* Text size */
+        font-weight: bold; /* Text weight */
+        text-align: center; /* Center text */
+        overflow-x: auto; /* Ensure content does not overflow */
+        overflow-y: hidden; /* Ensure content does not overflow */
+    }
+
+    .graph-container {
+        overflow-x: auto; /* Add horizontal scroll */
+        overflow-y: hidden; /* Add horizontal scroll */
+    }
+
+    .graph-placeholder iframe {
+        width: 100%; /* Make the chart fit the container */
+        height: 100%; /* Make the chart fit the container */
+    }
+    
+    /* Responsive design for mobile view */
+    @media (max-width: 768px) {
+        .graph-grid {
+            grid-template-columns: 1fr; /* Single column layout */
+        }
+        .graph-placeholder div {
+            width: 100%; /* Make the chart fit the container */
+            height: 100%; /* Make the chart fit the container */
+        }
+        .graph-placeholder iframe {
+            width: auto; /* Set iframe width to normal */
+            height: auto; /* Set iframe height to normal */
+        }
+    }
+</style>
+
+<center><h1 style="font-weight: bold">Graphical Dashboard</h1></center>   
+<div class="graph-grid">
+    <div class="graph-container">
+        <div class="graph-placeholder">Graph 1</div>
+    </div>
+    <div class="graph-container">
+        <div class="graph-placeholder">Graph 2</div>
+    </div>
+    <div class="graph-container">
+        <div class="graph-placeholder">Graph 3</div>
+    </div>
+    <div class="graph-container">
+        <div class="graph-placeholder">Graph 4</div>
+    </div>
+</div>
+{% endblock content %}

@@ -75,7 +75,7 @@ class CodechefTools:
             row = {
                 "Contest": contest['code'],
                 "Rating": contest['rating'],
-                "Rank": contest['rank'],
+                "Rank": int(contest['rank']),
                 "Plagarised": "No" if contest["penalised_in"] == None else "Yes"
             }
             rows.append(row)

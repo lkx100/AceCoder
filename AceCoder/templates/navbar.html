@@ -18,6 +18,7 @@
         color: lightgrey;
         text-shadow: 1px 1px black;
         font-weight: bold;
+        margin-left: 30px; 
     }
     .nav-link.active {
         color: cyan !important; /* Change color to cyan for active link */
@@ -33,6 +34,9 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'graph' %}active{% endif %}" aria-current="page" href="{% url 'graph' %}">Graph</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
