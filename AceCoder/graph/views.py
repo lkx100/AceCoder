@@ -13,9 +13,7 @@ def graph_student(request, codechef_id):
         all_details = codechef_scrapper.pd_fetch()
     else:
         return redirect("/")
-    
-    print(all_details)
-    
+        
     # Ensure 'Rating' and 'Rank' columns are numeric
     all_details['Rating'] = pd.to_numeric(all_details['Rating'], errors='coerce')
     all_details['Rank'] = pd.to_numeric(all_details['Rank'], errors='coerce')
