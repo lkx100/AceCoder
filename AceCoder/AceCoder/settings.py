@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'social_django',
     'upsolve',
     'django_rename_app',
-    'blogs'
+    'blogs',
+    'blog_test',
 ]
 
 SOCIALACCOUNT_PROVIDERS = {

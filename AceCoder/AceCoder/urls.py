@@ -26,5 +26,6 @@ urlpatterns = [
     path('upsolve/', include("upsolve.urls")),
     path('accounts/', include("allauth.urls")),
     path('blogs/', include("blogs.urls")),
-    path('', include("users.urls"))
+    path('', include("users.urls")),
+    path('blogtest/', include("blog_test.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
