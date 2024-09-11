@@ -1,50 +1,67 @@
 {% load socialaccount %}
+{% load static %}
 <style>
-    .navbar li,ui {
-        margin-left: 30px; 
+    @font-face {
+        font-family: 'Blanka';
+        src: url('{% static "fonts/Blanka-Regular.otf" %}') format('opentype');
+    }
+    .navbar-brand {
+        font-size: 28px;
+        color: white;
+        margin-top: 0;
+        text-shadow: 1px 1px cyan;
+        font-family: 'Blanka', sans-serif; /* Apply Blanka font */
+        letter-spacing: 2px;
+    }
+    .nav-link {
         font-size: 18px;
-        color: lightgrey; 
-        text-shadow: 1px 1px black
+        color: lightgrey;
+        text-shadow: 1px 1px black;
+        font-weight: bold;
+        margin-right: 30px; 
+    }
+    .nav-link.active {
+        color: cyan !important; /* Change color to cyan for active link */
     }
 </style>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}" style="font-weight: bold; color: white; text-shadow: 1px 1px darkgrey; font-size: 28px;">AceCoder</a>
+        <a class="navbar-brand" href="{% url 'home' %}">AceCoder</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url "home" %}" style="font-weight: bold; color: lightgrey">Home</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link active" href="{% url "dashboard" %}" style="font-weight: bold; color: lightgrey">Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="{% url "all_blogs" %}" style="font-weight: bold; color: lightgrey">Blogs</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#" style="font-weight: bold; color: lightgrey">Learning Path</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="{% url "upsolve_home" %}" style="font-weight: bold; color: lightgrey">Upsolve</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            {% if user.is_authenticated %}
-            <li class="nav-item d-flex align-items-center" style="font-weight: bold; margin-right: 20px">
-                Role: {% if is_admin %} <div style="color: red; padding-left: 10px"> Admin</div> {% else %} Student {% endif %}
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="{% url 'account_logout' %}" style="font-weight: bold; color: lightgrey"><button class='btn btn-danger' style="color: white">Logout</button></a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-                <a class="nav-link active" href="{% provider_login_url 'google' %}?next=/" style="font-weight: bold; color: lightgrey"><button class='btn btn-success' style="color: white">Login</button></a>
-            </li>
-            {% endif %}
-        </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'graph' %}active{% endif %}" aria-current="page" href="{% url 'graph' %}">Graph</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'resources_home' %}active{% endif %}" href="{% url 'resources_home' %}">Resources</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'upsolve_home' %}active{% endif %}" href="{% url 'upsolve_home' %}">Upsolve</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                {% if user.is_authenticated %}
+                <li class="nav-item d-flex align-items-center" style="font-weight: bold; margin-right: 20px">
+                    Role: {% if is_admin %} <div style="color: red; padding-left: 10px"> Admin</div>{% elif is_faculty %}<div style="color: lightgreen; padding-left: 10px"> Faculty</div>{% else %} Student {% endif %}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'account_logout' %}"><button class='btn btn-danger' style="color: white">Logout</button></a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'account_login' %}"><button class='btn btn-primary' style="color: white">Login</button></a>
+                </li>
+                {% endif %}
+            </ul>
         </div>
     </div>
 </nav>

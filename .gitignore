@@ -1,9 +1,5 @@
 .myenv
 myenv
-
-.DS_Store
-
 **/__pycache__/
-
+.DS_Store
 AceCoder.code-workspace
-

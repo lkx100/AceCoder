@@ -20,7 +20,7 @@ AceCoder
 
     h1,h2,h3  {
         font-weight: bold; 
-        margin-left: 30px; 
+        margin-left: 30px;
         color: grey;
         text-shadow: 1px 1px black
     }
@@ -36,7 +36,7 @@ AceCoder
         font-size: 18px;
         color: lightgrey; 
         text-shadow: 1px 1px black
-    }
+    } 
 
     .info_card {
         margin-right: 380px;
@@ -76,7 +76,7 @@ AceCoder
 
 <!-- Info Section -->
 <div id="info-section" class="section">
-    <h1 style="text-align: center; color: lightgrey; margin-bottom: 130px; opacity: 1;">Home Page</h1>
+    <h1 style="text-align: center; color: lightgrey; margin-bottom: 50px; opacity: 1;">Home Page</h1>
     <div class="container">
         {% for message in messages %}
             {% if forloop.last %}
@@ -89,14 +89,9 @@ AceCoder
             
     <div class="container glass_bg">
         <div class="row align-items-center g-10">
-            <div class="col-md-6 col-xl-4">
-                <center>
-                    <img src="{% static 'Images/AceCoder_Rounded.png' %}" alt="Main_Logo" style="width: 300px; height: 300px; box-shadow: 0 4px 20px rgba(0, 255, 255, 0.6); border-radius: 200px">
-                </center>
-            </div>
-            <div class="col-md-6 col-xl-8">
+            <div class="col-md-6 col-xl-8 mt-4 mt-md-0 order-2 order-lg-1"> <!-- Added margin-top for smaller screens -->
                 {% if user.is_authenticated %}
-                <h1 style="color: white">Hello, {{user.get_full_name}}</h1>
+                <h1 style="color: white;">Hello, <span style="color: cyan;">{{user.get_full_name}}</span></h1>
                 {% endif %}
                 <h2 style="color: white">Welcome to AceCoder!</h2>
                 <h4>Welcome to our dedicated platform, designed to elevate your CodeChef contest experience through AI-powered insights and comprehensive resources. Our mission is to empower students and faculty with detailed performance analysis and valuable tools for continuous improvement.</h4>
@@ -121,11 +116,16 @@ AceCoder
                     </li>
                     <li><strong>Answer Key Videos</strong>
                         <ul>
-                            <li>Provides detailed answer key videos after each contest.</li>
-                            <li>Helps users grasp complex problems and learn efficient coding practices.</li>
+                            <li>Provides video explanations for contest problems.</li>
+                            <li>Helps users understand problem-solving techniques and approaches.</li>
                         </ul>
                     </li>
                 </ul>
+            </div>
+            <div class="col-md-6 col-xl-4 order-1 order-lg-2">
+                <center>
+                    <img src="{% static 'Images/3_rounded.png' %}" alt="Main_Logo" style="width: 300px; height: 300px; box-shadow: 0 4px 20px rgba(0, 255, 255, 0.6); border-radius: 200px; opacity: 100%;">
+                </center>
             </div>
         </div>
     </div>

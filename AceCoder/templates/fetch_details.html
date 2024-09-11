@@ -36,7 +36,7 @@
         </tbody>
     </table>
 </div>
-<br>
+<br> 
 <form action="{% url "fetch_details" details.codechef_id %}" method="POST">
     {% csrf_token %}
     <div class="row align-items-center">
@@ -58,13 +58,12 @@
                 <option value="RankDec" {% if details.sortby == 'RankDec' %}selected{% endif %}>Rank (High to Low)</option>
             </select>
         </div>
-        <div class="col-auto ms-auto">
-            <button type="submit" class="btn btn-warning">Filter</button>
-            <button id="download" name="download" value="download" class="btn btn-success ms-2">Download</button>
+        <div class="col-auto ms-auto d-flex align-items-center">
+            <button type="submit" class="btn btn-warning me-2">Filter</button>
+            <button id="download" name="download" value="download" class="btn btn-success d-none d-md-inline-block">Download</button>
         </div>
     </div>
 </form>
-
 <br>
 
 {% if details.contests %}

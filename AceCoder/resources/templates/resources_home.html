@@ -3,11 +3,11 @@
 {% load static %}
 
 {% block title %}
-    Resources
+    Resources Page
 {% endblock %}
 
 {% block left_sidebar %}
-    <div class="left-sidebar-container d-none d-lg-block">
+    <div class="left-sidebar-container d-none d-lg-block">   <!-- Left sidebar content -->
         <h3 style='font-weight: bold; padding-left: 50px'> Topics </h3> <br>
         <ul class='right-bar'>
             <a href="{% url "resources_home" %}"><li><button class="btn btn-light" style="width: 180px;padding-left: 0px">All</button></li></a>
@@ -21,7 +21,7 @@
 {% block content %}
     <div class="resource_home_main_content">       
         <h1 style="text-align: center;font-weight: bold; color: lightgrey"> Resources Page </h1> <br> <br>
-        <div class="container row gap-3">
+        <div class="container d-flex flex-wrap justify-content-center gap-3">
             {% if blogs %}
             {% for blog in blogs|slice:":4" %}
             <div class="glassBox">
