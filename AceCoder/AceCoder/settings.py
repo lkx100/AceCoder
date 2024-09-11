@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+MY_APPS = [
     'dashboard',
     'resources',
     'users',
@@ -51,10 +54,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'social_django',
     'upsolve',
-    'django_rename_app',
     'blogs',
     'blog_test',
 ]
+
+INSTALLED_APPS += MY_APPS
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {

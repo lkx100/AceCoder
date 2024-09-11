@@ -4,7 +4,6 @@ myenv
 .DS_Store
 
 **/__pycache__/
-**/migrations/
 
 AceCoder.code-workspace
 
