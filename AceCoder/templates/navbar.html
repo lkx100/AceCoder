@@ -42,7 +42,10 @@
                     <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'resources_home' %}active{% endif %}" href="{% url 'resources_home' %}">Resources</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'resources_home' %}active{% endif %}" href="{% url 'resources_home' %}">Blogs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'resources_home' %}active{% endif %}" href="{% url 'resources_home' %}">Learning Path</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'upsolve_home' %}active{% endif %}" href="{% url 'upsolve_home' %}">Upsolve</a>
