@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'social_django',
     'upsolve',
     'graph',
+    'blog_test',
+    'blogs'
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
