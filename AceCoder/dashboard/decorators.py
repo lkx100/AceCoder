@@ -10,12 +10,34 @@ def isadmindashboard(view_func):
             return redirect("home")
 
         is_admin = request.user.groups.filter(name='admin').exists()
-        if not is_admin:
+        is_faculty = request.user.groups.filter(name='Faculty').exists()
+        if not is_admin and not is_faculty:
             roll_no = request.user.email[0:10]
             try:
                 student = Student.objects.get(roll_no=roll_no)
                 codechef_id = student.codechef_id
                 return redirect(f"fetch_details/{codechef_id}")
+            except Student.DoesNotExist:
+                messages.error(request, "Student with the given roll number does not exist.")
+                return redirect("home")
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view    
+
+def isfacultygraph(view_func):
+    def _wrapped_view(request, *args, **kwargs):
+
+        if not request.user.is_authenticated:
+            messages.info(request, "Login to access Graphs.")
+            return redirect("home")
+
+        is_admin = request.user.groups.filter(name='admin').exists()
+        is_faculty = request.user.groups.filter(name='Faculty').exists()
+        if not is_admin and not is_faculty:
+            roll_no = request.user.email[0:10]
+            try:
+                student = Student.objects.get(roll_no=roll_no)
+                codechef_id = student.codechef_id
+                return redirect(f"student/{codechef_id}")
             except Student.DoesNotExist:
                 messages.error(request, "Student with the given roll number does not exist.")
                 return redirect("home")

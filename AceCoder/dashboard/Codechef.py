@@ -75,7 +75,7 @@ class CodechefTools:
             row = {
                 "Contest": contest['code'],
                 "Rating": contest['rating'],
-                "Rank": contest['rank'],
+                "Rank": int(contest['rank']),
                 "Plagarised": "No" if contest["penalised_in"] == None else "Yes"
             }
             rows.append(row)
@@ -110,6 +110,5 @@ class CodechefTools:
 if __name__ == "__main__":
     obj = CodechefTools("sweshikreddy")
     obj.account_exists()
-    details = obj.fetch_contest_problems()
-    for arr in details.values():
-        print(", ".join(arr))
+    details = obj.feth_details()
+    print(details)

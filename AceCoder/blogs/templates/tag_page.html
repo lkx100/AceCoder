@@ -1,0 +1,74 @@
+{% extends "resources_base.html" %}
+
+{% load static %}
+
+{% block title %}
+    {{tag}} - Blogs
+{% endblock %}
+
+{% block left_sidebar %}
+    <div class="left-sidebar-container">
+        <h3 style='font-weight: bold; padding-left: 50px'> Topics </h3> <br>
+        <ul class='right-bar'>
+            <a href="{% url "all_blogs" %}">
+                <li>
+                    <button class="btn btn-light" style="width: 180px;">All</button>
+                </li>
+            </a>
+            {% for tag in all_tags %}
+                <a href="{% url "tag_page" tag %}">
+                    <li>
+                        <button {% if forloop.counter|divisibleby:2 %} class="btn btn-light" {% else %} class="btn btn-secondary" {% endif %} style="width: 180px;">
+                            {{ tag.tag }}
+                        </button>
+                    </li>
+                </a>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock left_sidebar %}
+
+{% block content %}
+
+<div class="resource_home_main_content"> 
+    {% if all_blogs %} 
+        <h1 style="text-align: center; font-weight: bold">{{tag}}</h1> 
+    {% endif %}
+    <div class="container row gap-3">
+        {% if all_blogs %}
+            {% for blog in all_blogs|slice:":4" %}
+                <div class="glassBox">
+                    <div class="glassBox__imgBox">
+                        <img src="{{ blog.banner.url }}" alt="...">
+                    </div>
+                    <div class="glassBox__title">
+                        {{ blog.title }}
+                    </div>
+                    <div class="glassBox__content">
+                        {% if blog.description|length >= 50 %}
+                            {{ blog.description|slice:":50" }} ...
+                        {% else %}
+                            {{ blog.description }}
+                        {% endif %}
+                        <br>
+                    </div>
+                    <a href="{% url "blog_detail" blog.id %}"><button class="btn btn-info" style="width: 200px"> Details </button></a>
+                    <div class="card-footer">
+                        <hr style="width: 250px">
+                        <div class="row">
+                            {% for tag in blog.blog_tag.all %}
+                            <div class="col-auto">
+                                <h6>{{tag.tag}} &nbsp |</h6>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2 style="font-weight: bold; color: grey; text-align: center;">No Posts created for {{tag}}, Try Creating One!</h2>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
