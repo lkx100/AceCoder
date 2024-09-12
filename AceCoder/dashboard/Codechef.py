@@ -58,6 +58,27 @@ class CodechefTools:
             return 6
         else:
             return 7
+        
+    def all_contest_stars(self, all_ratings):
+        all_stars = []
+        
+        for rating in all_ratings:
+            if rating < 1400:
+                all_stars.append(1)
+            elif rating < 1600:
+                all_stars.append(2)
+            elif rating < 1800:
+                all_stars.append(3)
+            elif rating < 2000:
+                all_stars.append(4)
+            elif rating < 2200:
+                all_stars.append(5)
+            elif rating < 2400:
+                all_stars.append(6)
+            else:
+                all_stars.append(7)
+
+        return all_stars
 
     def feth_details(self) -> list:
         # Extract the ratings data as a JSON array

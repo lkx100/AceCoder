@@ -161,6 +161,9 @@ def graph_student(request, codechef_id):
         'displaylogo': False  # Optionally remove the Plotly logo
     })
     
+    all_ranks = codechef_scrapper.all_contest_stars(list(all_details['Rating']))
+    
+
     graphs = {
         "line_chart": line_chart,
         "bar_chart": bar_chart

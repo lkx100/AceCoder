@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load custom_filters %}
 
 {% block title %}
 
@@ -82,7 +83,7 @@ Dashboard
     <table class="table table-striped table-bordered">
         <thead class="background-white">
             <tr style="text-align: center">
-                <th>College Rank</th>
+                <th>S.No</th>
                 <th>Roll No</th>
                 <th>Student Name</th>
                 <th>Year</th>
@@ -103,8 +104,7 @@ Dashboard
             {% for student in details %}
             
             <tr style="text-align: center">
-                <td>{{ forloop.counter }}</td> 
-                <td>{{student.student.roll_no}}</td> 
+                <td>{{ details.number|add:-1|multiply:10|add:forloop.counter }}</td>                <td>{{student.student.roll_no}}</td> 
                 <td>{{student.student.name}}</td>
                 <td>{{student.student.year}}</td>
                 <td>{{student.student.department}}</td>
