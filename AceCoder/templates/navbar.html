@@ -5,6 +5,13 @@
         font-family: 'Blanka';
         src: url('{% static "fonts/Blanka-Regular.otf" %}') format('opentype');
     }
+    html body nav.navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1030; /* Bootstrap's navbar z-index + 1 for good measure */
+    }
     .navbar-brand {
         font-size: 28px;
         color: white;
