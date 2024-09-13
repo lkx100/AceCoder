@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.conf import settings
 from .decorators import *
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 
 
@@ -43,12 +44,28 @@ def dashboard(request):
     depart = request.GET.get('department', 'All')
     sortby = request.GET.get('sorting', 'None')
     download = request.GET.get('download', 'False')
+    year = request.GET.get('year', 'All')
+    stars = request.GET.get('stars', 'All')
+    search_query = request.GET.get('search', '')
+
+    print( "Search: " ,search_query)
+
+    if search_query:
+        details = details.filter(
+            Q(student__name__icontains=search_query) | Q(student__roll_no__icontains=search_query)
+        )
 
     if depart != 'All':
         details = details.filter(student__department=depart)
 
     if plag != 'All':
         details = details.filter(plagarisms__gt=0) if plag == 'Yes' else details.filter(plagarisms=0)
+
+    if year != 'All':
+        details = details.filter(student__year=year)
+
+    if stars != 'All':
+        details = details.filter(stars=stars)
 
     if sortby != 'None':
         if sortby == 'RatingInc':
@@ -68,7 +85,7 @@ def dashboard(request):
     page = request.GET.get('page')
     details = paginator.get_page(page)
 
-    return render(request, "dashboard.html", {"details": details, "plag": plag, "sortby": sortby, "depart": depart})
+    return render(request, "dashboard.html", {"details": details, "plag": plag, "sortby": sortby, "depart": depart, 'search_query': search_query,'year': year, 'stars': stars})
 
 def fetch_details(request, codechef_id):
     student = CodechefTools(codechef_id)

@@ -36,7 +36,7 @@
         width: 100%; /* Make the chart fit the container */
         height: 100%; /* Make the chart fit the container */
     }
-    
+
     /* Responsive design for mobile view */
     @media (max-width: 768px) {
         .graph-grid {
@@ -47,13 +47,15 @@
             height: 100%; /* Make the chart fit the container */
         }
         .graph-placeholder iframe {
-            width: auto; /* Set iframe width to normal */
+            width: 100%; /* Make the chart fit the container */
             height: auto; /* Set iframe height to normal */
+            max-width: 100%; /* Ensure the iframe does not exceed the container width */
+            margin: auto; /* Center the iframe */
         }
     }
 </style>
 
-<center><h1 style="font-weight: bold">Graphical Dashboard</h1></center>   
+<center><h1 style="font-weight: bold; margin-top: 70px;"> {{codechef_id}} Graphical Dashboard</h1></center>   
 <div class="graph-grid">
     <div class="graph-container">
         <div class="graph-placeholder">{{line_chart|safe}}</div>
@@ -62,10 +64,10 @@
         <div class="graph-placeholder">{{bar_chart|safe}}</div>
     </div>
     <div class="graph-container">
-        <div class="graph-placeholder">Graph 3</div>
+        <div class="graph-placeholder">{{pie_chart|safe}}</div>
     </div>
     <div class="graph-container">
-        <div class="graph-placeholder">Graph 4</div>
+        <div class="graph-placeholder">{{histogram|safe}}</div>
     </div>
 </div>
 {% endblock content %}

@@ -126,7 +126,11 @@ class CodechefTools:
                 continue
             # print("-"*32)
 
-        return contest_problems
+        # Filtering only the Codechef staters contests.
+        filtered_contest_problems = {k: v for k, v in contest_problems.items() if k.lower().startswith('starters')}
+
+
+        return filtered_contest_problems
     
 if __name__ == "__main__":
     obj = CodechefTools("sweshikreddy")
