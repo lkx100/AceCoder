@@ -10,7 +10,7 @@
 ## 📋 **Table of Contents**
 
 - [AceCoder](#acecoder)
-  - [Features](#Features)
+  - [Features](#features)
   - [Technologies Used](#technologies-used)
   - [Setup and Installation](#setup-and-installation)
     - [Prerequisites](#Prerequisites)
