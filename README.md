@@ -2,6 +2,8 @@
 
 Welcome to our dedicated platform, designed to elevate your CodeChef contest experience through AI-powered insights and comprehensive resources. Our mission is to empower students and faculty with detailed performance analysis and valuable tools for continuous improvement.
 
+Our beta version is deployed here - https://acecoderbeta.onrender.com/
+
 ## Key Features 🌟
 
 ### 🤖 AI-Powered Performance Analysis
