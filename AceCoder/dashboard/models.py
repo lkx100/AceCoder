@@ -1,23 +1,21 @@
 from django.db import models
 from .Codechef import CodechefTools
 
-# Create your models here.
-class Student(models.Model): # Model for Student database
-
-    department_options = ( # Options for department field
+class Student(models.Model):
+    department_options = (
         ('Ai&Ds', 'Ai&Ds'),
         ('CSE', 'CSE'),
         ('ECE', 'ECE'),
     )
 
-    years_options = ( # Options for year field
+    years_options = (
         ('1', '1'),
         ('2', '2'),
         ('3', '3'),
         ('4', '4'),
     )
 
-    sections_options = ( # Options for section field
+    sections_options = (
         ('1', '1'),
         ('2', '2'),
         ('3', '3'),
@@ -29,7 +27,6 @@ class Student(models.Model): # Model for Student database
         ('9', '9'),
     )
 
-    # Input fields
     name = models.CharField(max_length=200)
     roll_no = models.CharField(max_length=10)
     codechef_id = models.CharField(max_length=100, null=True)
@@ -37,13 +34,26 @@ class Student(models.Model): # Model for Student database
     year = models.CharField(choices=years_options, max_length=1)
     section = models.CharField(choices=sections_options, max_length=1)
 
-    # Display name
     def __str__(self) -> str:
         return f"{self.roll_no} - {self.name}"
 
+class ContestPerformance(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    contest_name = models.CharField(max_length=100)
+    contest_code = models.CharField(max_length=10)
+    rating = models.IntegerField(null=True, blank=True)
+    rank = models.IntegerField(null=True, blank=True)
+    problems_solved = models.IntegerField(null=True, blank=True)
+    # contests_participated = models.IntegerField(null=True, blank=True)
+    # plagarisms = models.IntegerField(null=True, blank=True)
+    # stars = models.IntegerField(null=True, blank=True)
+    # date = models.DateField(null=True, blank=True)
+
+    def __str__(self) -> str:
+        return f"{self.student.roll_no} - {self.contest_name} ({self.date})"
 
 class Codechef_database(models.Model):
-    student = models.ForeignKey("Student", on_delete=models.CASCADE, null=True)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
     last_contest = models.CharField(max_length=10 ,null=True, blank=True)
     latest_rating = models.IntegerField(null=True, blank=True)
     latest_rank = models.IntegerField(null=True, blank=True)

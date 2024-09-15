@@ -136,4 +136,4 @@ if __name__ == "__main__":
     obj = CodechefTools("sweshikreddy")
     obj.account_exists()
     details = obj.feth_details()
-    print(details)
+    print(details, type(details))
