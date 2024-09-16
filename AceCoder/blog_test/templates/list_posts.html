@@ -1,0 +1,13 @@
+<h2>Blog Posts</h2>
+<ul>
+    {% if posts %}
+        {% for post in posts %}
+            <li>
+                <h3>{{ post.title }}</h3>
+                <div>{{ post.text_rendered|safe }}</div>
+            </li>
+        {% endfor %}
+    {% else %}
+        <h3>No Blogs Created Yet!</h3>
+    {% endif %}
+</ul>
