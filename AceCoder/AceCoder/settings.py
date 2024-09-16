@@ -31,20 +31,29 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+]
+
+MY_APPS = [
     'dashboard',
     'resources',
-    'users',
-    'django.contrib.sites',
+    'upsolve',
+    'graph',
+    'blog_test',
+    'blogs',
+    'markdownfield'
+]
+
+OAUTH_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'social_django',
-    'upsolve',
-    'graph',
-    'blog_test',
-    'blogs'
+    'users',
 ]
+
+INSTALLED_APPS += MY_APPS + OAUTH_APPS
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
