@@ -35,7 +35,6 @@ INSTALLED_APPS = [
 MY_APPS = [
     'users',
     'dashboard',
-    'resources',
     'upsolve',
     'graph',
     'BlogPost',
