@@ -20,8 +20,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = [".onrender.com", "127.0.0.1"]
 
-# Application definition
-
 SITE_ID = 2
 
 INSTALLED_APPS = [
@@ -35,13 +33,13 @@ INSTALLED_APPS = [
 ]
 
 MY_APPS = [
+    'users',
     'dashboard',
     'resources',
     'upsolve',
     'graph',
-    'blog_test',
-    'blogs',
-    'markdownfield'
+    'BlogPost',
+    'markdownx'
 ]
 
 OAUTH_APPS = [
@@ -50,10 +48,22 @@ OAUTH_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'social_django',
-    'users',
 ]
 
 INSTALLED_APPS += MY_APPS + OAUTH_APPS
+
+MARKDOWNX_MARKDOWNIFY_FUNCTION = 'markdownx.utils.markdownify'
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+    'markdown.extensions.codehilite',
+]
+MARKDOWNX_URLS_PATH = '/markdownx/markdownify/'
+MARKDOWNX_EDITOR_RESIZABLE = True
+MARKDOWNX_MEDIA_PATH = 'markdownx/'
+MARKDOWNX_IMAGE_MAX_SIZE = {
+    'size': (200, 200),
+    'quality': 90
+}
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
