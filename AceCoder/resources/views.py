@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post, PostTag, SubPost
+from .models import Post, PostTag
 
 def resources_home(request):
     blogs = Post.objects.all()
@@ -9,11 +9,11 @@ def resources_home(request):
 def blog_page(request, blog_id):
     blog = get_object_or_404(Post, pk = blog_id)
     all_tags = PostTag.objects.all()
-    subposts = SubPost.objects.filter(parent_post = blog)
+    # subposts = SubPost.objects.filter(parent_post = blog)
     context = {
         'blog': blog,  
         'all_tags': all_tags,
-        'subposts': subposts
+        # 'subposts': subposts
     }
     return render(request, 'blog_page.html', context)
 

@@ -49,10 +49,10 @@
                     <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'resources_home' %}active{% endif %}" href="{% url 'resources_home' %}">Blogs</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'post_list' %}active{% endif %}" href="{% url 'post_list' %}">Blogs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'resources_home' %}active{% endif %}" href="{% url 'resources_home' %}">Learning Path</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == '' %}active{% endif %}" href="#">Learning Path</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'upsolve_home' %}active{% endif %}" href="{% url 'upsolve_home' %}">Upsolve</a>
