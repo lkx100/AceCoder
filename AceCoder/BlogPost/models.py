@@ -51,7 +51,7 @@ class Post(models.Model):
                 pass
 
         md = markdown.Markdown(
-            extensions=['toc', 'fenced_code', 'codehilite']
+            extensions=['toc', 'fenced_code']
         )
 
         html_content = md.convert(content)
