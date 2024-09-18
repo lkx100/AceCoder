@@ -51,18 +51,18 @@ OAUTH_APPS = [
 
 INSTALLED_APPS += MY_APPS + OAUTH_APPS
 
-MARKDOWNX_MARKDOWNIFY_FUNCTION = 'markdownx.utils.markdownify'
-MARKDOWNX_MARKDOWN_EXTENSIONS = [
-    'markdown.extensions.extra',
-    'markdown.extensions.codehilite',
-]
-MARKDOWNX_URLS_PATH = '/markdownx/markdownify/'
-MARKDOWNX_EDITOR_RESIZABLE = True
-MARKDOWNX_MEDIA_PATH = 'markdownx/'
-MARKDOWNX_IMAGE_MAX_SIZE = {
-    'size': (200, 200),
-    'quality': 90
-}
+# MARKDOWNX_MARKDOWNIFY_FUNCTION = 'markdownx.utils.markdownify'
+# MARKDOWNX_MARKDOWN_EXTENSIONS = [
+#     'markdown.extensions.extra',
+#     'markdown.extensions.codehilite',
+# ]
+# MARKDOWNX_URLS_PATH = '/markdownx/markdownify/'
+# MARKDOWNX_EDITOR_RESIZABLE = True
+# MARKDOWNX_MEDIA_PATH = 'markdownx/'
+# MARKDOWNX_IMAGE_MAX_SIZE = {
+#     'size': (200, 200),
+#     'quality': 90
+# }
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {

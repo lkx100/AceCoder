@@ -24,7 +24,59 @@
     z-index: 1; /* Ensures the sidebar is above the main content */
     overflow: auto;
     overflow-y: scroll;
+}
 
+.copy-button {
+  background-color: #007bff;
+  color: rgb(72, 66, 66);
+  border: none;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.copy-button:hover {
+  background-color: #0056b3;
+}
+
+.markdown-content img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%; /* Responsive images */
+}
+
+pre {
+  white-space: pre-wrap; /* Ensure the content in the <pre> tag respects line breaks */
+  word-wrap: break-word;  /* Allow long lines to break and wrap if necessary */
+  background-color: #393434; /* Light background for code block */
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto; /* Enable horizontal scroll for very long lines */
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+pre code {
+  white-space: pre-wrap; /* Same as above, applies to <code> as well */
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.table-of-contents ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.table-of-contents li {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.table-of-contents a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
 }
 
 .main-content {

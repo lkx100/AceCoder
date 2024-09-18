@@ -1,7 +1,9 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
+import markdown
 from django.contrib.auth.models import User
 import re
 
@@ -26,7 +28,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     banner = models.ImageField(upload_to='post_banners/', blank=True, null=True)
 
-    content = MarkdownxField()
+    # content = MarkdownxField()
+    content = models.TextField()
     created_on = models.DateField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
@@ -47,7 +50,14 @@ class Post(models.Model):
             except PostImage.DoesNotExist:
                 pass
 
-        return markdownify(content)
+        md = markdown.Markdown(
+            extensions=['toc', 'fenced_code', 'codehilite']
+        )
+
+        html_content = md.convert(content)
+        toc = md.toc        
+
+        return mark_safe(html_content), mark_safe(toc)
 
     def __str__(self):
         return self.title
