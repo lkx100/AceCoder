@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tag, Post, PostImages
+from .models import Tag, Post, PostImage
 from markdownx.admin import MarkdownxModelAdmin
 
 @admin.register(Tag)
@@ -21,4 +21,4 @@ class PostAdmin(MarkdownxModelAdmin):
 
 class PostImageAdmin(admin.ModelAdmin):
     list_display = ['slug', 'post']
-admin.site.register(PostImages, PostImageAdmin)
+admin.site.register(PostImage, PostImageAdmin)

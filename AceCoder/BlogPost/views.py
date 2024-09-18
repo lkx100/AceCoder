@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Tag, PostImages
+from .models import Post, Tag, PostImage
 
 def home(request):
     posts = Post.objects.all()

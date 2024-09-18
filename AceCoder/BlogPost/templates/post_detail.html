@@ -1,4 +1,4 @@
-{% extends "resources_base.html" %}
+{% extends "blogpost_base.html" %}
 
 {% load static %}
 
@@ -6,18 +6,16 @@
 
 {% block right_sidebar %}
     <div class="right-sidebar-container">
-        <h3 style='font-weight: bold; padding-left: 5px; margin-bottom: 30px'> Dummy Contents </h3>
+        <h3 style='font-weight: bold; padding-left: 5px; margin-bottom: 30px'> Blog Contents </h3>
         <hr>
-        <ul class='left-bar' style="list-style-type: decimal">
-            {% comment %} {% for subpost in subposts %}
-            <li><a href="#subpost-{{ subpost.id }}">{{ subpost.tittle }}</a></li> <br>
-            {% endfor %} {% endcomment %}
-            <li> Markdown </li> <br>
-            <li> BolgPost </li> <br>
-            <li> Resources </li> <br>
-        </ul>
+        <div class="table-of-contents">
+            {{ post.get_markdown.1|safe }}
+        </div>
+        {% comment %} <ul class='left-bar' style="list-style-type: decimal"> {% endcomment %}
+        {% comment %} </ul> {% endcomment %}
     </div>
 {% endblock %}
+
 
 {% block content %}
 
@@ -52,7 +50,9 @@
                     </div>
                     <hr>
                     <div class="row">
-                        {{ post.get_markdown | safe }}
+                        <div class="markdown-content">
+                            {{ post.get_markdown.0 | safe }}
+                        </div>
                     </div>
                 </div>
                 <style>
