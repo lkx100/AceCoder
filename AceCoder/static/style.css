@@ -26,42 +26,53 @@
     overflow-y: scroll;
 }
 
-.copy-button {
-  background-color: #007bff;
-  color: rgb(72, 66, 66);
-  border: none;
-  padding: 5px 10px;
-  margin-bottom: 5px;
-  cursor: pointer;
-  border-radius: 4px;
+.markdown-content {
+  font-size: 1.2em; /* Adjust the base font size as needed */
 }
 
-.copy-button:hover {
-  background-color: #0056b3;
+.markdown-content h1 {
+  font-weight: bold;
 }
 
 .markdown-content img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  max-width: 100%; /* Responsive images */
+  max-width: 100%;  /* Responsive images */
 }
 
+.markdown-content p {
+  line-height: 2; /* Adjust the line height as needed */
+  margin-bottom: 2em; /* Add space between paragraphs */
+}
+
+.markdown-content pre {
+  line-height: 2; /* Adjust the line height for code blocks */
+  margin-bottom: 2em; /* Add space between code blocks */
+}
+
+.markdown-content li {
+  line-height: 1.6; /* Adjust the line height for list items */
+  margin-bottom: 0.5em; /* Add space between list items */
+}
+
+/* 
 pre {
-  white-space: pre-wrap; /* Ensure the content in the <pre> tag respects line breaks */
-  word-wrap: break-word;  /* Allow long lines to break and wrap if necessary */
-  background-color: #393434; /* Light background for code block */
+  white-space: pre-wrap; // Ensure the content in the <pre> tag respects line breaks
+  word-wrap: break-word;  // Allow long lines to break and wrap if necessary 
+  background-color: #393434; // Light background for code block 
   padding: 10px;
   border-radius: 4px;
-  overflow-x: auto; /* Enable horizontal scroll for very long lines */
+  overflow-x: auto; // Enable horizontal scroll for very long lines 
   margin-bottom: 20px;
   font-size: 14px;
-}
+} 
+*/
 
-pre code {
-  white-space: pre-wrap; /* Same as above, applies to <code> as well */
+/* pre code {
+  white-space: pre-wrap; // Same as above, applies to <code> as well 
   font-family: 'Courier New', Courier, monospace;
-}
+} */
 
 .table-of-contents ul {
   list-style-type: none;
