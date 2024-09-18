@@ -41,10 +41,10 @@ class Post(models.Model):
 
         for ref in image_references:
             try:
-                image = self.postimages_set.get(slug = ref)
+                image = self.postimage_set.get(slug = ref)
                 image_markdown = f"![{image.slug}]({image.image.url})"
                 content = content.replace(f"[{ref}]", image_markdown)
-            except PostImages.DoesNotExist:
+            except PostImage.DoesNotExist:
                 pass
 
         return markdownify(content)
@@ -53,7 +53,7 @@ class Post(models.Model):
         return self.title
 
 
-class PostImages(models.Model):
+class PostImage(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='post_images/')
     slug = models.CharField(max_length=100)
