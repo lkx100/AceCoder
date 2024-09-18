@@ -64,7 +64,7 @@ Before getting started, ensure you have the following installed:
     - **Windows:**
     ```bash
     python -m venv .myenv
-    .\myenv\Scripts\activate
+    .\.myenv\Scripts\activate
     ```
 
     - **Mac/Linux:**
