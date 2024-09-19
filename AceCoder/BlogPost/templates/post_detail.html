@@ -9,7 +9,12 @@
         <h3 style='font-weight: bold; padding-left: 5px; margin-bottom: 30px'> Blog Contents </h3>
         <hr>
         <div class="table-of-contents">
-            {{ post.get_markdown.1|safe }}
+            {% comment %} {{ post.get_markdown.1|safe }} {% endcomment %}
+            <ul>
+                {% for href, text in toc_items %}
+                    <li> <a href="{{ href }}"> {{ text }} </a> </li>
+                {% endfor %}
+            </ul>
         </div>
         {% comment %} <ul class='left-bar' style="list-style-type: decimal"> {% endcomment %}
         {% comment %} </ul> {% endcomment %}

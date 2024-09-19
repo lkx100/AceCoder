@@ -19,7 +19,7 @@
             {% for problem in problems %}
             <tr style="text-align: center">
                 <td> {{forloop.counter}} </td>
-                <td> {{problem.name}} </td>
+                <td> <a href="{{ problem.problem_link }}" target="_blank"> {{problem.name}} </a> </td>
                 <td> {{problem.problem_tags_str}} </td>
                 <td> {{problem.Rating}} </td>
                 <td> {{problem.submissions}} </td>

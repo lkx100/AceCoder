@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Tag, PostImage
+from bs4 import BeautifulSoup
 
 def home(request):
     posts = Post.objects.all()
@@ -23,4 +24,18 @@ def posts_by_tag(request, slug):
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    return render(request, 'post_detail.html', {'post': post})
+    soup = BeautifulSoup(str(post.get_markdown()[1]), 'html.parser')
+    links = soup.select('li > a')
+    href_list, text_list = [], []
+    
+    for link in links:
+        href_list.append(link.get('href'))
+        text_list.append(link.text)
+
+    toc_items = zip(href_list, text_list)
+
+    context = {
+        'post': post,
+        'toc_items': toc_items,
+    }
+    return render(request, 'post_detail.html', context)
