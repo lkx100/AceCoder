@@ -56,24 +56,6 @@
   margin-bottom: 0.5em; /* Add space between list items */
 }
 
-/* 
-pre {
-  white-space: pre-wrap; // Ensure the content in the <pre> tag respects line breaks
-  word-wrap: break-word;  // Allow long lines to break and wrap if necessary 
-  background-color: #393434; // Light background for code block 
-  padding: 10px;
-  border-radius: 4px;
-  overflow-x: auto; // Enable horizontal scroll for very long lines 
-  margin-bottom: 20px;
-  font-size: 14px;
-} 
-*/
-
-/* pre code {
-  white-space: pre-wrap; // Same as above, applies to <code> as well 
-  font-family: 'Courier New', Courier, monospace;
-} */
-
 .table-of-contents ul {
   list-style-type: none;
   padding-left: 0;
@@ -88,6 +70,12 @@ pre {
   text-decoration: none;
   color: #fff;
   font-weight: bold;
+}
+
+.main-content {
+    margin-top: 69px; /* Adjust this value to match the navbar's height */
+    /* margin-left: 275px;
+    margin-right: 275px; */
 }
 
 .main-content {
