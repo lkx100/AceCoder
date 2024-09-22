@@ -22,7 +22,12 @@
 
 {% block content %}
     <div class="resource_home_main_content">
-        <h1 style="text-align: center;font-weight: bold; color: lightgrey"> All Blog Posts </h1> <br> <br>
+        <div class="all_blogs_nav">
+            <h1 style="text-align: center;font-weight: bold; color: lightgrey"> All Blog Posts </h1> 
+            <a href="{% url "post_create" %}"> <button type="button" class="btn btn-primary"> Create Blog </button> </a>
+        </div>
+        <hr>
+        <br> <br>
         <div class="container d-flex flex-wrap justify-content-center gap-3">
             {% if posts %}
                 {% for post in posts|slice:":4" %}
