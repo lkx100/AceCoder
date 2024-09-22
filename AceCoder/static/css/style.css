@@ -97,6 +97,12 @@
   margin-left: 275px;
 }
 
+.all_blogs_nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /* Media query for screens smaller than large (less than 992px) */
 @media (max-width: 991px) {
   .main-content {
