@@ -46,7 +46,12 @@
                                 {% endif %}
                                 <br>
                         </div>
-                        <a href="{% url "post_detail" slug=post.slug %}"><button class="btn btn-info" style="width: 200px"> Details </button></a>
+
+                        <div class="card-clickables">
+                            <a href="{% url "post_detail" slug=post.slug %}"><button class="btn btn-info" style="width: 100px"> Details </button></a>
+                            <a href="{% url "post_delete" id=post.id %}"> <button class="btn btn-danger" style="width: 100px"> Delete </button> </a>
+                        </div>
+
                         <div class="card-footer">
                             <hr style="width: 250px">
                             <div class="row">

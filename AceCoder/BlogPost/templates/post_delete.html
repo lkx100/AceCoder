@@ -1,0 +1,28 @@
+{% extends "blogpost_base.html" %}
+
+{% block title %}
+    Delete Post
+{% endblock %}
+
+{% block content %}
+
+    <h2 style="text-align: center"> Are you sure you want to delete this Blog ? </h2>
+    <br> <br> <hr>
+
+    {% if post %}
+
+        <div style="text-align: center;">
+            <h3> {{post.title}} </h3>
+            <p> {{post.description}} </p>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger"> Delete </button>
+                <a href="{% url "post_list" %}" class="btn btn-secondary"> Cancel </a>
+            </form>
+        </div>
+
+    {% else %}
+        <h3 style="text-align: center"> No Blog Found </h3>
+    {% endif %}
+
+{% endblock %}

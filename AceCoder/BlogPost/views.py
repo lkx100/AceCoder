@@ -25,25 +25,31 @@ def posts_by_tag(request, slug):
     }
     return render(request, 'post_list.html', context)
 
+def post_delete(request, id):
+    post = get_object_or_404(Post, id=id)
+    if request.method == 'POST':
+        post.delete()
+        return redirect('post_list')
+    
+    return render(request, 'post_delete.html', {'post': post})
+
 def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('post_list')
-        '''
-        post = request.POST
-        post_banner = request.FILES.get('banner')
-        title = post.get('title)
-        description = post.get('description')
-        content = post.get('content')
-        tags = post.getlist('tags')
-        author = post.get('author')
-        Post.objects.create(
-            title=title, description=description, content=content, banner=post_banner, 
-            author=author, tags=tags
-        )
-        '''
+        # post = request.POST
+        # post_banner = request.FILES.get('banner')
+        # title = post.get('title')
+        # description = post.get('description')
+        # content = post.get('content')
+        # tags = post.getlist('tags')
+        # author = post.get('author')
+        # Post.objects.create(
+        #     title=title, description=description, content=content, banner=post_banner, 
+        #     author=author, tags=tags
+        # )
     else:
         form = PostForm()
     # users = User.objects.all()
