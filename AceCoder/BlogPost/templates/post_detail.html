@@ -16,8 +16,6 @@
                 {% endfor %}
             </ul>
         </div>
-        {% comment %} <ul class='left-bar' style="list-style-type: decimal"> {% endcomment %}
-        {% comment %} </ul> {% endcomment %}
     </div>
 {% endblock %}
 
@@ -58,6 +56,12 @@
                         <div class="markdown-content">
                             {{ post.get_markdown.0 | safe }}
                         </div>
+                    </div>
+                    <div class="col-2">
+                        <h4>Want to delete the Post ?</h4>
+                        <a href="{% url "post_delete" id=post.id %}"> <button type="submit" class="btn btn-danger"> Delete </button> </a>
+                        <h4>Want to Update the Post ?</h4>
+                        <a href="{% url "post_detail" slug=post.slug %}"> <button type="submit" class="btn btn-secondary"> Update </button> </a>
                     </div>
                 </div>
                 <style>

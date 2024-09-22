@@ -61,6 +61,22 @@ def post_create(request):
     }
     return render(request, 'post_create.html', context)
 
+def post_update(request, id):
+    post = Post.objects.get(id=id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post_detail', slug=post.slug)
+    else:
+        form = PostForm(instance=post)
+
+    context = {
+        'post': post,
+        'form': form,
+    }
+    return render(request, 'post_update.html', context)
+
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     soup = BeautifulSoup(str(post.get_markdown()[1]), 'html.parser')

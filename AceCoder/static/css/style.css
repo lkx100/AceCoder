@@ -145,7 +145,7 @@ html body nav.navbar {
 
 .card-clickables {
     display: flex;
-    gap: 10px;
+    gap: 20px;
 }
 
 .image-class {

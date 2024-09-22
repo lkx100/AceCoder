@@ -30,7 +30,7 @@
         <br> <br>
         <div class="container d-flex flex-wrap justify-content-center gap-3">
             {% if posts %}
-                {% for post in posts|slice:":4" %}
+                {% for post in posts|slice:":10" %}
                     <div class="glassBox">
                         <div class="glassBox__imgBox">
                             <img src="{{ post.banner.url }}" alt="...">
@@ -47,9 +47,10 @@
                                 <br>
                         </div>
 
+                        <a href="{% url "post_detail" slug=post.slug %}"><button class="btn btn-info" style="width: 200px"> Details </button></a> <br>
                         <div class="card-clickables">
-                            <a href="{% url "post_detail" slug=post.slug %}"><button class="btn btn-info" style="width: 100px"> Details </button></a>
                             <a href="{% url "post_delete" id=post.id %}"> <button class="btn btn-danger" style="width: 100px"> Delete </button> </a>
+                            <a href="{% url "post_update" id=post.id %}"> <button class="btn btn-secondary" style="width: 100px"> Update </button> </a>
                         </div>
 
                         <div class="card-footer">
