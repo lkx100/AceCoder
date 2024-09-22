@@ -23,7 +23,11 @@
 {% block content %}
     <div class="resource_home_main_content">
         <div class="all_blogs_nav">
-            <h1 style="text-align: center;font-weight: bold; color: lightgrey"> All Blog Posts </h1> 
+            <form>
+                <div class="mb-4">
+                    <input name="search" type="text" class="form-control" placeholder="Search Blogs...">
+                </div>
+            </form>
             <a href="{% url "post_create" %}"> <button type="button" class="btn btn-primary"> Create Blog </button> </a>
         </div>
         <hr>
@@ -66,7 +70,12 @@
                     </div>
                 {% endfor %}
             {% else %}
-                <h3> There are no Blogs related to {{tag}} </h3>
+                {% if search_word %}
+                    <h3> No Blogs related to {{search_word}} </h3>
+                {% endif %}
+                {% if tag %}
+                    <h3> There are no Blogs related to {{tag}} </h3>
+                {% endif %}
             {% endif %}
         </div>
     </div>

@@ -8,10 +8,17 @@ from .forms import PostForm
 def home(request):
     posts = Post.objects.all()
     all_tags = Tag.objects.all()
+    
+    if request.GET.get('search'):
+        posts = Post.objects.filter(title__icontains = request.GET.get('search'))
+    
     context = {
         'posts': posts,
         'all_tags': all_tags,
+        'search_word': request.GET.get('search'),
     }
+
+
     return render(request, 'post_list.html', context)
 
 def posts_by_tag(request, slug):
