@@ -143,6 +143,11 @@ html body nav.navbar {
     padding: 2px;
 }
 
+.card-clickables {
+    display: flex;
+    gap: 20px;
+}
+
 .image-class {
     height: 200px; /* Fixed height */
     width: 100%; /* Full width of the container */

@@ -8,10 +8,17 @@ from .forms import PostForm
 def home(request):
     posts = Post.objects.all()
     all_tags = Tag.objects.all()
+    
+    if request.GET.get('search'):
+        posts = Post.objects.filter(title__icontains = request.GET.get('search'))
+    
     context = {
         'posts': posts,
         'all_tags': all_tags,
+        'search_word': request.GET.get('search'),
     }
+
+
     return render(request, 'post_list.html', context)
 
 def posts_by_tag(request, slug):
@@ -25,25 +32,31 @@ def posts_by_tag(request, slug):
     }
     return render(request, 'post_list.html', context)
 
+def post_delete(request, id):
+    post = get_object_or_404(Post, id=id)
+    if request.method == 'POST':
+        post.delete()
+        return redirect('post_list')
+    
+    return render(request, 'post_delete.html', {'post': post})
+
 def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('post_list')
-        '''
-        post = request.POST
-        post_banner = request.FILES.get('banner')
-        title = post.get('title)
-        description = post.get('description')
-        content = post.get('content')
-        tags = post.getlist('tags')
-        author = post.get('author')
-        Post.objects.create(
-            title=title, description=description, content=content, banner=post_banner, 
-            author=author, tags=tags
-        )
-        '''
+        # post = request.POST
+        # post_banner = request.FILES.get('banner')
+        # title = post.get('title')
+        # description = post.get('description')
+        # content = post.get('content')
+        # tags = post.getlist('tags')
+        # author = post.get('author')
+        # Post.objects.create(
+        #     title=title, description=description, content=content, banner=post_banner, 
+        #     author=author, tags=tags
+        # )
     else:
         form = PostForm()
     # users = User.objects.all()
@@ -54,6 +67,22 @@ def post_create(request):
         'form': form,
     }
     return render(request, 'post_create.html', context)
+
+def post_update(request, id):
+    post = Post.objects.get(id=id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post_detail', slug=post.slug)
+    else:
+        form = PostForm(instance=post)
+
+    context = {
+        'post': post,
+        'form': form,
+    }
+    return render(request, 'post_update.html', context)
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
