@@ -5,9 +5,10 @@ from django.contrib.auth.models import User
 from .models import Tag
 from .forms import PostForm
 from AceCoder.context_processors import add_is_admin
+from django.contrib.auth.decorators import login_required
 
 def home(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().filter(status='1')
     all_tags = Tag.objects.all()
     
     if request.GET.get('search'):
@@ -26,7 +27,16 @@ def home(request):
         'is_authorised': is_admin or is_faculty,
     }
 
+    return render(request, 'post_list.html', context)
 
+@login_required
+def my_posts(request):
+    posts = Post.objects.filter(author=request.user)
+    all_tags = Tag.objects.all()
+    context = {
+        'posts': posts,
+        'all_tags': all_tags,
+    }
     return render(request, 'post_list.html', context)
 
 def posts_by_tag(request, slug):
@@ -40,6 +50,7 @@ def posts_by_tag(request, slug):
     }
     return render(request, 'post_list.html', context)
 
+@login_required
 def post_delete(request, id):
     post = get_object_or_404(Post, id=id)
     if request.method == 'POST':
@@ -48,10 +59,13 @@ def post_delete(request, id):
     
     return render(request, 'post_delete.html', {'post': post})
 
+@login_required
 def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
             form.save()
             return redirect('post_list')
         # post = request.POST
@@ -76,6 +90,7 @@ def post_create(request):
     }
     return render(request, 'post_create.html', context)
 
+@login_required
 def post_update(request, id):
     post = Post.objects.get(id=id)
     if request.method == 'POST':
