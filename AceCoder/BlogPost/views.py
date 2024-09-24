@@ -25,6 +25,7 @@ def home(request):
         'all_tags': all_tags,
         'search_word': request.GET.get('search'),
         'is_authorised': is_admin or is_faculty,
+        'is_admin': is_admin,
     }
 
     return render(request, 'post_list.html', context)

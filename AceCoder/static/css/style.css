@@ -145,8 +145,10 @@ html body nav.navbar {
 
 .card-clickables {
     display: flex;
-    gap: 20px;
+    gap: 40px;
     margin-top: 0;
+    justify-content: space-between;
+    align-items: space-between;
 }
 
 .image-class {
@@ -256,8 +258,8 @@ ul.no-marker {
     }
     
     .display-tag {
-      color: lightgrey;
-      background-color: grey;
+      color: black;
+      background-color: white;
       border-radius: 5px;
       padding-left: 5px;
       padding-right: 5px;

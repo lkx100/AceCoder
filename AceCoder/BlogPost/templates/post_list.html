@@ -11,7 +11,9 @@
         <div class="blog-section">
             <center><h3>Blogs</h3></center>
             <a href="{% url "my_posts" %}"> <button class="btn btn-light" style="width: 180px;padding-left: 0px"><span style="font-weight: bold;">My Blogs</span> </button> </a> <br>
-            <a href="{% url "pending_posts" id=0 %}"> <button class="btn btn-secondary" style="width: 180px;padding-left: 0px"><span style="font-weight: bold;">Pending Posts</span> </button> </a>
+            {% if is_admin %}
+                <a href="{% url "pending_posts" id=0 %}"> <button class="btn btn-secondary" style="width: 180px;padding-left: 0px; margin-top: 10px;"><span style="font-weight: bold;">Pending Posts</span> </button> </a>
+            {% endif %}
         </div>
         <hr>
         <h3 style='font-weight: bold; padding-left: 50px'> Topics </h3> <br>
@@ -24,6 +26,9 @@
             {% endfor %}
         </ul>
     </div>
+
+    
+
 {% endblock %}
 
 {% block content %}
@@ -75,21 +80,29 @@
 
                         <a href="{% url "post_detail" slug=post.slug %}"><button class="btn btn-info" style="width: 200px; margin-top: 10px"> Details </button></a> <br>
                         {% if is_authorised %}
-                        <div class="card-clickables">
-                            <a href="{% url "post_delete" id=post.id %}"> <button class="btn btn-danger" style="width: 100px"> Delete </button> </a>
-                            <a href="{% url "post_update" id=post.id %}"> <button class="btn btn-warning" style="width: 100px"> Update </button> </a>
-                        </div>
+                            <div class="card-clickables">
+                                <a href="{% url "post_delete" id=post.id %}"> <button class="btn btn-danger" style="width: auto"> ❌ </button> </a>
+                                <a href="{% url "post_update" id=post.id %}"> <button class="btn btn-secondary" style="width: auto"> ✏️ </button> </a>
+                            </div>
                         {% endif %}
 
                         <div class="card-footer">
                             <hr style="width: 250px">
-                            <div class="row">
-                                {% for tag in post.tags.all %}
+                            {% if tag == 'My' %}
+                                {% if post.status == '1' %}
+                                    <p style="font-weight: bold; color: lightgreen">This Blog is live !</p>
+                                {% else %}
+                                    <p style="font-weight: bold; color: orange">Approval Pending...</p>
+                                {% endif %}
+                            {% else %}
+                                <div class="row">
+                                    {% for tag in post.tags.all %}
                                     <div class="col-auto">
                                         <h6> <span class="display-tag">{{tag.name}}</span> &nbsp |</h6>
                                     </div>
-                                {% endfor %}
-                            </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
