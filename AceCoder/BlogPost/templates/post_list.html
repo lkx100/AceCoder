@@ -72,28 +72,14 @@
                             {% endif %}
                             <br>
                         </div>
-                        {% comment %} <div class="glassBox__content">
-                                {% if post.description|length >= 50 %}
-                                    {{ post.description|slice:":50" }} ...
-                                {% else %}
-                                    {{ post.description }}
-                                {% endif %}
-                                <br>
-                        </div> {% endcomment %}
 
-                        {% if is_authorised %}
-                            <div class="card-clickables">
-                                <a href="{% url "post_delete" id=post.id %}"> <button class="btn btn-danger" style="width: 100px"> Delete </button> </a>
-                                <a href="{% url "post_update" id=post.id %}"> <button class="btn btn-secondary" style="width: 100px"> Update </button> </a>
-                            </div>
-                        {% else %}
-                            {% if post.description|length >= 60 %}
-                                {{ post.description|slice:":60" }} ...
-                            {% else %}
-                                {{ post.description }}
-                            {% endif %}
-                        {% endif %}
                         <a href="{% url "post_detail" slug=post.slug %}"><button class="btn btn-info" style="width: 200px; margin-top: 10px"> Details </button></a> <br>
+                        {% if is_authorised %}
+                        <div class="card-clickables">
+                            <a href="{% url "post_delete" id=post.id %}"> <button class="btn btn-danger" style="width: 100px"> Delete </button> </a>
+                            <a href="{% url "post_update" id=post.id %}"> <button class="btn btn-warning" style="width: 100px"> Update </button> </a>
+                        </div>
+                        {% endif %}
 
                         <div class="card-footer">
                             <hr style="width: 250px">
@@ -111,7 +97,9 @@
                 {% if search_word %}
                     <h3> No Blogs related to {{search_word}} </h3>
                 {% endif %}
-                {% if tag %}
+                {% if tag == 'My' %}
+                    <h3> You have not created any Blogs yet. Try to create one !</h3>
+                {% elif tag %}
                     <h3> There are no Blogs related to {{tag}} </h3>
                 {% endif %}
             {% endif %}
