@@ -36,6 +36,8 @@ def my_posts(request):
     context = {
         'posts': posts,
         'all_tags': all_tags,
+        'is_authorised': True,
+        'tag': 'My'
     }
     return render(request, 'post_list.html', context)
 
