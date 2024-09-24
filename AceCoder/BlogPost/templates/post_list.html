@@ -8,6 +8,7 @@
 
 {% block left_sidebar %}
     <div class="left-sidebar-container d-none d-lg-block">
+        <a href="{% url "my_posts" %}"> <button class="btn btn-primary"> My Blogs </button> </a>
         <h3 style='font-weight: bold; padding-left: 50px'> Topics </h3> <br>
         <ul class='right-bar'>
             <a href="{% url "post_list" %}"> <li><button class="btn btn-light" style="width: 180px;padding-left: 0px">All</button></li></a>
@@ -43,12 +44,12 @@
                             {{ post.title }}
                         </div>
                         <div class="glassBox__content">
-                                {% if post.description|length >= 50 %}
-                                    {{ post.description|slice:":50" }} ...
-                                {% else %}
-                                    {{ post.description }}
-                                {% endif %}
-                                <br>
+                            {% if post.description|length >= 50 %}
+                                <p> {{ post.description|slice:":50" }} ... </p>
+                            {% else %}
+                                <p> {{ post.description }} </p>
+                            {% endif %}
+                            <br>
                         </div>
 
                         <a href="{% url "post_detail" slug=post.slug %}"><button class="btn btn-info" style="width: 200px"> Details </button></a> <br>
