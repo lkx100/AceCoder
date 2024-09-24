@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from django.contrib.auth.models import User
 from .models import Tag
 from .forms import PostForm
+from AceCoder.context_processors import add_is_admin
 
 def home(request):
     posts = Post.objects.all()
@@ -11,11 +12,18 @@ def home(request):
     
     if request.GET.get('search'):
         posts = Post.objects.filter(title__icontains = request.GET.get('search'))
+
+    is_admin = False
+    is_faculty = False
+    if request.user.is_authenticated:
+        is_admin = request.user.groups.filter(name='admin').exists()
+        is_faculty = request.user.groups.filter(name='Faculty').exists()
     
     context = {
         'posts': posts,
         'all_tags': all_tags,
         'search_word': request.GET.get('search'),
+        'is_authorised': is_admin or is_faculty,
     }
 
 
