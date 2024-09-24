@@ -11,7 +11,7 @@ class TagAdmin(admin.ModelAdmin):
 # Register Post model with Markdownx support
 @admin.register(Post)
 class PostAdmin(MarkdownxModelAdmin):
-    list_display = ['title', 'author', 'created_on']
+    list_display = ['title', 'author', 'created_on', 'status']
     list_filter = ['tags', 'created_on']
     search_fields = ['title', 'content']
     prepopulated_fields = {"slug": ("title",)}

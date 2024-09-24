@@ -36,7 +36,7 @@ class Post(models.Model):
         ('0', 'Pending'),
         ('1', 'Published'),
     )
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, null=True, blank=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, null=True, default='0')
 
     def save(self, *args, **kwargs):
         if not self.slug:

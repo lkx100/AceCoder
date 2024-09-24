@@ -8,7 +8,11 @@
 
 {% block left_sidebar %}
     <div class="left-sidebar-container d-none d-lg-block">
-        <a href="{% url "my_posts" %}"> <button class="btn btn-primary"> My Blogs </button> </a>
+        <div class="blog-section">
+            <center><h3>Blogs</h3></center>
+            <a href="{% url "my_posts" %}"> <button class="btn btn-light" style="width: 180px;padding-left: 0px"><span style="font-weight: bold;">My Blogs</span> </button> </a>
+        </div>
+        <hr>
         <h3 style='font-weight: bold; padding-left: 50px'> Topics </h3> <br>
         <ul class='right-bar'>
             <a href="{% url "post_list" %}"> <li><button class="btn btn-light" style="width: 180px;padding-left: 0px">All</button></li></a>
@@ -23,6 +27,15 @@
 
 {% block content %}
     <div class="resource_home_main_content">
+
+        <div class="title">
+            {% if tag %}
+                <h1>{{tag}} Blogs</h1>
+            {% else %}
+                <h1> All Blogs </h1>
+            {% endif %}
+        </div>
+            <!-- Search bar and Create Blog button  -->   
             <div class="row d-flex justify-content-between align-items-center mb-4">
                 <div class="col">
                     <form>
