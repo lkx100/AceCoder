@@ -29,6 +29,22 @@ def home(request):
 
     return render(request, 'post_list.html', context)
 
+def pending_posts(request, id=0):
+    if id:
+        post = Post.objects.get(id=id)
+        post.status = '1'
+        post.save()
+    all_tags = Tag.objects.all()
+    pending_post = Post.objects.filter(status='0')
+    context = {
+        'posts': pending_post,
+        'all_tags': all_tags,
+        'tag': 'Pending',
+    }
+
+    return render(request, 'pending_posts.html', context)
+
+
 @login_required
 def my_posts(request):
     posts = Post.objects.filter(author=request.user)

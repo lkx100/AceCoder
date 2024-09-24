@@ -81,19 +81,12 @@
                                 <br>
                         </div> {% endcomment %}
 
-                        {% if is_authorised %}
+                        <a href="{% url "post_detail" slug=post.slug %}"><button class="btn btn-info" style="width: 200px; margin-top: 10px"> Details </button></a> <br>
                             <div class="card-clickables">
-                                <a href="{% url "post_delete" id=post.id %}"> <button class="btn btn-danger" style="width: 100px"> Delete </button> </a>
+                                <a href="{% url "post_delete" id=post.id %}"> <button class="btn btn-danger" style="width: 100px"> Reject </button> </a>
                                 <a href="{% url "post_update" id=post.id %}"> <button class="btn btn-secondary" style="width: 100px"> Update </button> </a>
                             </div>
-                        {% else %}
-                            {% if post.description|length >= 60 %}
-                                {{ post.description|slice:":60" }} ...
-                            {% else %}
-                                {{ post.description }}
-                            {% endif %}
-                        {% endif %}
-                        <a href="{% url "post_detail" slug=post.slug %}"><button class="btn btn-info" style="width: 200px; margin-top: 10px"> Details </button></a> <br>
+                            <a href="{% url "pending_posts" id=post.id %}"> <button class="btn btn-success" style="width: 200px"> Approve </button> </a>
 
                         <div class="card-footer">
                             <hr style="width: 250px">
