@@ -1,0 +1,109 @@
+.container-home {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll; /* Prevent vertical overflow */
+    height: 100vh;
+    width: 100%;
+}
+section {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    margin: 0;
+}
+.one {
+    z-index: 1;
+    /* background-color: red; */
+}
+.two {
+    background-color:  #2596be;
+    overflow: hidden; /* Prevent overflow within the section */
+}
+.three {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.four {
+    background-color: yellow;
+}
+h1,h2,h3  {
+    font-weight: bold; 
+    margin-left: 30px;
+    color: white;
+    text-shadow: 1px 1px black
+}
+.background-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.glass_bg {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    background: rgba(255, 255, 255, 0); /* Fully transparent background */
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    backdrop-filter: blur(10px); /* Blur effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.18); /* Light border */
+    padding: 20px; /* Optional: Add some padding */
+}
+/* Making the two-container to fullscreen */
+.two-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Prevent overflow within the container */
+}
+.two-container .row {
+    width: 100%;
+    height: 50%;
+    display: flex;
+}
+.two-container .row .col-6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.18); /* Border between features */
+    overflow: hidden; /* Prevent overflow within the columns */
+}
+.two-container h1 {
+    color: black;
+}
+.feature-content ul li {
+    color: black;
+    font-weight: bold;
+}
+
+/* Responsive styles for mobile screens */
+@media (max-width: 768px) {
+    .two-container {
+        margin-top: 105px;
+    }
+    .two-container .row {
+        flex-direction: column;
+        height: auto;
+    }
+    .two-container .row .col-6 {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18); /* Border between features */
+        font-size: small;
+        justify-content: start;
+        align-items: start;
+    }
+    .two-container .row .col-6:last-child {
+        border-bottom: none; /* Remove bottom border for the last item */
+    }
+    .two-container .row .col-6 .feature-content {
+        padding: 20px;
+    }
+    .two-container .row .col-6 svg {
+        display: none; /* Hide SVG in mobile view */
+    }
+}

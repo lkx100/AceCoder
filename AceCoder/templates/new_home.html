@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<div class="container-home">
+    <section class="one">
+        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.27/build/spline-viewer.js"></script>
+        <spline-viewer class="background-viewer" loading-anim-type="spinner-small-dark" url="https://prod.spline.design/j97TA2-PhetiXL62/scene.splinecode"></spline-viewer>
+        <!-- Info Section -->
+        <div id="info-section" class="section">
+            <div class="container">
+                {% for message in messages %}
+                    {% if forloop.last %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+                    
+            <div class="container" style="border-radius: 20px; margin-top: 100px;">
+                <div class="welcome-card row align-items-center g-10">
+                    <div class="col-md-6 col-xl-8 mt-4 mt-md-0 order-2 order-lg-1"> <!-- Added margin-top for smaller screens -->
+                        <h1 class="navbar-brand" style="font-size: 50px">AceCoder</h1>
+                        <hr>
+                        {% if user.is_authenticated %}
+                        <h1 style="color: white;font-size: 40px">Hello, <span style="color: cyan;font-size: 40px">{{user.get_full_name}}</span></h1>
+                        {% endif %}
+                        <h3 >Welcome to our dedicated platform, designed to elevate your CodeChef contest experience through comprehensive resources. Our mission is to empower students and faculty with detailed performance analysis and valuable tools for continuous improvement.</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="two">
+        <div class="two-container">
+            <div class="row">
+                <div class="col-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" xml:space="preserve" width="250" height="250">
+                        <path fill="#FBCF26" d="M86.319 75.29H32.804a.492.492 0 0 1-.492-.492v-3.395h54.5v3.394a.493.493 0 0 1-.493.493zM38.359 63.401h7.875V56.11h-7.875v7.291zm22-13.791v13.792h7.875V49.61h-7.875z"/>
+                        <path fill="#1A2559" d="M86.277 33.056H32.849a3.538 3.538 0 0 0-3.537 3.537v38.164a3.535 3.535 0 0 0 3.537 3.533h19.134v4.736h-2.749a1.5 1.5 0 1 0 0 2.999h21.374a1.5 1.5 0 1 0 0-2.999h-2.5V78.29h18.168a3.532 3.532 0 0 0 3.535-3.533h.002V36.593a3.536 3.536 0 0 0-3.536-3.537zm-21.169 49.97H54.984V78.29h10.123v4.736zm21.169-7.736H32.849a.537.537 0 0 1-.537-.533v-3.354h54.5v3.354h.002a.538.538 0 0 1-.537.533zm.535-6.888h-54.5V36.593a.539.539 0 0 1 .537-.537h53.427c.295 0 .535.24.537.537l-.001 31.809zm-4.452-5.001h-1.625V41.776H69.858v21.625H58.735l-.002-21.625H47.859v21.625H36.567a1.5 1.5 0 0 0 0 3H82.36a1.5 1.5 0 0 0 0-3zm-26.625 0h-4.876V44.775h4.876v18.626zm21.999 0h-4.876V44.775h4.876v18.626z"/>
+                    </svg>
+                    <div class="feature-content">
+                        <h1>Graphical Analysis</h1>
+                        <ul>
+                            <li>Visualize CodeChef performance with various graphs.</li>
+                            <li>Includes Rating, Rankings, and Problems Solved graphs.</li>
+                            <li>Faculty dashboard for monitoring student groups.</li>
+                            <li>Interactive, responsive, and downloadable graphs.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" style="enable-background:new 0 0 128 128" xml:space="preserve" width="150" height="150"><path style="fill:#191919" d="M19.133.002A4.188 4.188 0 0 0 16.219 1.2a4.12 4.12 0 0 0-1.207 2.89v119.822c0 1.07.444 2.134 1.207 2.89A4.188 4.188 0 0 0 19.133 128h89.734a4.188 4.188 0 0 0 2.914-1.198 4.12 4.12 0 0 0 1.207-2.89V30.947c-.117-1.197-.552-2.405-1.271-3.114L83.643 1.135a4.183 4.183 0 0 0-2.76-1.126C60.323-.006 39.711.002 19.133.002zm4.121 8.176h53.418v22.61c0 1.07.444 2.134 1.207 2.89a4.188 4.188 0 0 0 2.914 1.198h23.953v84.949H23.254V8.178zm61.66 5.66L98.444 26.7h-13.53V13.838zm13.513 82.791h-64.92V55.317h64.92v41.312zm-39.345-5.901h33.444v-5.902H59.082v5.902zm-19.673 0H53.18v-5.902H39.409v5.902zm19.673-11.804h33.444v-5.902H59.082v5.902zm-19.673 0H53.18v-5.902H39.409v5.902zM59.082 67.12h33.444v-5.902H59.082v5.902zm-19.673 0H53.18v-5.902H39.409v5.902z"/></svg>
+                    <div class="feature-content">
+                        <h1>Performance Sheets</h1>
+                        <ul>
+                            <li>Tabularize CodeChef performance with organised tables.</li>
+                            <li>Includes Rating, Rankings, Problems Solved, Plagarisms.</li>
+                            <li>Faculty dashboard for monitoring all students ratings.</li>
+                            <li>Interactive, responsive, and downloadable datasheets.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" xml:space="preserve" width="200" height="200"><switch><g><path fill="#4EA4DB" d="M855.7 712.7V234.9c0-14.1-11.4-25.6-25.6-25.6H169.9c-14.1 0-25.6 11.4-25.6 25.6v477.8c0 14.1 11.4 25.6 25.6 25.6h255.5V790c0 14.1-11.4 25.6-25.6 25.6h-70.7c-14.1 0-25.6 11.4-25.6 25.6v29.4H696.4v-29.4c0-14.1-11.4-25.6-25.6-25.6h-70.7c-14.1 0-25.6-11.4-25.6-25.6v-51.8H830c14.3.1 25.7-11.4 25.7-25.5z"/><path fill="#FFF" d="M830.1 209.3H169.9c-14.1 0-25.5 11.4-25.6 25.5h711.4c0-14.1-11.5-25.5-25.6-25.5zM185.5 651.7h628.9v25.5H185.5zM307.8 815.2h384.3v25.5H307.8z"/><path fill="#FFF" d="M196 261.9h608.1v389.9H196z"/><path fill="#122436" d="M706.4 880.5H293.6v-39.4c0-19.6 15.9-35.6 35.6-35.6h70.6c8.6 0 15.6-7 15.6-15.6v-41.8H169.9c-19.6 0-35.6-15.9-35.6-35.6V234.9c0-19.6 15.9-35.6 35.6-35.6h660.3c19.6 0 35.6 15.9 35.6 35.6v477.8c0 19.6-15.9 35.6-35.6 35.6H584.7V790c0 8.6 7 15.6 15.6 15.6H671c19.6 0 35.6 15.9 35.6 35.6v39.3zm-392.8-20h372.8v-19.4c0-8.6-7-15.6-15.6-15.6h-70.7c-19.6 0-35.6-15.9-35.6-35.6v-61.8H830c8.6 0 15.6-7 15.6-15.6V234.9c0-8.6-7-15.6-15.6-15.6H169.9c-8.6 0-15.6 7-15.6 15.6v477.8c0 8.6 7 15.6 15.6 15.6h265.5V790c0 19.6-15.9 35.6-35.6 35.6h-70.6c-8.6 0-15.6 7-15.6 15.6v19.3z"/><circle fill="#FFF" cx="463.2" cy="709.4" r="11"/><circle fill="#FFF" cx="500" cy="709.4" r="11"/><circle fill="#FFF" cx="536.8" cy="709.4" r="11"/><path fill="#122436" d="M814 661.7H186V251.9h628v409.8zm-608-20h588V271.9H206v369.8z"/><path fill="#FFCD35" d="M244.7 304.1h507v69h-507zM244.7 420.7h116.1v185.7H244.7zM635.6 420.7h116.1v185.7H635.6zM403.8 420.7h185.7v185.7H403.8z"/><path fill="#FFCD35" d="M244.7 304.1h507v69h-507zM244.7 420.7h116.1v185.7H244.7zM635.6 420.7h116.1v185.7H635.6zM403.8 420.7h185.7v185.7H403.8z"/><path fill="#122436" d="M437.1 458.1h119.1v20H437.1z"/><g><path fill="#122436" d="M437.1 503.6h119.1v20H437.1z"/></g><g><path fill="#122436" d="M437.1 549.1h119.1v20H437.1z"/></g><g><path fill="#122436" d="M660.4 458.1h67.9v20h-67.9z"/></g><g><path fill="#122436" d="M660.4 503.6h67.9v20h-67.9z"/></g><g><path fill="#122436" d="M660.4 549.1h67.9v20h-67.9z"/></g><g><path fill="#122436" d="M268.8 458.1h67.9v20h-67.9z"/></g><g><path fill="#122436" d="M268.8 503.6h67.9v20h-67.9z"/></g><g><path fill="#122436" d="M268.8 549.1h67.9v20h-67.9z"/></g><g><path fill="#FFF" d="m486.3 476.5-134 45.8 45.8-134 257.1-257.1c40.2 16.2 72 48 88.2 88.2L486.3 476.5z"/><path fill="#FFCD35" d="M678.1 142.7 419.1 403l26.8 23.4 267.8-263zM463.6 445.6l260.1-261.4 19.7 35.2-254.2 254.2zM387.4 473.6l24 24-37.8 16z"/><path fill="#122436" d="m336.2 538.4 53.2-155.5 1.6-1.6 261.8-261.8 6.1 2.5c42.5 17.1 76.6 51.3 93.7 93.7l2.5 6.1-263.4 263.4-155.5 53.2zm70.6-144.6-38.5 112.6 112.6-38.5 250.7-250.7c-14.9-32.7-41.4-59.2-74.1-74.1L406.8 393.8z"/><path fill="#122436" d="M477.8 481.9c-21.6-34.1-51-63.5-85.1-85.1l10.7-16.9c36.6 23.2 68.1 54.7 91.3 91.3l-16.9 10.7zM366.518 466.942 380.66 452.8l42.284 42.285-14.142 14.142z"/><path fill="#122436" d="M444.968 415.442 701.15 159.26l14.142 14.142L459.11 429.584z"/></g></g></switch></svg>
+                    <div class="feature-content">
+                        <h1>Resource-Rich Blogs</h1>
+                        <ul>
+                            <li>Seniors share resources with juniors.</li>
+                            <li>Create and share educational blogs.</li>
+                            <li>Learn trending tech stacks.</li>
+                            <li>Get doubts cleared via community chat.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="150" height=" 150"><g data-name="29-Up"><path style="fill:#ff6d04" d="m63 25-3 3-4-4-22 22-12-12L1 57v-6l21-23 12 12 21.97-22.03L63 25z"/><path style="fill:#fd9c04" d="m51.03 13.03-2.5 2.5L43 10l2-3 6.03 6.03z"/><path style="fill:#fab503" d="m48.53 15.53 2.5-2.5L45 7h18v18l-7.03-7.03L34 40 22 28 1 51V40l21-22 12.08 11.97 14.45-14.44z"/><path style="fill:#d65106" d="M22 28v6l12 12v-6L22 28z"/><path style="fill:#fa5f07" d="M1 51v6l21-23v-6L1 51z"/><path style="fill:#ff6d04" d="M55.97 17.97 34 40v6l22-22v-6l-.03-.03z"/><path style="fill:#fa5f07" d="M56 18v6l4 4 3-3-7-7z"/><path d="M51.03 13.03 45 7l-.8 1.2 3.093 3.093a1 1 0 0 1 0 1.414l-.793.793 2.03 2.03z" style="fill:#ed9204"/><path style="fill:#fd9c04" d="M22 18v10l12 12V29.891L22 18z"/><path d="M45.334 23.377 57 11a2.584 2.584 0 0 0 .373-4H45l6.03 6.03-2.5 2.5-6.666 6.661a2.009 2.009 0 0 0 3.47 1.186z" style="fill:#ffdb02"/><path style="fill:none;stroke:#000;stroke-linejoin:round;stroke-width:2px" d="M7 33.714 5.773 35M4 36.857 1 40v11l21-23 12 12 21.975-22.025L63 25V7H45l6.025 6.025L34.081 29.97 22 18 8.636 32"/><path style="fill:none;stroke:#000;stroke-linejoin:round;stroke-width:2px" d="m53 27 3-3 4 4 3-3M1 51v6l21-23 12 12 17-17M45 7l-2 3 4 4"/></g></svg>
+                    <div class="feature-content">
+                        <h1>Upskilling sessions</h1>
+                        <ul>
+                            <li>Video solutions after every contest.</li>
+                            <li>Detailed explanation of all contest problems.</li>
+                            <li>Filter and practice questions based on the topic.</li>
+                            <li>Get doubts cleared via community chat.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="three">
+        <h1>More features comming soon... </h1>
+    </section>
+</div>
+
+<script>
+    window.onload = function() {
+        var shadowRoot = document.querySelector('spline-viewer').shadowRoot;
+        shadowRoot.querySelector('#logo').remove();
+    }
+</script>
+
+{% endblock %}
