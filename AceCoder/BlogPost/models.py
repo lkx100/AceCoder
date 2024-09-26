@@ -37,11 +37,18 @@ class Post(models.Model):
         ('1', 'Published'),
     )
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, null=True, default='0')
+    likes = models.ManyToManyField(User, related_name="post_likes")
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+    def total_likes(self):
+        return self.likes.count()
+    
+    def has_user_liked(self, user):
+        return self.likes.filter(id=user.id).exists()
 
     def get_markdown(self):
 
