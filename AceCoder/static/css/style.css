@@ -258,8 +258,8 @@ ul.no-marker {
     }
     
     .display-tag {
-      color: black;
-      background-color: white;
+      color: white;
+      /* background-color: white; */
       border-radius: 5px;
       padding-left: 5px;
       padding-right: 5px;

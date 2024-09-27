@@ -1,14 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}
+AceCoder - Home
+{% endblock %}
+
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
 <div class="container-home">
     <section class="one">
-        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.27/build/spline-viewer.js"></script>
-        <spline-viewer class="background-viewer" loading-anim-type="spinner-small-dark" url="https://prod.spline.design/j97TA2-PhetiXL62/scene.splinecode"></spline-viewer>
+        <video id="background-viewer" class="background-viewers" autoplay muted loop>
+            <source src="{% static 'videos/AceCoder_bg.mp4' %}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
         <!-- Info Section -->
         <div id="info-section" class="section">
             <div class="container">
@@ -104,6 +110,15 @@
         var shadowRoot = document.querySelector('spline-viewer').shadowRoot;
         shadowRoot.querySelector('#logo').remove();
     }
+
+    // Smooth loop for the video
+    var video = document.getElementById('background-viewer');
+    video.addEventListener('timeupdate', function() {
+        if (video.currentTime >= video.duration - 0.5) {
+            video.currentTime = 0;
+            video.play();
+        }
+    });
 </script>
 
 {% endblock %}
