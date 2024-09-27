@@ -7,6 +7,7 @@ from .forms import PostForm
 from AceCoder.context_processors import add_is_admin
 from django.contrib.auth.decorators import login_required
 
+# All View Types
 def home(request):
     posts = Post.objects.all().filter(status='1')
     all_tags = Tag.objects.all()
@@ -30,6 +31,37 @@ def home(request):
 
     return render(request, 'post_list.html', context)
 
+def post_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    user_has_liked = post.has_user_liked(request.user)
+    soup = BeautifulSoup(str(post.get_markdown()[1]), 'html.parser')
+    links = soup.select('li > a')
+    href_list, text_list = [], []
+    
+    for link in links:
+        href_list.append(link.get('href'))
+        text_list.append(link.text)
+
+    toc_items = zip(href_list, text_list)
+
+    context = {
+        'post': post,
+        'toc_items': toc_items,
+        'user_has_liked': user_has_liked,
+    }
+    return render(request, 'post_detail.html', context)
+
+def posts_by_tag(request, slug):
+    all_tags = Tag.objects.all()
+    tag = get_object_or_404(Tag, slug=slug)
+    posts = Post.objects.filter(tags=tag).order_by('-created_on')
+    context = {
+        'tag': tag,
+        'posts': posts,
+        'all_tags': all_tags,
+    }
+    return render(request, 'post_list.html', context)
+
 def pending_posts(request, id=0):
     if id:
         post = Post.objects.get(id=id)
@@ -45,7 +77,6 @@ def pending_posts(request, id=0):
 
     return render(request, 'pending_posts.html', context)
 
-
 @login_required
 def my_posts(request):
     posts = Post.objects.filter(author=request.user)
@@ -58,17 +89,19 @@ def my_posts(request):
     }
     return render(request, 'post_list.html', context)
 
-def posts_by_tag(request, slug):
-    all_tags = Tag.objects.all()
-    tag = get_object_or_404(Tag, slug=slug)
-    posts = Post.objects.filter(tags=tag).order_by('-created_on')
-    context = {
-        'tag': tag,
-        'posts': posts,
-        'all_tags': all_tags,
-    }
-    return render(request, 'post_list.html', context)
+# Additional Features
+@login_required
+def like_post(request, id):
+    post = get_object_or_404(Post, id=id)
 
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+
+    return redirect('post_detail', slug=post.slug)
+
+# CRUD Operations
 @login_required
 def post_delete(request, id):
     post = get_object_or_404(Post, id=id)
@@ -125,21 +158,3 @@ def post_update(request, id):
         'form': form,
     }
     return render(request, 'post_update.html', context)
-
-def post_detail(request, slug):
-    post = get_object_or_404(Post, slug=slug)
-    soup = BeautifulSoup(str(post.get_markdown()[1]), 'html.parser')
-    links = soup.select('li > a')
-    href_list, text_list = [], []
-    
-    for link in links:
-        href_list.append(link.get('href'))
-        text_list.append(link.text)
-
-    toc_items = zip(href_list, text_list)
-
-    context = {
-        'post': post,
-        'toc_items': toc_items,
-    }
-    return render(request, 'post_detail.html', context)
