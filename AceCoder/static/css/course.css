@@ -1,0 +1,192 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-family: "Montserrat";
+  overflow: hidden; /* Prevent scrolling on the whole page */
+}
+body {
+  background-size: cover;
+  overflow: hidden; /* Prevent scrolling on the whole page */
+}
+.right-col {
+  margin-top: 75px;
+}
+.container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+}
+.timeline {
+  width: 80%;
+  height: auto;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+.timeline ul {
+  list-style: none;
+}
+.timeline ul li {
+    padding: 20px;
+    border-radius: 15px; /* Increased border-radius for better glass effect */
+    background: rgba(255, 255, 255, 0.05); /* Slightly more opaque background */
+    backdrop-filter: blur(10px); /* Increased blur for stronger glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-right-color: rgba(255, 255, 255, 0.1);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+.col-lg-6.col-sm-12 {
+  height: 100vh; /* Full viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+.timeline ul li:last-child {
+  margin-bottom: 0;
+}
+.timeline-content h1 {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+.timeline-content p {
+  font-size: 16px;
+  line-height: 30px;
+  font-weight: 300;
+}
+.timeline-content .number {
+  font-size: 12px;
+  font-weight: 300;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.right-col{
+    margin-top: 80px;
+    padding-left: 50px;;
+    text-align: start;
+    font-family: Georgia, serif;
+}
+
+.timeline ul li .hidden-content {
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+    .right-col{
+        display: none;
+    }
+}
+@media only screen and (min-width: 768px) {
+
+  .timeline:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background-color: gray;
+  }
+  .timeline ul li {
+    width: 50%;
+    position: relative;
+    margin-bottom: 50px;
+  }
+  .timeline ul li .hidden-content {
+    display: none;
+  }
+  .timeline ul li:nth-child(odd) {
+    float: left;
+    clear: right;
+    transform: translateX(-30px);
+    border-radius: 20px 0px 20px 20px;
+  }
+  .timeline ul li:nth-child(even) {
+    float: right;
+    clear: left;
+    transform: translateX(0px);
+    border-radius: 0px 20px 20px 20px;
+  }
+  .timeline ul li::before {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: gray;
+    top: 0px;
+  }
+  .timeline ul li:nth-child(odd)::before {
+    transform: translate(50%, -50%);
+    right: -15px;
+  }
+  .timeline ul li:nth-child(even)::before {
+    transform: translate(-50%, -50%);
+    left: -15px;
+  }
+  .timeline-content .date {
+    position: absolute;
+    top: -30px;
+  }
+  .timeline ul li:hover::before {
+    background-color: aqua;
+  }
+  @keyframes appear {
+      from {
+          opacity: 0;
+          scale: 0.8;
+      }
+      to {
+          opacity: 1;
+          scale: 1;
+      }
+  }
+
+  .block{
+    animation: appear linear ;
+    animation-timeline: view();
+    animation-range: entry 0 cover 30%;
+  }
+  @keyframes slideInFromLeft {
+        from {
+            transform: translateY(10%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOutFromLeft {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(10%);
+            opacity: 0;
+        }
+    }
+
+    .right-col-animation {
+        animation: slideInFromLeft 0.8s ease-out;
+    }
+
+    .right-col-slide-out {
+        animation: slideOutFromLeft 0.8s ease-out;
+        opacity: 0;
+    }
+}

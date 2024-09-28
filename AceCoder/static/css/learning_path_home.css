@@ -1,0 +1,91 @@
+.main-container {
+    margin-top: 80px;
+}
+
+.glass-box-container {
+    display: flex;
+    justify-content: center;
+}
+
+.glassBox {
+    display: flex;
+    width: 95%; /* Ensure the glass box takes up the full width */
+    margin: 20px 0; /* Add some vertical margin */
+    padding: 20px; /* Add padding inside the glass box */
+    background: rgba(255, 255, 255, 0.1); /* Add a glass-like background */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    -webkit-backdrop-filter: blur(10px); /* Apply blur effect for Safari */
+    border: 1px solid rgba(255, 255, 255, 0.18); /* Add a subtle border */
+    border-radius: 20px; /* Add rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.glassBox__imgBox {
+    flex: 1; /* Allow the image box to take up equal space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glassBox__imgBox img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px; /* Add rounded corners to the image */
+}
+
+.glassBox__content {
+    flex: 2; /* Allow the content to take up more space */
+    padding: 20px;
+    color: #FFF;
+    font-size: 14px;
+    letter-spacing: .1em;
+}
+
+.glassBox__content h1 {
+    font-size: 24px;
+}
+
+.glassBox__title {
+    text-align: start;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #FFF;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-footer {
+    text-align: center;
+    margin-top: 10px;
+    color: #FFF;
+}
+
+/* Media query for mobile screens */
+@media (max-width: 768px) {
+    .glassBox {
+        flex-direction: column; /* Stack the image and content vertically */
+        padding: 10px; /* Adjust padding for mobile screens */
+    }
+
+    .glassBox__imgBox {
+        margin-bottom: 10px; /* Add some space between the image and content */
+    }
+
+    .glassBox__imgBox img {
+        border-radius: 20px; /* Ensure the image has rounded corners */
+    }
+
+    .glassBox__content {
+        padding: 10px; /* Adjust padding for mobile screens */
+    }
+
+    .glassBox__title {
+        font-size: 16px; /* Adjust font size for mobile screens */
+    }
+
+    .card-footer {
+        margin-top: 5px; /* Adjust margin for mobile screens */
+    }
+}

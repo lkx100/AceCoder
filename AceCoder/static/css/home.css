@@ -117,3 +117,29 @@ h1,h2,h3  {
         display: none; /* Hide SVG in mobile view */
     }
 }
+
+.svg-container {
+    text-align: center; /* Center the SVG horizontally */
+    margin-top: 120px; /* Add some space above the SVG */
+}
+
+.svg-up {
+    margin-top: -10px; /* Adjust the value as needed */
+    display: block; /* Ensure the SVG is displayed as a block element */
+    margin-left: auto; /* Center the SVG horizontally */
+    margin-right: auto; /* Center the SVG horizontally */
+    opacity: 0.25;
+    animation: moveDown 2s infinite; /* Add animation */
+}
+
+@keyframes moveDown {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px); /* Move down by 10px */
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

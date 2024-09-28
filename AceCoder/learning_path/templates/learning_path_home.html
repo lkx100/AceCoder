@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+AceCoder - Learning Path
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static "css/learning_path_home.css" %}">
+<div class="main-container">
+    <center><h1>Learning Path</h1></center>
+    <hr>
+    {% for course in all_courses %}
+    <div class="glass-box-container">
+        <div class="glassBox">
+            <div class="glassBox__imgBox">
+                <img src="{{course.banner.url}}" alt="...">
+            </div>
+            <div class="glassBox__content">
+                <div class="glassBox__title">
+                    <h1>{{course.name}}</h1>
+                </div>
+                <hr>
+                <p>{{course.description}}</p>
+                <br>
+                <hr>
+                <div class="card-footer">
+                    <a class="btn btn-secondary" href="{% url "course" course.slug %}">Check Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

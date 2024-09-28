@@ -38,7 +38,8 @@ MY_APPS = [
     'upsolve',
     'graph',
     'BlogPost',
-    'markdownx'
+    'markdownx',
+    'learning_path',
 ]
 
 OAUTH_APPS = [

@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+AceCoder - Learning Path
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static "css/course.css" %}">
+<link rel="stylesheet" href="{% static "css/prism.css" %}">
+
+
+<div class="row">
+    <div class="col-lg-6 col-sm-0 right-col" id="summary">
+       
+    </div>
+    <div class="col-lg-6 col-sm-12">
+        <div class="container">
+            <div class="timeline">
+                <ul>
+                    {% for chapter in course_chapters %}
+                    <li class="block">
+                        <div class="timeline-content">
+                            <h3 class="number">Chapter {{forloop.counter}}</h3>
+                            <h1>{{chapter.name}}</h1>
+                            <p>{{chapter.description}}</p>
+                            <div class="hidden-content">
+                                {{chapter.get_markdown|safe}}
+                            </div>
+                            <button class="btn btn-secondary">-></button>
+                        </div>
+                    </li>
+                    {% endfor %}
+                    {% comment %} {% for chapter in course_chapters %}
+                    <li class="block">
+                        <div class="timeline-content">
+                            <h3 class="number">Chapter 1</h3>
+                            <h1>{{chapter.name}}</h1>
+                            <p>{{chapter.description}}</p>
+                            <div class="hidden-content">
+                                {{chapter.get_markdown|safe}}
+                            </div>
+                            <button class="btn btn-secondary">-></button>
+                        </div>
+                    </li>
+                    {% endfor %}
+                    {% for chapter in course_chapters %}
+                    <li class="block">
+                        <div class="timeline-content">
+                            <h3 class="number">Chapter 1</h3>
+                            <h1>{{chapter.name}}</h1>
+                            <p>{{chapter.description}}</p>
+                            <div class="hidden-content">
+                                {{chapter.get_markdown|safe}}
+                            </div>
+                            <button class="btn btn-secondary">-></button>
+                        </div>
+                    </li>
+                    {% endfor %} {% endcomment %}
+                </ul>
+            </div>
+        </div>
+    </div>  
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const timelineContents = document.querySelectorAll(".timeline-content");
+    const summaryElement = document.getElementById("summary");
+    const rightCol = document.querySelector('.right-col');
+
+    timelineContents.forEach(content => {
+        content.addEventListener("mouseover", function() {
+            const summaryTextTitle = this.querySelector("h1").innerText;
+            const summaryTextContent = this.querySelector("p").innerText;
+            const summaryTextHiddenContent = this.querySelector(".hidden-content").innerHTML;
+            summaryElement.innerHTML = `
+                <center><h1>${summaryTextTitle}\n</h1></center>
+                <center><p>${summaryTextContent}</p></center>
+                <hr>
+                ${summaryTextHiddenContent}
+            `;
+
+            // Trigger the slide-in animation
+            rightCol.classList.remove('right-col-slide-out');
+            void rightCol.offsetWidth; // Trigger reflow to restart the animation
+            rightCol.classList.add('right-col-animation');
+        });
+
+        content.addEventListener("mouseout", function() {
+            //summaryElement.innerText = "Summary";
+
+            // Trigger the slide-out animation
+            rightCol.classList.remove('right-col-animation');
+            void rightCol.offsetWidth; // Trigger reflow to restart the animation
+            rightCol.classList.add('right-col-slide-out');
+        });
+    });
+});
+</script>
+<script src="{% static "js/prism.js" %}"></script>
+
+{% endblock %}
