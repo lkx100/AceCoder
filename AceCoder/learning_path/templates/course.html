@@ -10,6 +10,8 @@ AceCoder - Learning Path
 <link rel="stylesheet" href="{% static "css/prism.css" %}">
 
 
+<center><h1 style="margin-top: 80px">{{course.name}}</h1></center>
+<hr>
 <div class="row">
     <div class="col-lg-6 col-sm-0 right-col" id="summary">
        
@@ -25,20 +27,20 @@ AceCoder - Learning Path
                             <h1>{{chapter.name}}</h1>
                             <p>{{chapter.description}}</p>
                             <div class="hidden-content">
-                                {{chapter.get_markdown|safe}}
+                                {{chapter.get_markdown.2|safe}}...
                             </div>
-                            <button class="btn btn-secondary">-></button>
+                            <a href="{% url "chapter" chapter.slug %}" class="btn btn-secondary">Check Out</a>
                         </div>
                     </li>
                     {% endfor %}
-                    {% comment %} {% for chapter in course_chapters %}
+                    {% for chapter in course_chapters %}
                     <li class="block">
                         <div class="timeline-content">
-                            <h3 class="number">Chapter 1</h3>
+                            <h3 class="number">Chapter {{forloop.counter}}</h3>
                             <h1>{{chapter.name}}</h1>
                             <p>{{chapter.description}}</p>
                             <div class="hidden-content">
-                                {{chapter.get_markdown|safe}}
+                                {{chapter.get_markdown.2 |safe}}...
                             </div>
                             <button class="btn btn-secondary">-></button>
                         </div>
@@ -47,16 +49,16 @@ AceCoder - Learning Path
                     {% for chapter in course_chapters %}
                     <li class="block">
                         <div class="timeline-content">
-                            <h3 class="number">Chapter 1</h3>
+                            <h3 class="number">Chapter {{forloop.counter}}</h3>
                             <h1>{{chapter.name}}</h1>
                             <p>{{chapter.description}}</p>
                             <div class="hidden-content">
-                                {{chapter.get_markdown|safe}}
+                                {{chapter.get_markdown.2|safe}}...
                             </div>
                             <button class="btn btn-secondary">-></button>
                         </div>
                     </li>
-                    {% endfor %} {% endcomment %}
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -64,39 +66,50 @@ AceCoder - Learning Path
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const timelineContents = document.querySelectorAll(".timeline-content");
-    const summaryElement = document.getElementById("summary");
-    const rightCol = document.querySelector('.right-col');
-
-    timelineContents.forEach(content => {
-        content.addEventListener("mouseover", function() {
-            const summaryTextTitle = this.querySelector("h1").innerText;
-            const summaryTextContent = this.querySelector("p").innerText;
-            const summaryTextHiddenContent = this.querySelector(".hidden-content").innerHTML;
-            summaryElement.innerHTML = `
-                <center><h1>${summaryTextTitle}\n</h1></center>
-                <center><p>${summaryTextContent}</p></center>
-                <hr>
-                ${summaryTextHiddenContent}
-            `;
-
-            // Trigger the slide-in animation
-            rightCol.classList.remove('right-col-slide-out');
-            void rightCol.offsetWidth; // Trigger reflow to restart the animation
-            rightCol.classList.add('right-col-animation');
-        });
-
-        content.addEventListener("mouseout", function() {
-            //summaryElement.innerText = "Summary";
-
-            // Trigger the slide-out animation
-            rightCol.classList.remove('right-col-animation');
-            void rightCol.offsetWidth; // Trigger reflow to restart the animation
-            rightCol.classList.add('right-col-slide-out');
+    document.addEventListener("DOMContentLoaded", function() {
+        const blocks = document.querySelectorAll(".block");
+        const summaryElement = document.getElementById("summary");
+        const rightCol = document.querySelector('.right-col');
+        let isAnimating = false; // Flag to track animation state
+    
+        blocks.forEach(block => {
+            block.addEventListener("mouseover", function() {
+                if (isAnimating) return; // Exit if an animation is already in progress
+    
+                isAnimating = true; // Set the flag to indicate animation is in progress
+    
+                const summaryTextTitle = this.querySelector(".timeline-content h1").innerText;
+                const summaryTextContent = this.querySelector(".timeline-content p").innerText;
+                const summaryTextHiddenContent = this.querySelector(".timeline-content .hidden-content").innerHTML;
+                summaryElement.innerHTML = `
+                    <center><h1>${summaryTextTitle}\n</h1></center>
+                    <center><p>${summaryTextContent}</p></center>
+                    <hr>
+                    ${summaryTextHiddenContent}
+                `;
+    
+                // Trigger the slide-in animation only if not already animating
+                if (!rightCol.classList.contains('right-col-animation')) {
+                    rightCol.classList.remove('right-col-slide-out');
+                    void rightCol.offsetWidth; // Trigger reflow to restart the animation
+                    rightCol.classList.add('right-col-animation');
+                }
+    
+                // Listen for the end of the animation to reset the flag
+                rightCol.addEventListener('animationend', function() {
+                    isAnimating = false; // Reset the flag when the animation ends
+                }, { once: true });
+            });
+    
+            block.addEventListener("mouseout", function() {
+                // Trigger the slide-out animation
+                rightCol.classList.remove('right-col-animation');
+                void rightCol.offsetWidth; // Trigger reflow to restart the animation
+                rightCol.classList.add('right-col-slide-out');
+                isAnimating = false;
+            });
         });
     });
-});
 </script>
 <script src="{% static "js/prism.js" %}"></script>
 

@@ -12,6 +12,7 @@ section {
     align-items: center;
     scroll-snap-align: start;
     margin: 0;
+    overflow-x: hidden;
 }
 .one {
     z-index: 1;
@@ -79,8 +80,11 @@ h1,h2,h3  {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.18); /* Border between features */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);/*  Border between features */
+    border-left: 1px solid rgba(255, 255, 255, 0.18);/*  Border between features */
+    border-top: 1px solid rgba(255, 255, 255, 0.18);/*  Border between features */
     overflow: hidden; /* Prevent overflow within the columns */
+    margin-right: 0;
 }
 .two-container h1 {
     color: black;
@@ -141,5 +145,141 @@ h1,h2,h3  {
     }
     100% {
         transform: translateY(0);
+    }
+}
+
+.three {
+    position: relative;
+}
+
+.top-scroll {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Ensure it stretches the full width of the section */
+    /* background-color: white; Optional: Add a background color */
+    text-align: center; /* Optional: Center the text */
+    padding: 10px; /* Optional: Add some padding */
+    margin-top: 75px;
+}
+
+.bottom-scroll {
+    position: absolute;
+    top: 80vh;
+    left: 0;
+    width: 100%; /* Ensure it stretches the full width of the section */
+    /* background-color: white; Optional: Add a background color */
+    text-align: center; /* Optional: Center the text */
+    padding: 10px; /* Optional: Add some padding */
+    margin-top: 75px;
+}
+
+.marquee {
+    margin: 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+  }
+  
+.top-scroll .marquee div {
+display: inline-block;
+padding-left: 100%;
+animation: marquee 160s linear infinite;
+}
+
+.bottom-scroll .marquee div {
+display: inline-block;
+padding-left: 100%;
+animation: reverse_marquee 160s linear infinite;
+}
+
+.marquee2 div {
+animation-delay: 7.5s;
+}
+
+@keyframes marquee {
+0% {
+    transform: translate(0, 0);
+}
+100% {
+    transform: translate(-100%, 0);
+}
+}
+
+@keyframes reverse_marquee {
+0% {
+    transform: translate(-100%, 0);
+}
+100% {
+    transform: translate(0, 0);
+}
+}
+
+.table-div {
+    width: 100%;
+    overflow-x: auto; /* Add horizontal overflow */
+    margin: 20px 0; /* Add margin for spacing */
+    padding: 10px; /* Add padding to prevent overlap */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.table-div table {
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom: 1px solid #2595be; /* Add border to the table */
+}
+
+.table-div td {
+    padding: 8px 10px; /* Decrease padding to reduce cell height */
+    text-align: left;
+    border: 1px solid black; /* Add border to table cells */
+}
+
+.table-div th {
+    padding: 8px 10px; /* Decrease padding to reduce cell height */
+    text-align: left;
+    background-color: #2595be84;
+    border-bottom: 2px solid #2595be; /* Add a thicker border to the header */
+}
+
+.table-div td {
+    background: rgba(255, 255, 255, 0.1); /* Light background with transparency */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    backdrop-filter: blur(10px); /* Blur effect */
+    -webkit-backdrop-filter: blur(10px); /* Blur effect for Safari */
+    border: 1px solid rgba(255, 255, 255, 0.18); /* Light border */
+}
+
+@media (max-width: 768px) {
+    .table-div {
+        padding: 10px; /* Ensure padding is applied in mobile view */
+    }
+
+    .table-div table, .table-div th, .table-div td {
+        display: table-cell; /* Change display to table-cell */
+        width: auto; /* Reset width */
+    }
+
+    .table-div th, .table-div td {
+        padding: 8px 10px; /* Ensure padding is consistent */
+        text-align: left; /* Ensure text alignment is consistent */
+        line-height: 1.2; /* Adjust line-height to reduce cell height */
+    }
+
+    .table-div th {
+        position: relative; /* Reset position */
+        top: auto; /* Reset top */
+        left: auto; /* Reset left */
+    }
+
+    .table-div td {
+        position: relative; /* Reset position */
+        padding-left: 8px; /* Reset padding */
+        text-align: left; /* Reset text alignment */
+    }
+
+    .table-div td:before {
+        content: none; /* Remove pseudo-element */
     }
 }

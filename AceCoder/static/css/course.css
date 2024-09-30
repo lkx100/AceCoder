@@ -154,10 +154,27 @@ body {
       }
   }
 
+  @keyframes disappear {
+      from {
+          opacity: 1;
+          scale: 1;
+      }
+      to {
+          opacity: 0;
+          scale: 0.5;
+      }
+  }
+
   .block{
     animation: appear linear ;
     animation-timeline: view();
-    animation-range: entry 0 cover 30%;
+    animation-range: entry 0 cover 50%;
+  }
+
+  .block:after {
+    animation: disappear linear;
+    animation-timeline: view();
+    animation-range: exit 0 cover 50%;
   }
   @keyframes slideInFromLeft {
         from {

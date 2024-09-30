@@ -109,7 +109,60 @@ AceCoder - Home
         </div>
     </section>
     <section class="three">
-        <h1>More features comming soon... </h1>
+        {% comment %} Top Scroll  {% endcomment %}
+        <div class="top-scroll">
+            <h1 class="marquee">
+                <div>
+                    {% for text in leaderboard_text %}
+                    {{text}} - <span style="color: black">{{text}} - </span>
+                    {% endfor %}
+                </div>
+            </h1>
+        </div>
+
+        <div class="table-div">
+            <table>
+                <tr>
+                    <th>College Rank</th>
+                    <th>Roll No</th>
+                    <th>Student</th>
+                    <th>Codechef Id</th>
+                    <th>Last Contest</th>
+                    <th>Rating</th>
+                    <th>Rank</th>
+                    <th>Stars</th>
+                    <th>Problems Solved</th>
+                    <th>Contests Participated</th>
+                    <th>Plagarisms</th>
+                </tr>
+                {% for student in details|slice:":10" %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{student.student.roll_no}}</td>
+                    <td>{{student.student.name}}</td>
+                    <td>{{student.student.codechef_id}}</td>
+                    <td>{{student.last_contest}}</td>
+                    <td>{{student.latest_rating}}</td>
+                    <td>{{student.latest_rank}}</td>
+                    <td>{{student.stars}}</td>
+                    <td>{{student.no_of_problems}}</td>
+                    <td>{{student.no_of_contests}}</td>
+                    <td>{{student.plagarisms}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        {% comment %} Bottom Scroll  {% endcomment %}
+        <div class="bottom-scroll">
+            <h1 class="marquee">
+                <div>
+                {% for text in leaderboard_text %}
+                {{text}} - <span style="color: #2596be">{{text}} - </span>
+                {% endfor %}
+                </div>
+            </h1>
+        </div>
     </section>
 </div>
 
