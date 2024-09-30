@@ -109,11 +109,11 @@
         <script src="{% static 'js/script.js' %}"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-                console.log("DOM fully loaded and parsed in blogpost_base.html");
+                console.log("DOM is fully loaded");
                 document.getElementById("spinner").style.display = "none";
             });
             window.addEventListener("beforeunload", function() {
-                console.log("Page is unloading in blogpost_base.html");
+                console.log("Page is unloading");
                 document.getElementById("spinner").style.display = "flex";
             });
         </script>

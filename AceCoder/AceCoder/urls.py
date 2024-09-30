@@ -27,6 +27,7 @@ urlpatterns = [
     path('accounts/', include("allauth.urls")),
     path('graph/', include("graph.urls")),
     path('blogpost/', include("BlogPost.urls")),
+    path('discuss/', include("discuss.urls")),
     path('', include("users.urls"))
     
 

@@ -1,0 +1,74 @@
+{% extends "discuss_base.html" %}
+
+{% block title %}
+    All Discussions
+{% endblock %}
+
+{% block left_sidebar %}
+    <div class="left-sidebar-container d-none d-lg-block">
+        <center><h3 style='font-weight: bold; padding-left: 50px'> Categories </h3> <br></center>
+        <ul class='right-bar'>
+            <a href="{% url "discussion_home" %}"> <li><button class="btn btn-light" style="width: 180px;padding-left: 0px">All</button></li></a>
+            {% for category in all_categorys %}
+                {% if category.slug %}
+                    <a href="{% url "categorys_by_name" slug=category.slug %}">
+                        <li><button {% if forloop.counter|divisibleby:2 %} class="btn btn-light" {% else %} class="btn btn-secondary" {% endif %} style="width: 180px;padding-left: 0px">{{ category.name }}</button></li>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="resource_home_main_content">
+
+        <h1 style="text-align: center"> 
+            {% if name %}
+                {{ name }}
+            {% else %}
+                All Discussions
+            {% endif %}    
+        </h1> <br> <hr>
+        {% if discussions %}
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 55%">Topic</th>
+                        {% if not name %}
+                            <th> Category </th>
+                        {% endif %}
+                        <th scope="col">Author</th>
+                        <th scope="col">Replies</th>
+                        <th scope="col">Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for discussion in discussions %}
+                    <tr>
+                        <td>
+                            <div style="padding-bottom: 5px; font-weight: bold;">
+                                <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{% url "discussion_detail" slug_title=discussion.slug %}" >{{ discussion.title }}</a>
+                            </div>
+                            <div style="padding-top: 5px;">{{ discussion.content }}</div>
+                        </td>
+                        {% if not name %}
+                            <td> {{ discussion.category }} </td>
+                        {% endif %}
+                        <td> {{ discussion.user.username }} </td>
+                        <td> {{ discussion.comment_count }} </td>
+                        <td> {{ discussion.created_at }} </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        {% else %}
+            <h3>No discussions found for {{name}}</h3>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

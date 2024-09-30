@@ -1,0 +1,49 @@
+{% extends "discuss_base.html" %}
+
+{% block left_sidebar %}
+    <div class="left-sidebar-container d-none d-lg-block">
+        <center><h3 style='font-weight: bold; padding-left: 50px'> Categories </h3> <br></center>
+        <ul class='right-bar'>
+            <a href="{% url "discussion_home" %}"> <li><button class="btn btn-light" style="width: 180px;padding-left: 0px">All</button></li></a>
+            {% for category in all_categorys %}
+                {% if category.slug %}
+                    <a href="{% url "categorys_by_name" slug=category.slug %}">
+                        <li><button {% if forloop.counter|divisibleby:2 %} class="btn btn-light" {% else %} class="btn btn-secondary" {% endif %} style="width: 180px;padding-left: 0px">{{ category.name }}</button></li>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="resource_home_main_content">
+
+        <h1 style="font-weight: 500; font-size: 35px;">{{ discussion.title }}</h1>
+        <p style="font-weight: 200; font-size: 20px;">{{ discussion.content }}</p>
+        <hr> <br>
+        <h2>Comments</h2>
+        <div id="comments">
+            {% for comment in comments %}
+                {% include 'comment_thread.html' with comment=comment comment_depth=0 %}
+            {% endfor %}
+        </div>
+
+        <br> <hr> <br>
+
+        <!-- Comment form for new comments -->
+        <h3>Add a Comment</h3>
+        {% if user.is_authenticated %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Post Comment</button>
+            </form>
+        {% else %}
+            <p><a href="{% url 'login' %}">Log in</a> to post a comment.</p>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
