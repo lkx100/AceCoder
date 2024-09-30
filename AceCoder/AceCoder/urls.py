@@ -28,6 +28,7 @@ urlpatterns = [
     path('graph/', include("graph.urls")),
     path('blogpost/', include("BlogPost.urls")),
     path('learning_path/', include("learning_path.urls")),
+    path('discuss/', include("discuss.urls")),
     path('', include("users.urls"))
     
 

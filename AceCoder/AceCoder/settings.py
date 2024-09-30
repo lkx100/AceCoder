@@ -40,6 +40,7 @@ MY_APPS = [
     'BlogPost',
     'markdownx',
     'learning_path',
+    'discuss',
 ]
 
 OAUTH_APPS = [

@@ -1,0 +1,22 @@
+{% block content %}
+
+<div class="comment" style="margin-left: {{ comment_depth }}em;">
+    <p>({{comment.user.username}}) - {{ comment.content }}</p>
+
+    <!-- Form to reply to this comment -->
+    {% if user.is_authenticated %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="parent" value="{{ comment.id }}">
+            <button type="submit">Reply</button>
+        </form>
+    {% endif %}
+
+    <!-- Display replies recursively -->
+    {% for reply in comment.replies.all %}
+        {% include 'comment_thread.html' with comment=reply comment_depth=comment_depth|add:4 %}
+    {% endfor %}
+</div>
+
+{% endblock %}
