@@ -22,14 +22,14 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("dashboard.urls")),
-    path('markdownx/', include('markdownx.urls')),
     path('upsolve/', include("upsolve.urls")),
     path('accounts/', include("allauth.urls")),
     path('graph/', include("graph.urls")),
     path('blogpost/', include("BlogPost.urls")),
     path('learning_path/', include("learning_path.urls")),
     path('discuss/', include("discuss.urls")),
-    path('', include("users.urls"))
-    
+    path('', include("users.urls")),
+    path('markdownx/', include('markdownx.urls')),
+    path("ckeditor5/", include('django_ckeditor_5.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

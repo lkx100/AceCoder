@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
+from django_ckeditor_5.fields import CKEditor5Field
+from django_ckeditor_5.widgets import CKEditor5Widget
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -37,6 +39,7 @@ class Comment(models.Model):
     discussion = models.ForeignKey(Discussion, on_delete=models.CASCADE, related_name='comments')
     parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='replies', null=True, blank=True)
     content = models.CharField(max_length=1000)
+    # content = CKEditor5Field('Text', config_name='extends')
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

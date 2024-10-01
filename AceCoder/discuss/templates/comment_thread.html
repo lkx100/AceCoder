@@ -57,16 +57,22 @@
 <div class="comment-container">
     <div class="comment" style="margin-left: {{ comment_depth }}em;">
         {% comment %} <p>({{comment.user.username}}) - {{ comment.content }}</p> {% endcomment %}
-        <span style="font-weight: bold; color:#2595be; margin-bottom: 10px">{{comment.user.username}} </span><span style="margin-bottom: 10px">- {{ comment.content }}</span>
+        <span style="font-weight: bold; color:#2595be; margin-bottom: 10px">{{comment.user.username}} </span><span style="margin-bottom: 10px">- {{ comment.content|safe }}</span>
         <!-- Form to reply to this comment -->
         {% if user.is_authenticated %}
             <br>
-            <form method="POST" class="form-box">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="hidden" name="parent" value="{{ comment.id }}">
-                <button type="submit" class="btn btn-secondary btn-reply">Reply</button>
-            </form>
+            <button class="btn btn-secondary btn-reply" style="background-color: transparent; border: none; color: rgb(50, 119, 8);" onclick="showReplyForm({{ comment.id }})">
+                Reply
+            </button>
+            
+                <div id="reply-form-{{ comment.id }}" style="display: none;">
+                <form method="POST" class="form-box">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="hidden" name="parent" value="{{ comment.id }}">
+                    <button type="submit" class="btn btn-secondary btn-reply">Submit</button>
+                </form>
+            </div>
             <br>
         {% endif %}
         <!-- Display replies recursively -->
@@ -75,4 +81,16 @@
         {% endfor %}
     </div>
 </div>
+
+<script>
+function showReplyForm(commentId) {
+    var form = document.getElementById('reply-form-' + commentId);
+    if (form.style.display === 'none') {
+        form.style.display = 'block';
+    } else {
+        form.style.display = 'none';
+    }
+}
+</script>
+
 {% endblock %}

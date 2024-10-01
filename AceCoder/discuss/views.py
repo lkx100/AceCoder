@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Discussion, Category
+from .models import Discussion, Category, Comment
 from .forms import CommentForm, DiscussionForm
 from django.contrib.auth.decorators import login_required
 
@@ -26,6 +26,7 @@ def categorys_by_name(request, slug):
     }
     return render(request, 'discussion_list.html', context)
 
+@login_required
 def discussion_detail(request, slug_title):
     discussion = get_object_or_404(Discussion, slug=slug_title)
     comments = discussion.comments.filter(parent__isnull=True)  # Top-level comments
@@ -37,6 +38,9 @@ def discussion_detail(request, slug_title):
             comment = form.save(commit=False)
             comment.user = request.user
             comment.discussion = discussion
+            parent_id = request.POST.get('parent')
+            if parent_id:
+                comment.parent = Comment.objects.get(id=parent_id)
             comment.save()
             return redirect('discussion_detail', slug_title=discussion.slug)
     else:
