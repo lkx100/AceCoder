@@ -1,22 +1,78 @@
 {% block content %}
+<style>
+.comment-container {
+    position: relative;
+}
 
-<div class="comment" style="margin-left: {{ comment_depth }}em;">
-    <p>({{comment.user.username}}) - {{ comment.content }}</p>
+.comment-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background-color: #3b3b3b80;
+    margin-left: -1em; /* Adjust this value to align the line with the indentation */
+}
 
-    <!-- Form to reply to this comment -->
-    {% if user.is_authenticated %}
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="hidden" name="parent" value="{{ comment.id }}">
-            <button type="submit">Reply</button>
-        </form>
-    {% endif %}
+.msg {
+    padding: 10px;
+}
 
-    <!-- Display replies recursively -->
-    {% for reply in comment.replies.all %}
-        {% include 'comment_thread.html' with comment=reply comment_depth=comment_depth|add:4 %}
-    {% endfor %}
+.form-control.comment-content {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    resize: vertical; /* Allow vertical resizing */
+    margin-bottom: 10px;
+}
+
+.btn-reply {
+    height: 25px;
+    width: 50px;
+    font-size: 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-box {
+    {% comment %} border: 1px solid #2595be; {% endcomment %}
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: #3b3b3b80;
+}
+
+.form-box p {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+</style>
+
+<div class="comment-container">
+    <div class="comment" style="margin-left: {{ comment_depth }}em;">
+        {% comment %} <p>({{comment.user.username}}) - {{ comment.content }}</p> {% endcomment %}
+        <span style="font-weight: bold; color:#2595be; margin-bottom: 10px">{{comment.user.username}} </span><span style="margin-bottom: 10px">- {{ comment.content }}</span>
+        <!-- Form to reply to this comment -->
+        {% if user.is_authenticated %}
+            <br>
+            <form method="POST" class="form-box">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="hidden" name="parent" value="{{ comment.id }}">
+                <button type="submit" class="btn btn-secondary btn-reply">Reply</button>
+            </form>
+            <br>
+        {% endif %}
+        <!-- Display replies recursively -->
+        {% for reply in comment.replies.all %}
+            {% include 'comment_thread.html' with comment=reply comment_depth=4 %}
+        {% endfor %}
+    </div>
 </div>
-
 {% endblock %}

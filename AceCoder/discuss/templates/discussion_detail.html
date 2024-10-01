@@ -2,7 +2,7 @@
 
 {% block left_sidebar %}
     <div class="left-sidebar-container d-none d-lg-block">
-        <center><h3 style='font-weight: bold; padding-left: 50px'> Categories </h3> <br></center>
+        <center><h3 style='font-weight: bold; text-align: center'> Categories </h3> <br></center>
         <ul class='right-bar'>
             <a href="{% url "discussion_home" %}"> <li><button class="btn btn-light" style="width: 180px;padding-left: 0px">All</button></li></a>
             {% for category in all_categorys %}
@@ -18,31 +18,60 @@
 
 {% block content %}
 
+    <style>
+        .all-comments hr {
+            max-width: 50%;
+        }
+
+        .all-comments hr:last-child {
+            display: none;
+        }
+
+        .new-comment {
+            {% comment %} border: 1px solid #2595be; {% endcomment %}
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+            background-color: #3b3b3b80;
+        }
+        
+        .new-comment p {
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+
     <div class="resource_home_main_content">
 
-        <h1 style="font-weight: 500; font-size: 35px;">{{ discussion.title }}</h1>
+        <h1 style="font-weight: 600; font-size: 35px;">{{ discussion.title }}</h1>
         <p style="font-weight: 200; font-size: 20px;">{{ discussion.content }}</p>
         <hr> <br>
-        <h2>Comments</h2>
-        <div id="comments">
+        <h2 style="font-weight: 100px;">Comments</h2>
+        <hr style="max-width: 50%">
+        <div id="comments" class="all-comments">
             {% for comment in comments %}
                 {% include 'comment_thread.html' with comment=comment comment_depth=0 %}
+                <br><hr><br>
             {% endfor %}
         </div>
 
-        <br> <hr> <br>
+        <br><br>
 
-        <!-- Comment form for new comments -->
-        <h3>Add a Comment</h3>
-        {% if user.is_authenticated %}
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Post Comment</button>
-            </form>
-        {% else %}
-            <p><a href="{% url 'login' %}">Log in</a> to post a comment.</p>
-        {% endif %}
+
+        <div class="new-comment">
+            <!-- Comment form for new comments -->
+            <h3>Add a Comment</h3>
+            <hr style="max-width: 50%">
+            {% if user.is_authenticated %}
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Post Comment</button>
+                </form>
+            {% else %}
+                <p><a href="{% url 'login' %}">Log in</a> to post a comment.</p>
+            {% endif %}
+        </div>
 
     </div>
 
