@@ -2,6 +2,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # CRUD Operations
+    path('post/create/', views.post_create, name="post_create"),
+    path('post/<int:id>/delete/', views.post_delete, name="post_delete"),
+    path('post/<int:id>/update/', views.post_update, name="post_update"),
     
     # All View Types
     path('', views.home, name='post_list'),
@@ -13,8 +17,4 @@ urlpatterns = [
     # Additional Features
     path('like/<int:id>/', views.like_post, name="like_post"),
     
-    # CRUD Operations
-    path('post/create/', views.post_create, name="post_create"),
-    path('post/<int:id>/delete/', views.post_delete, name="post_delete"),
-    path('post/<int:id>/update/', views.post_update, name="post_update"),
 ]

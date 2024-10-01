@@ -133,14 +133,14 @@ def post_create(request):
         # )
     else:
         form = PostForm()
-    # users = User.objects.all()
-    # tags = Tag.objects.all()
-    context = {
-        # 'users': users,
-        # 'tags': tags,
-        'form': form,
-    }
-    return render(request, 'post_create.html', context)
+        # users = User.objects.all()
+        # tags = Tag.objects.all()
+        context = {
+            # 'users': users,
+            # 'tags': tags,
+            'form': form,
+        }
+        return render(request, 'post_create.html', context)
 
 @login_required
 def post_update(request, id):
