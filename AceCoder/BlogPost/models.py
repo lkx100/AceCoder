@@ -23,7 +23,7 @@ class Tag(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True)
-    description = models.CharField(max_length = 200)
+    description = models.TextField()
     tags = models.ManyToManyField(Tag)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     banner = models.ImageField(upload_to='post_banners/', blank=True, null=True)
