@@ -52,6 +52,46 @@
     font-weight: bold;
 }
 
+.form-box input[type="text"],
+.form-box input[type="email"],
+.form-box input[type="password"],
+.form-box textarea,
+.form-box select {
+    width: 100%; /* Increase the width to 100% */
+    max-width: 100%; /* Ensure it doesn't exceed the container width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.slide-down {
+    animation: slideDown 0.5s ease-out forwards;
+}
+
+.slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+    to {
+        max-height: 500px; /* Adjust as needed */
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        max-height: 500px; /* Adjust as needed */
+        opacity: 1;
+    }
+    to {
+        max-height: 0;
+        opacity: 0;
+    }
+}
+
 </style>
 
 <div class="comment-container">
@@ -61,7 +101,7 @@
         <!-- Form to reply to this comment -->
         {% if user.is_authenticated %}
             <br>
-            <button class="btn btn-secondary btn-reply" style="background-color: transparent; border: none; color: rgb(50, 119, 8);" onclick="showReplyForm({{ comment.id }})">
+            <button class="btn btn-dark btn-reply" style="background-color: transparent; border: none; color: white;" onclick="showReplyForm({{ comment.id }})">
                 Reply
             </button>
             
@@ -87,8 +127,14 @@ function showReplyForm(commentId) {
     var form = document.getElementById('reply-form-' + commentId);
     if (form.style.display === 'none') {
         form.style.display = 'block';
+        form.classList.remove('slide-up');
+        form.classList.add('slide-down');
     } else {
-        form.style.display = 'none';
+        form.classList.remove('slide-down');
+        form.classList.add('slide-up');
+        setTimeout(function() {
+            form.style.display = 'none';
+        }, 500);
     }
 }
 </script>

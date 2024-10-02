@@ -44,6 +44,16 @@
             font-size: 14px;
             font-weight: bold;
         }
+
+        .new-comment input[type="text"],
+        .new-comment input[type="email"],
+        .new-comment input[type="password"],
+        .new-comment textarea,
+        .new-comment select {
+            width: 100%; /* Increase the width to 100% */
+            max-width: 100%; /* Ensure it doesn't exceed the container width */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
     </style>
 
     <div class="resource_home_main_content">

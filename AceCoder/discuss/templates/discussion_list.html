@@ -6,7 +6,7 @@
 
 {% block left_sidebar %}
     <div class="left-sidebar-container d-none d-lg-block">
-        <center><h3 style='font-weight: bold; padding-left: 50px'> Categories </h3> <br></center>
+        <center><h3 style='font-weight: bold; text-align: center'> Categories </h3> <br></center>
         <ul class='right-bar'>
             <a href="{% url "discussion_home" %}"> <li><button class="btn btn-light" style="width: 180px;padding-left: 0px">All</button></li></a>
             {% for category in all_categorys %}
@@ -21,54 +21,85 @@
 {% endblock %}
 
 {% block content %}
-
-    <div class="resource_home_main_content">
-
-        <h1 style="text-align: center"> 
-            {% if name %}
-                {{ name }}
-            {% else %}
-                All Discussions
-            {% endif %}    
-        </h1> <br> <hr>
-        {% if discussions %}
-
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col" style="width: 55%">Topic</th>
-                        {% if not name %}
-                            <th> Category </th>
-                        {% endif %}
-                        <th scope="col">Author</th>
-                        <th scope="col">Replies</th>
-                        <th scope="col">Activity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for discussion in discussions %}
-                    <tr>
-                        <td>
-                            <div style="padding-bottom: 5px; font-weight: bold;">
-                                <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{% url "discussion_detail" slug_title=discussion.slug %}" >{{ discussion.title }}</a>
-                            </div>
-                            <div style="padding-top: 5px;">{{ discussion.content }}</div>
-                        </td>
-                        {% if not name %}
-                            <td> {{ discussion.category }} </td>
-                        {% endif %}
-                        <td> {{ discussion.user.username }} </td>
-                        <td> {{ discussion.comment_count }} </td>
-                        <td> {{ discussion.created_at }} </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
+<div class="resource_home_main_content">
+    <h1 style="text-align: center"> 
+        {% if name %}
+            {{ name }}
         {% else %}
-            <h3>No discussions found for {{name}}</h3>
-        {% endif %}
-
+            All Discussions
+        {% endif %}    
+    </h1>
+    <br>
+    <hr>
+    <div class="create-button" style="display: flex; justify-content: end; align-items: end; margin-bottom: 20px">
+        <a href="{% url 'create_discussion' %}" class="btn btn-primary">Create New Discussion</a>
     </div>
-
+    {% if discussions %}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 55%">Topic</th>
+                    {% if not name %}
+                        <th>Category</th>
+                    {% endif %}
+                    <th scope="col">Author</th>
+                    <th scope="col">Replies</th>
+                    <th scope="col">Activity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for discussion in discussions %}
+                <tr>
+                    <td data-label="Topic">
+                        <div style="padding-bottom: 5px; font-weight: bold;">
+                            <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{% url "discussion_detail" slug_title=discussion.slug %}">{{ discussion.title }}</a>
+                        </div>
+                    </td>
+                    {% if not name %}
+                    <td data-label="Category">{{ discussion.category.name }}</td>
+                    {% endif %}
+                    <td data-label="Author">{{ discussion.user.username }}</td>
+                    <td data-label="Replies">{{ discussion.comments.count }}</td>
+                    <td data-label="Activity">{{ discussion.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p>No discussions available.</p>
+    {% endif %}
+</div>
 {% endblock %}
+<style>
+    @media (max-width: 768px) {
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .table thead {
+            display: none;
+        }
+        .table tbody, .table tr, .table td {
+            display: block;
+            width: 100%;
+        }
+        .table tr {
+            margin-bottom: 15px;
+        }
+        .table td {
+            text-align: right;
+            padding-left: 50%;
+            position: relative;
+        }
+        .table td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 0;
+            width: 50%;
+            padding-left: 15px;
+            font-weight: bold;
+            text-align: left;
+        }
+    }
+</style>
