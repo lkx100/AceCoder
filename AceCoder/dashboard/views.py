@@ -11,6 +11,9 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 
 
+def download(request):
+
+    return render(request, "download.html")
 
 
 # Create your views here.
