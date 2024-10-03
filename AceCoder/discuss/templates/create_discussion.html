@@ -12,11 +12,11 @@
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="id_title" class="form-label">Title</label>
-                    <input type="text" name="title" class="form-control bg-dark text-white" id="id_title" value="{{ form.title.value|default_if_none:'' }}">
+                    <input required type="text" name="title" class="form-control bg-dark text-white" id="id_title" value="{{ form.title.value|default_if_none:'' }}">
                 </div>
                 <div class="mb-3">
                     <label for="id_content" class="form-label">Content</label>
-                    <textarea name="content" class="form-control bg-dark text-white" id="id_content">{{ form.content.value|default_if_none:'' }}</textarea>
+                    <textarea required name="content" class="form-control bg-dark text-white" id="id_content">{{ form.content.value|default_if_none:'' }}</textarea>
                 </div>
                 <div class="mb-3">
                     <label for="id_category" class="form-label">Category</label>

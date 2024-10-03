@@ -56,7 +56,7 @@ def discussion_detail(request, slug_title):
     return render(request, 'discussion_detail.html', context)
 
 
-@login_required
+@login_required(redirect_field_name='create_discussion')
 def create_discussion(request):
     if request.method == 'POST':
         form = DiscussionForm(request.POST)
