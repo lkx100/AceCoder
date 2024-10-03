@@ -11,7 +11,7 @@ import re
 class Course(models.Model):
     name =models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True)
-    description = models.CharField(max_length = 200)
+    description = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     banner = models.ImageField(upload_to='post_banners/', blank=True, null=True)
 
@@ -32,7 +32,7 @@ class Chapter(models.Model):
 
     name =models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True)
-    description = models.CharField(max_length = 200)
+    description = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     course = models.ForeignKey(Course, related_name='chapters', on_delete=models.CASCADE)  # Add this line

@@ -11,22 +11,52 @@
                 <th style="width: 30%"> Problem </th>
                 <th> Tags </th>
                 <th> Rating </th>
-                <th> Submissions </th>
                 <th> Notes </th>
             </tr>
         </thead>
         <tbody>
             {% for problem in problems %}
             <tr style="text-align: center">
-                <td> {{forloop.counter}} </td>
+                <td> {{ forloop.counter0|add:problems.start_index }} </td>
                 <td> <a href="{{ problem.problem_link }}" target="_blank"> {{problem.name}} </a> </td>
-                <td> {{problem.problem_tags_str}} </td>
-                <td> {{problem.Rating}} </td>
-                <td> {{problem.submissions}} </td>
+                <td> 
+                    {% for tag in problem.problem_tags.all %}
+                        {{ tag.tag }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+                <td> {{problem.rating}} </td>
                 <td> 🗒️ </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+<br>
+
+    <center> Page {{ problems.number }} of {{ problems.paginator.num_pages }} </center> <br>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        {% if problems.number != 1 %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ problems.previous_page_number }}"> &laquo&laquo </a>
+            </li>
+        {% endif %}
+
+        {% for i in nums %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ forloop.counter }}">
+                    {{ forloop.counter }}
+                </a>
+            </li>
+        {% endfor %}
+
+        {% if problems.number != problems.paginator.num_pages %}
+            <li class="page-item"> 
+                <a class="page-link" href="?page={{ problems.next_page_number }}"> &raquo&raquo </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+
 {% endblock %}

@@ -10,7 +10,7 @@ class ContestAdmin(admin.ModelAdmin):
 
 
 class ContestProblemAdmin(admin.ModelAdmin):
-    list_display = ('name', 'get_tags', 'rating', 'submissions')
+    list_display = ('name', 'get_tags', 'rating')
     filter_horizontal = ('problem_tags',)
 
     def get_tags(self, obj):

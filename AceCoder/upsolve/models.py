@@ -17,8 +17,7 @@ class ContestProblem(models.Model):
     code = models.CharField(max_length=50)
     problem_link = models.URLField(default='')
     rating = models.IntegerField(null=True, blank=True)
-    submissions = models.IntegerField(null=True, blank=True)
-    problem_tags = models.ManyToManyField(Tag)
+    problem_tags = models.ManyToManyField(Tag, related_name="tags")
     def __str__(self):
         return self.code
 
