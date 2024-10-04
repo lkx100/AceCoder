@@ -6,13 +6,57 @@ Usolve Page
 {% endblock %}
 
 {% block content %}
+
+    <style>
+        .active-link {
+            color: #ff6347; /* Example active color */
+            font-weight: bold;
+            transition: color 0.3s ease, font-weight 0.3s ease;
+        }
+
+        .inactive-link {
+            color: lightgrey;
+            transition: color 0.3s ease, font-weight 0.3s ease;
+        }
+    </style>
+
     <br><br>
     <h3 style="font-weight: bold; text-align: center; color: lightgrey; margin-top: 55px">
-        <a href="{% url "upsolve_home" %}">Past Contests</a> | <a href="{% url "problem_set" %}">Problems Set</a>
-    </h1>
+        <a href="{% url "upsolve_home" %}" id="past-contests-link" class="inactive-link">Past Contests</a> | 
+        <a href="{% url "problem_set" %}" id="problem-set-link" class="inactive-link">Problems Set</a>
+    </h3>
 
     <hr>
     {% block subblock %}
     {% endblock %}
 
 {% endblock %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const pastContestsLink = document.getElementById('past-contests-link');
+        const problemSetLink = document.getElementById('problem-set-link');
+
+        function setActiveLink(activeLink, inactiveLink) {
+            activeLink.classList.add('active-link');
+            activeLink.classList.remove('inactive-link');
+            inactiveLink.classList.add('inactive-link');
+            inactiveLink.classList.remove('active-link');
+        }
+
+        pastContestsLink.addEventListener('click', function() {
+            setActiveLink(pastContestsLink, problemSetLink);
+        });
+
+        problemSetLink.addEventListener('click', function() {
+            setActiveLink(problemSetLink, pastContestsLink);
+        });
+
+        // Set the initial active link based on the current URL
+        if (window.location.href.includes("{% url 'upsolve_home' %}")) {
+            setActiveLink(pastContestsLink, problemSetLink);
+        } else if (window.location.href.includes("{% url 'problem_set' %}")) {
+            setActiveLink(problemSetLink, pastContestsLink);
+        }
+    });
+</script>

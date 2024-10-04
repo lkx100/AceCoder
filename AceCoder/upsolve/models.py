@@ -2,7 +2,7 @@ from django.db import models
 
 '''
 All_Problem_Tags = [
-    'basics',
+    'basics', 'math', 'arrays', 'trees', 'bitmask'
 ]
 '''
 
@@ -12,15 +12,6 @@ class Tag(models.Model):
     def __str__(self):
         return self.tag
 
-class ContestProblem(models.Model):
-    name = models.CharField(max_length=100)
-    code = models.CharField(max_length=50)
-    problem_link = models.URLField(default='')
-    rating = models.IntegerField(null=True, blank=True)
-    problem_tags = models.ManyToManyField(Tag, related_name="tags")
-    def __str__(self):
-        return self.code
-
 
 class Contest(models.Model):
     name = models.CharField(max_length=10, primary_key=True)
@@ -29,7 +20,16 @@ class Contest(models.Model):
     solution_link = models.URLField(default='')
     date = models.DateField()
     duration = models.SmallIntegerField()
-    contest_problems = models.ManyToManyField(ContestProblem)
 
+    def __str__(self):
+        return self.name
+
+class Problem(models.Model):
+    name = models.CharField(max_length=100)
+    code = models.CharField(max_length=50, null=True, blank=True)
+    contest = models.ForeignKey(Contest, on_delete=models.CASCADE, related_name="problems")
+    problem_link = models.URLField(default='')
+    rating = models.IntegerField(null=True, blank=True)
+    problem_tags = models.ManyToManyField(Tag, related_name="tags")
     def __str__(self):
         return self.name

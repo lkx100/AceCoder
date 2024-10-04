@@ -48,7 +48,6 @@ Contest Page
             <thead>
                 <tr style="text-align: center">
                     <th> Name </th>
-                    <th> Code </th>
                     <th> Solve </th>
                     <th> Note </th>
                 </tr>
@@ -57,7 +56,6 @@ Contest Page
                 {% for problem in problems %}
                 <tr style="text-align: center">
                     <td> {{problem.name}} </td>
-                    <td> {{problem.code}} </td>
                     <td> <a href="{{problem.problem_link}}" target="_blank"> <img src="{% static "Images/codechef_icon.jpg" %}" alt="cf" style="width:30px; height:30px; border-radius: 50%"> </a> </td>
                     <td> Wait </td>
                 </tr>

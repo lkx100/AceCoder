@@ -18,7 +18,7 @@
             {% for problem in problems %}
             <tr style="text-align: center">
                 <td> {{ forloop.counter0|add:problems.start_index }} </td>
-                <td> <a href="{{ problem.problem_link }}" target="_blank"> {{problem.name}} </a> </td>
+                <td> <a class="link-info link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{{ problem.problem_link }}" target="_blank"> {{problem.name}} </a> </td>
                 <td> 
                     {% for tag in problem.problem_tags.all %}
                         {{ tag.tag }}{% if not forloop.last %}, {% endif %}
