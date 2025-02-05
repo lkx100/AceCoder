@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 # All View Types
 def home(request):
-    posts = Post.objects.all().filter(status='1')
+    posts = Post.objects.all().filter(status='1').order_by('-created_on')
     all_tags = Tag.objects.all()
     
     if request.GET.get('search'):

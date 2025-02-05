@@ -54,7 +54,11 @@
                 {% for post in posts|slice:":10" %}
                     <div class="glassBox">
                         <div class="glassBox__imgBox">
-                            <img src="{{ post.banner.url }}" alt="...">
+                            {% if post.banner %}
+                                <img src="{{ post.banner.url }}" alt="...">
+                            {% else %}
+                                <h2>No Image Found</h2>
+                            {% endif %}
                         </div>
                         <div class="glassBox__title">
                             {% if post.title|length >= 50 %}

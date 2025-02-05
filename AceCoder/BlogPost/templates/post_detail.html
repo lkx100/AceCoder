@@ -45,7 +45,11 @@
                 
                 <div class="row justify-content-center align-item-center;">
                     <div class="col-auto">
-                        <img src="{{ post.banner.url }}" alt="" class="blog-page-image">
+                        {% if post.banner %}
+                            <img src="{{ post.banner.url }}" alt="" class="blog-page-image">
+                        {% else %}
+                            <h2>No Image Found</h2>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row justify-content-center align-item-center;">
