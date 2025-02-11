@@ -83,7 +83,11 @@
                     <hr>
                     <div class="row">
                         <div class="markdown-content">
-                            {{ post.get_markdown.0 | safe }}
+                            {% if post.content_type == '1' and post.ipynb %}
+                                {{ post.content_type }} - {{ post.ipynb }} - {{ post.content|safe }}
+                            {% else %}
+                                {{ post.get_markdown.0 | safe }}
+                            {% endif %}
                         </div>
                     </div>
                 </div>

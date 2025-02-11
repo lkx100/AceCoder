@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'description', 'tags', 'banner', 'content']
+        fields = ['title', 'description', 'tags', 'banner', 'content', 'ipynb']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),

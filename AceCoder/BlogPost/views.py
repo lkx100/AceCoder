@@ -6,6 +6,8 @@ from .models import Tag
 from .forms import PostForm
 from AceCoder.context_processors import add_is_admin
 from django.contrib.auth.decorators import login_required
+import nbformat
+from nbconvert import HTMLExporter
 
 # All View Types
 def home(request):
@@ -30,6 +32,18 @@ def home(request):
     }
 
     return render(request, 'post_list.html', context)
+
+
+def render_ipynb(ipynb_file):
+    try:
+        with ipynb_file.open('r', encoding='utf-8') as f:
+            nb = nbformat.read(f, as_version=4)
+        html_exporter = HTMLExporter()
+        (body, resources) = html_exporter.from_notebook_node(nb)
+        return body
+    except Exception as e:
+        return f"Error rendering IPynb file: {e}"
+
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
